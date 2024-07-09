@@ -1,0 +1,248 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 6/07/2024, 6:28:11 p. m.
+    Author     : Julian
+*/
+
+.container__factura{
+    width: 98%;
+    height: 100%;
+    gap: 8px;
+    padding: var(--padding);
+    margin-left: var(--margin--icon);
+}
+
+.fatura__buscar{
+  align-content: center;
+  grid-row: 1/1;
+  height: 100%;
+}
+
+.form__datos{
+  display: grid;
+  grid-template-columns: 500px 1fr;
+  width: 100%;
+  height: 600px;
+  align-items: center;
+  border-top: solid 1px var(--primario);
+  border-bottom: solid 1px var(--primario);
+}
+.cliente__title{
+  font-weight: 350;
+  margin: var(--margin--icon);
+
+}
+.id__cliente{
+  margin-left: var(--margin);
+}
+.codigo__cliente{
+  border-radius: 4px;
+  padding: 11px;
+  width: 130px;
+}
+.buscar__cliente{
+  padding: var(--padding);
+  color: var(--whithe);
+}
+.buscar__cliente:hover{
+  color: var(--primario);
+}
+.cliente__nombre{
+  width: 195px;
+  margin-left: 30px;
+  border: solid 0.5px var(--gray)
+}
+.buscar__btn{
+  width: 100%;
+  display: flex;
+  gap: 100px;
+  margin: var(--margin);
+}
+.button__agregar{
+  color: var(--whithe);
+  margin-top: 30px;
+  padding: var(--padding);
+}
+.button__agregar--color{
+  background: var(--whithe);
+  color: var(--primario);
+  border: none;
+  border-radius: 0px;
+  border-bottom: solid 1px var(--primario);
+
+}
+.button__agregar:hover{
+  color: var(--primario);
+}
+.button__agregar--color:hover{
+  background: var(--primario);
+  color: var(--whithe);
+  border-radius: 4px;
+}
+
+
+
+.factura__tabla{
+    /* border: solid 1px var(--primario); */
+    display: flex;
+    justify-content: center;
+    /* height: 100%; */
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+}
+.tabla__factura{
+  width: 100%;
+}
+.tabla{
+  width: 90%;
+  height: 500px;
+  border-bottom: solid 1px var(--primario);
+  overflow-y: auto;
+}
+.tabla__th{
+  background: var(--primario);
+  color: var(--whithe);
+  height: 40px;
+}
+.tabla__fila{
+  padding: var(--padding);
+}
+.tabla__td{
+  height: 20%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 5px;
+  border-bottom: solid 1px var(--primario);
+}
+.button__actions{
+  background: var(--primario);
+  color: var(--whithe);
+  padding: var(--padding);
+  width: 60px;
+  margin-bottom: var(--margin);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.button__actions:hover{
+  background: var(--whithe);
+  color: var(--primario);
+}
+.button__link{
+  color: var(--whithe);
+  padding: var(--padding);
+  background: var(--alert);
+  border-radius: 4px;
+  cursor: pointer;
+  border-color: var(--primario);
+}
+.button__form{
+  color: var(--whithe);
+  padding: var(--padding);
+  font-size: 1rem;
+}
+.button__form:hover{
+  color: var(--primario);
+}
+
+.button__link--size{
+  font-size: 1rem;
+  height: 42px;
+}
+.generar__factura{
+  justify-content: space-around;
+  width: 90%;
+  align-items: center;
+  margin-top: var(--margin--icon);
+  display: flex;
+  gap: 20px;
+}
+.button__link--size:hover{
+  background: rgb(248, 37, 37);
+}
+.margin{
+  margin: 0;
+}
+.datos__producto{
+  margin-top: 30px;
+}
+.margin--top{
+  margin-top: 30px;
+}
+.total{
+  padding-bottom: var(--padding);
+  border-bottom: solid 1px var(--primario);
+  display: inline;
+  font-size: 2rem;
+}
+.modal__title--ventas{
+  text-align: center;
+}
+
+
+
+/*  Adaptacion de items para la vista Venatas*/
+
+@media (max-width: 1600px){
+  .form__datos{
+    display: flex;
+    flex-direction: column;
+    border-bottom: none;
+    height: auto;
+  }
+  .buscar{
+    width: 435px;
+  }
+  .factura__tabla{
+    margin-top: 50px;
+    width: 100%;
+    margin-bottom: 100px;
+  }
+  .nav__header{
+    position: fixed;
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      z-index: 100000; 
+  }
+  .container{
+    height: 100vh;
+    margin-top: 70px;
+  }
+  .menu__lista{
+    height: auto;
+  }
+  .menu__salir{
+    height: 100px;
+  }
+  .tabla{
+    width: 100%;
+    padding-right: var(--padding);
+  }
+}
+
+@media (max-width: 580px){
+  .buttons__facturas{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .btn__ventas{
+    height: auto;
+  }
+}
+
+@media (max-width: 550px){
+  .contenido__modal{
+    width: 90%;
+  }
+  .form__modal{
+    width: auto;
+  }
+  .cliente__nombre{
+    width: 150px;
+  }
+}
