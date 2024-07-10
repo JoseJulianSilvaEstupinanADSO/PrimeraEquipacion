@@ -109,8 +109,8 @@ public class Usuarios extends HttpServlet {
         StringBuilder json = new StringBuilder("[");
         for (int i = 0; i < usuarios.size(); i++) {
             Usuario usuario = usuarios.get(i);
-             json.append(String.format("{\"idUsuario\": \"%s\", \"usuario\": \"%s\", \"nombre\": \"%s\", \"email\": \"%s\", \"rol\": \"%s\"}",
-                    usuario.getIdUsuario(), usuario.getUsuario(), usuario.getNombre(), usuario.getEmail(), usuario.getRol()));
+             json.append(String.format("{\"idUsuario\": \"%s\", \"usuario\": \"%s\", \"nombre\": \"%s\", \"email\": \"%s\", \"rol\": \"%s\", \"documento\": \"%s\", \"telefono\": \"%s\", \"direccion\": \"%s\", \"email\": \"%s\"}",
+                    usuario.getIdUsuario(), usuario.getUsuario(), usuario.getNombre(), usuario.getEmail(), usuario.getRol(), usuario.getDocumento(), usuario.getTelefono(), usuario.getDireccion(), usuario.getEmail()));
             if (i < usuarios.size() - 1) {
                 json.append(",");
             }

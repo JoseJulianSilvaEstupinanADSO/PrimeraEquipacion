@@ -104,9 +104,10 @@ public class UsuarioDAO extends Conexion {
                 u.setUsuario(rs.getString("usuario"));
                 u.setContraseña(rs.getString("contrasena"));
                 u.setDocumento(rs.getString("documento"));
-                u.setNombre(rs.getString("telefono"));
+                u.setNombre(rs.getString("nombre"));
                 u.setTelefono(rs.getString("telefono"));
                 u.setDireccion(rs.getString("direccion"));
+                u.setEmail(rs.getString("email"));
                 u.setRol(rs.getString("id_rol"));
                 
                 usuarios.add(u);

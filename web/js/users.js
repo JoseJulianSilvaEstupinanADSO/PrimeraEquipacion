@@ -7,18 +7,23 @@
 
 const $dom = document;
 
-/*Se cambia el color de las filas inpares */
-(() =>{
-    const $filas = $dom.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
-    $filas.forEach((fila,index) =>{
-        if (index % 2 !== 0) {
-            fila.style.background = "#DBDADA";
-        }
-    });
-})
-();
 
 const $modal = $dom.getElementById("ventanaModal");
+
+/*Se cambia el color de las filas inpares */
+
+
+
+
+
+function filas(){
+    $filas = $dom.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
+        $filas.forEach((fila,index) =>{
+            if (index % 2 !== 0) {
+                fila.style.background = "#DBDADA";
+            }
+        });  
+}
 
 
 
@@ -29,15 +34,15 @@ function CargarDatos() {
         ope.open("GET", "../../Usuarios?action=ListaUsuarios", true);
         ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         ope.onload = function(){
-            console.log("hola");
-            console.log(ope.status);
             if (ope.status === 200){
                 let respuesta = JSON.parse(ope.responseText);
                 console.log("la respuesta es " + respuesta);
-                console.log("hola");
+                console.log(respuesta.idUsuario);
                 const $tbody = $dom.querySelector(".body__tabla");
                 const $frag = $dom.createDocumentFragment();
                 respuesta.forEach((x) => {
+                    
+                    console.log(x);
 
                     const $fila = $dom.createElement("tr");
                     $fila.classList.add("fila__tabla");
@@ -45,39 +50,61 @@ function CargarDatos() {
                     const $colId = $dom.createElement("td");
                     $colId.classList.add("td__tabla");
                     $colId.classList.add("IdUsuario");
+                    
+                    $colId.innerText = x.idUsuario;
 
                     const $colNom = $dom.createElement("td");
                     $colNom.classList.add("td__tabla");
                     $colNom.classList.add("NombreUsuario");
+                    
+                    $colNom.innerText = x.nombre;
 
                     const $colDoc = $dom.createElement("td");
                     $colDoc.classList.add("td__tabla");
                     $colDoc.classList.add("DocumentoUsuario");
+                    
+                    $colDoc.innerText = x.documento;
 
                     const $colRol = $dom.createElement("td");
                     $colRol.classList.add("td__tabla");
                     $colRol.classList.add("Rol");
+                    
+                    $colRol.innerText = x.rol;
 
                     const $colUser = $dom.createElement("td");
                     $colUser.classList.add("td__tabla");
                     $colUser.classList.add("UsuarioUser");
+                    
+                    $colUser.innerText = x.usuario;
 
                     const $colTel = $dom.createElement("td");
                     $colTel.classList.add("td__tabla");
                     $colTel.classList.add("TelUser");
+                    
+                    $colTel.innerText = x.telefono;
 
                     const $colDirec = $dom.createElement("td");
                     $colDirec.classList.add("td__tabla");
                     $colDirec.classList.add("DireccionUser");
+                    
+                    $colDirec.innerText = x.direccion;
 
                     const $colEmail = $dom.createElement("td");
                     $colEmail.classList.add("td__tabla");
                     $colEmail.classList.add("EmailUser");
-
+                    
+                    $colEmail.innerText = x.email;
+                    
+                    const $colBtn = $dom.createElement("td");
+                    $colBtn.classList.add("td__tabla");
+                    
+                    
                     const $BtnEdit = $dom.createElement("button");
                     $BtnEdit.classList.add("button__tabla");
                     $BtnEdit.innerText = "Editar";
-
+                    
+                    
+                    $colBtn.appendChild($BtnEdit);
                     $fila.appendChild($colId);
                     $fila.appendChild($colNom);
                     $fila.appendChild($colDoc);
@@ -86,28 +113,23 @@ function CargarDatos() {
                     $fila.appendChild($colTel);
                     $fila.appendChild($colDirec);
                     $fila.appendChild($colEmail);
+                    $fila.appendChild($colBtn);
                     
                     $frag.appendChild($fila);
                      
                 });
                 
                 $tbody.appendChild($frag);
+                filas();
             
             }
         };
         ope.send();
+        
+    
 }
 
 CargarDatos();
-
-setInterval(function() {
-            CargarDatos();
-}, 5000);
-
-
-
-
-
 
 
 /*Se abra el modal con toda la imformacion de la fila de la tabla
