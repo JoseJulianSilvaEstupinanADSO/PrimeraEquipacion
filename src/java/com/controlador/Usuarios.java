@@ -49,13 +49,22 @@ public class Usuarios extends HttpServlet {
                     break;
                    
                 case "RegistrarUsuario":
+                    
                     RegistrarUsuario(request, response);
                     
                     break;
                 case "ListaUsuarios":
+                    
                     ListarUsuarios(request, response);
                                        
                     break;
+                    
+                case "ModificarUsuario":
+                    
+                    ModificarUsuario(request,response);
+                    
+                    break;
+                    
                     
                 default:
                     response.getWriter().write("Acción no reconocida");
@@ -90,8 +99,7 @@ public class Usuarios extends HttpServlet {
         String direccion = request.getParameter("direccion");
         String email = request.getParameter("email");
         String edad = request.getParameter("edad");
-        
-        System.out.println(usuario + " " + contraseña + " " + documento + " " + nombre + " " +  telefono + " " + direccion + " " + email + " " + edad);
+       
         Usuario u = new Usuario(null, usuario, contraseña, documento, nombre, telefono, direccion, email, edad, null);
         
         boolean resultado = modelo.insertarUsuario(u);
@@ -117,6 +125,26 @@ public class Usuarios extends HttpServlet {
         }
         json.append("]");
         response.getWriter().write(json.toString());
+        
+    }
+    
+    private void ModificarUsuario(HttpServletRequest request, HttpServletResponse response) throws  IOException{
+        
+        String idUsuario = request.getParameter("id");
+        String rol = request.getParameter("id_rol");
+        
+        Usuario u = new Usuario(idUsuario,null,null,null,null,null,null,null,null, rol);
+        
+        boolean resultado = modelo.ModificarUsuario(u);
+        
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        
+        String jsonResponse = "{\"resultado\": " + resultado + "}";
+
+        
+        response.getWriter().write(jsonResponse);
+        
         
     }
 

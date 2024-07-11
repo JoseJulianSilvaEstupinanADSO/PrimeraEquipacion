@@ -57,6 +57,7 @@ public class UsuarioDAO extends Conexion {
     
     
     public boolean  insertarUsuario(Usuario u){
+        
         try {
             this.conectar();
             String sql = "INSERT INTO usuario(usuario, contrasena, documento, nombre, telefono, direccion, email, edad) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -76,10 +77,13 @@ public class UsuarioDAO extends Conexion {
             
             
         } catch (SQLException e) {
+            
             e.printStackTrace();
             return false;
+            
         } finally {
             this.desconectar();
+            
         }
         
     }
@@ -122,6 +126,35 @@ public class UsuarioDAO extends Conexion {
             
             return usuarios;
            
+    }
+    
+    public boolean ModificarUsuario(Usuario u){
+        
+        try {
+            this.conectar();
+            String sql = "UPDATE usuario SET id_rol=?  WHERE id_usuario = ?";
+            
+            PreparedStatement pre = this.getCon().prepareStatement(sql);
+            
+            System.out.println(u.getIdUsuario());
+            System.out.println(u.getRol());
+            
+            pre.setInt(1, Integer.parseInt(u.getRol()));
+            pre.setInt(2, Integer.parseInt(u.getIdUsuario()));
+ 
+            return pre.executeUpdate() > 0;
+
+  
+                       
+        } catch (SQLException e) {
+                e.printStackTrace();
+            
+            return false;
+            
+        } finally {
+            this.desconectar();
+        }
+        
     }
        
 }

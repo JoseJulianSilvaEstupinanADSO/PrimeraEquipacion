@@ -249,7 +249,7 @@ MODAL ---------------------------------------------------------------------
   margin: auto; 
   padding: 50px;
   width: 480px;
-  animation-name: animarsuperior;
+  animation-name: animatetop;
   animation-duration: 0.5s
 }
 
@@ -262,6 +262,22 @@ MODAL ---------------------------------------------------------------------
 @keyframes animarsuperior {
   from {top:-300px; opacity:0}
   to {top:0; opacity:1}
+}
+
+
+.cerrando .contenido__modal {
+    animation-name: cerraranimar;
+}
+
+/* Animación de cierre */
+@-webkit-keyframes cerraranimar {
+  from {top: 0; opacity: 1} 
+  to {top:-300px; opacity:0}
+}
+
+@keyframes cerraranimar {
+  from {top: 0; opacity: 1}
+  to {top:-300px; opacity:0}
 }
 
 .cerrar {

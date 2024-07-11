@@ -55,14 +55,22 @@ table.addEventListener('click', function(event) {
  const $cerrar = $dom.querySelector(".cerrar__x");
  
  
- $cerrar.addEventListener("click", function () {
-      $modal.style.display = "none";
- });
- window.addEventListener("click",function(event) {
-    if (event.target == $modal) {
-      $modal.style.display = "none";
-    }
-  });
+$cerrar.addEventListener("click", function () {
+    $modal.classList.add("cerrando");
+    setTimeout(function() {
+        $modal.style.display = "none";
+        $modal.classList.remove("cerrando");
+    }, 500);
+});
+window.addEventListener("click",function(event) {
+  if (event.target == $modal) {
+    $modal.classList.add("cerrando");
+    setTimeout(function() {
+        $modal.style.display = "none";
+        $modal.classList.remove("cerrando");
+    }, 500);
+  }
+});
  
 
 //----------------------------------------------------------------------------

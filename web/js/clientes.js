@@ -29,21 +29,18 @@ table.addEventListener('click', function(event) {
     $modal.style.display = "block";
 
      const row = event.target.closest('tr');
-     const $id = row.querySelector('td.IdFactura');
-     const $fecha = row.querySelector("td.Fecha");
-     const $total = row.querySelector("td.Total");
+     const $id = row.querySelector('td.IdCliente');
 
-     let total = Number($total.innerText);
+
+
      let id = Number($id.innerText);
-     let fecha = $fecha.innerText;
+
 
      const $id_form = $dom.querySelector('.Numero_factura');
-     const $fecha_factura = $dom.querySelector(".fecha__factura");
-     const $total_modal = $dom.querySelector(".total--facturas");
+
 
      $id_form.innerText = "Numero: " + id;
-     $fecha_factura.innerText = "Fecha: " + fecha;
-     $total_modal.innerText = "TOTAL: " + total;
+
    }
  });
 
@@ -55,14 +52,20 @@ table.addEventListener('click', function(event) {
  const $cerrar = $dom.querySelector(".cerrar__x");
  
  
- $cerrar.addEventListener("click", function () {
-      $modal.style.display = "none";
- });
- window.addEventListener("click",function(event) {
-    if (event.target == $modal) {
-      $modal.style.display = "none";
-    }
-  });
- 
-
+$cerrar.addEventListener("click", function () {
+    $modal.classList.add("cerrando");
+    setTimeout(function() {
+        $modal.style.display = "none";
+        $modal.classList.remove("cerrando");
+    }, 500);
+});
+window.addEventListener("click",function(event) {
+  if (event.target == $modal) {
+    $modal.classList.add("cerrando");
+    setTimeout(function() {
+        $modal.style.display = "none";
+        $modal.classList.remove("cerrando");
+    }, 500);
+  }
+});
 //----------------------------------------------------------------------------

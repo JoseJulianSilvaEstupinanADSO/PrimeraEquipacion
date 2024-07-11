@@ -135,13 +135,25 @@ const $cerrar = $dom.querySelector(".cerrar__x");
 const $cancelar = $dom.querySelector(".modal__cancelar");
 
 $cerrar.addEventListener("click", function () {
-    $modal.style.display = "none";
+    $modal.classList.add("cerrando");
+    setTimeout(function() {
+        $modal.style.display = "none";
+        $modal.classList.remove("cerrando");
+    }, 500);
 });
 $cancelar.addEventListener("click", function () {
-    $modal.style.display = "none";
+    $modal.classList.add("cerrando");
+    setTimeout(function() {
+        $modal.style.display = "none";
+        $modal.classList.remove("cerrando");
+    }, 500);
 });
 window.addEventListener("click",function(event) {
   if (event.target == $modal) {
-    $modal.style.display = "none";
+    $modal.classList.add("cerrando");
+    setTimeout(function() {
+        $modal.style.display = "none";
+        $modal.classList.remove("cerrando");
+    }, 500);
   }
 });
