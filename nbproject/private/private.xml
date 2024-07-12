@@ -3,11 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/src/java/com/controlador/Usuarios.java</file>
             <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/users.js</file>
             <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/Vistas/registro.jsp</file>
             <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/src/java/com/modelo/Usuario.java</file>
             <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/src/java/com/modelo/UsuarioDAO.java</file>
+=======
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/Vistas/admin/usuarios.jsp</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/src/java/com/controlador/Usuarios.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/src/java/com/modelo/Usuario.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/src/java/com/modelo/UsuarioDAO.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/index.jsp</file>
+>>>>>>> d58257c0d9c9481d6749a01d2a8f9916432dbee8
         </group>
     </open-files>
 </project-private>

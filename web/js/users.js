@@ -8,8 +8,40 @@
 const $dom = document;
 
 
+/**
+ * Se crean los eventos para cerrar el modal
+ * 
+ */
+
 const $modal = $dom.getElementById("ventanaModal");
 
+const $cerrar = $dom.querySelector(".cerrar__x");
+
+const $cancelar = $dom.querySelector(".modal__cancelar");
+
+$cerrar.addEventListener("click", function () {
+    $modal.classList.add("cerrando");
+    setTimeout(function() {
+        $modal.style.display = "none";
+        $modal.classList.remove("cerrando");
+    }, 500);
+});
+$cancelar.addEventListener("click", function () {
+    $modal.classList.add("cerrando");
+    setTimeout(function() {
+        $modal.style.display = "none";
+        $modal.classList.remove("cerrando");
+    }, 500);
+});
+window.addEventListener("click",function(event) {
+  if (event.target == $modal) {
+    $modal.classList.add("cerrando");
+    setTimeout(function() {
+        $modal.style.display = "none";
+        $modal.classList.remove("cerrando");
+    }, 500);
+  }
+});
 /*Se cambia el color de las filas inpares */
 
 
@@ -27,23 +59,27 @@ function filas(){
 
 
 
+
+// Listar Toddos los usuarios Registrados en la base de datos//
 function CargarDatos() {
     const $BtnBusacar = $dom.querySelector("#BuscarUser");
-    
+    $filas = $dom.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
+    $filas.forEach((x) =>{
+        x.remove();
+    });
+    //Operacion AJAX//
     let ope = new XMLHttpRequest();
         ope.open("GET", "../../Usuarios?action=ListaUsuarios", true);
         ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         ope.onload = function(){
             if (ope.status === 200){
                 let respuesta = JSON.parse(ope.responseText);
-                console.log("la respuesta es " + respuesta);
-                console.log(respuesta.idUsuario);
                 const $tbody = $dom.querySelector(".body__tabla");
                 const $frag = $dom.createDocumentFragment();
                 respuesta.forEach((x) => {
                     
-                    console.log(x);
-
+                    //tomando el resultado de la operacion AJAX y recorriendolo
+                    //Se crea la fila donde se almacenaran los datos del respectivo usuario
                     const $fila = $dom.createElement("tr");
                     $fila.classList.add("fila__tabla");
 
@@ -160,7 +196,7 @@ table.addEventListener('click', function(event) {
     let id = Number($id.innerText);
     let nombre = $nombre.innerText;
     let documento = $documento.innerText;
-    let rol = Number($rol.innerText);
+    let rol = ($rol.innerText);
     let user = $user.innerText;
     let tel = $tel.innerText;
     let direccion = $direccion.innerText;
@@ -179,17 +215,15 @@ table.addEventListener('click', function(event) {
     $id_user.value = id;
     $nombre_user.value = nombre;
     $doc_user.value = documento;
-    if (rol === 1) {
-        $rol_user.value = "valor1";
+    
+
+    if(rol === "null"){ 
+        $rol_user.value = "sleccionar";
     }
     else{
-        if (rol === 2) {
-            $rol_user.value = "valor2";
-        }
-        else{
-            $rol_user.value = "sleccionar";
-        }
+        $rol_user.value = String(rol);
     }
+
     $user_user.value = user;
     $tel_user.value = tel;
     $direc_user.value = direccion;
@@ -206,26 +240,77 @@ table.addEventListener('click', function(event) {
    }
  });
 
+function Modificar() {
+    
+    const $id = $dom.querySelector(".form_Id").value;
+    const $rol = $dom.querySelector(".form_Rol").value;
+    
+    console.log($id + " " + $rol);
+    
+   let ope = new XMLHttpRequest();
+   ope.open("POST", "../../Usuarios?action=ModificarUsuario", true);
+   ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+   ope.onload = function () {
+     if(ope.status === 200){
+         console.log(ope.responseText);
+         let respuesta = JSON.parse(ope.responseText);
+            
+         
+         if(respuesta.resultado){
+             alert("Usuario Modificado");
+             
+             const $filas = document.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
+             $filas.forEach((x) => {
+                 x.remove();
+             });
+             CargarDatos();
+             
+             
+         }
+         else{
+             alert("Error al Modificar el Usuario");
+         }
+     }  
+   };
+   ope.send("id=" + $id + "&id_rol=" + $rol);
+};
 
+const $BtnModificar = $dom.querySelector(".ModificarUser");
 
+$BtnModificar.addEventListener("click",Modificar);
 
-/**
- * Se crean los eventos para cerrar el modal
- * 
- */
+function Buscar() {
 
-const $cerrar = $dom.querySelector(".cerrar__x");
+    const $Label = document.querySelector(".BuscarUsuario").value;
+    const $filas = document.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
+    let num = 0;
+    $filas.forEach((fila) => {
 
-const $cancelar = $dom.querySelector(".modal__cancelar");
+       let documento = fila.querySelector(".DocumentoUsuario").innerText;
+       
+        if (documento !== $Label){
+            fila.style.display = "none";
+            num = num+1;
+        }
+        else{
+            fila.style.display = "";
+        }
+    });
+    
+    if(num === $filas.length){
+        CargarDatos();
+    }
+}
 
-$cerrar.addEventListener("click", function () {
-    $modal.style.display = "none";
+const $BtnBuscar = $dom.querySelector(".Buscar");
+$BtnBuscar.addEventListener("click",Buscar);
+
+const $Listar = $dom.querySelector(".Listar");
+$Listar.addEventListener("click",() => {
+    const $filas = document.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
+    $filas.forEach((fila) => {
+           fila.remove();
+    });
+    CargarDatos();
 });
-$cancelar.addEventListener("click", function () {
-    $modal.style.display = "none";
-});
-window.addEventListener("click",function(event) {
-  if (event.target == $modal) {
-    $modal.style.display = "none";
-  }
-});
+

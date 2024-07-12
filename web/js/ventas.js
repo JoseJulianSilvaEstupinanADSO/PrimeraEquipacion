@@ -24,15 +24,22 @@ $boton.addEventListener("click",function() {
 });
 
 $cerrar.addEventListener("click", function () {
-    $modal.style.display = "none";
+    $modal.classList.add("cerrando");
+    setTimeout(function() {
+        $modal.style.display = "none";
+        $modal.classList.remove("cerrando");
+    }, 500);
 });
 
 window.addEventListener("click",function(event) {
   if (event.target == $modal) {
-    $modal.style.display = "none";
+    $modal.classList.add("cerrando");
+    setTimeout(function() {
+        $modal.style.display = "none";
+        $modal.classList.remove("cerrando");
+    }, 500);
   }
 });
-
 
 //----------------------------------------------------------------------------
 

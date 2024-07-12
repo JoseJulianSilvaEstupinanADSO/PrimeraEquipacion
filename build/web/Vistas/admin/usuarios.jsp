@@ -65,6 +65,7 @@
     <section class="facturas">
         <div class="header__productos">
             <h1 class="producto__title">Gestion de Usuarios</h1>
+            <button type="button" class="agregar__producto  Listar">Listar</button>
         </div>
       <div class="container__tabla">
         <table class="tabla--factura">
@@ -87,8 +88,8 @@
       <div class="container__buscar">
         <div class="buscar--usuarios">
             <label class="label__buscar" for="">Buscar Usuario:</label>
-            <input class="input__buscar" type="text">
-            <button class="button__buscar">Buscar</button>
+            <input class="input__buscar BuscarUsuario" type="text">
+            <button class="button__buscar Buscar">Buscar</button>
         </div>
       </div>
     </section>
@@ -123,8 +124,9 @@
                                 <label class="label__modal" for="">Rol:</label>
                                 <select   class="input__modal form_Rol" name="" id="">
                                   <option value="sleccionar">Seleccionar Rol</option>
-                                  <option value="valor1">1</option>
-                                  <option value="valor2">2</option>
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
                                 </select>
                             </div>
                         </div>
@@ -149,7 +151,7 @@
                           </div>
                       </div>
                         <div class="form__content--buttons">
-                            <button type="submit" class="button__modal button__modal--inventario">Guardar Cambios</button>
+                            <button type="button" class="button__modal button__modal--inventario ModificarUser">Guardar Cambios</button>
                             <button type="button" class="button__modal  button--alert modal__cancelar">Cancelar</button>
                         </div>
                     </div>

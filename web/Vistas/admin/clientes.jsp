@@ -77,46 +77,10 @@
           </thead>
           <tbody class="body__tabla">
             <tr class="fila__tabla">
-                <td class="td__tabla IdProducto">1</td>
+                <td class="td__tabla IdCliente">1</td>
                 <td class="td__tabla NombreProducto">1106544620</td>
                 <td class="td__tabla PrecioProducto">Ronaldo Messi</td>
                 <td class="td__tabla TallaProducto">123546351</td>
-                <td class="td__tabla ">
-                  <button type="button" class="button__tabla">Historial</button>
-                </td>
-            </tr>
-            <tr class="fila__tabla">
-                <td class="td__tabla IdProducto">1</td>
-                <td class="td__tabla NombreProducto">Casima Real Madrid</td>
-                <td class="td__tabla PrecioProducto">123000</td>
-                <td class="td__tabla TallaProducto">M</td>
-                <td class="td__tabla ">
-                  <button type="button" class="button__tabla">Historial</button>
-                </td>
-            </tr>
-            <tr class="fila__tabla">
-                <td class="td__tabla IdProducto">1</td>
-                <td class="td__tabla NombreProducto">Casima Real Madrid</td>
-                <td class="td__tabla PrecioProducto">124000</td>
-                <td class="td__tabla TallaProducto">L</td>
-                <td class="td__tabla ">
-                  <button type="button" class="button__tabla">Historial</button>
-                </td>
-            </tr>
-            <tr class="fila__tabla">
-                <td class="td__tabla IdProducto">1</td>
-                <td class="td__tabla NombreProducto">Casima Real Madrid</td>
-                <td class="td__tabla PrecioProducto">125000</td>
-                <td class="td__tabla TallaProducto">X</td>
-                <td class="td__tabla ">
-                  <button type="button" class="button__tabla">Historial</button>
-                </td>
-            </tr>
-            <tr class="fila__tabla">
-                <td class="td__tabla IdProducto">1</td>
-                <td class="td__tabla NombreProducto">Casima Real Madrid</td>
-                <td class="td__tabla PrecioProducto">126000</td>
-                <td class="td__tabla TallaProducto">XL</td>
                 <td class="td__tabla ">
                   <button type="button" class="button__tabla">Historial</button>
                 </td>
