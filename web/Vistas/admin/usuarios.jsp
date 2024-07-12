@@ -80,58 +80,7 @@
             <th class="th__item">Acciones</th>
           </thead>
           <tbody class="body__tabla">
-            <tr class="fila__tabla">
-                <td class="td__tabla IdUsuario">1</td>
-                <td class="td__tabla NombreUsuario">Jose Julian Silva</td>
-                <td class="td__tabla DocumentoUsuario">1245643156</td>
-                <td class="td__tabla Rol">1</td>
-                <td class="td__tabla UsuarioUser">breiking</td>
-                <td class="td__tabla TelUser">3164458492</td>
-                <td class="td__tabla DireccionUser">hola hola hola</td>
-                <td class="td__tabla EmailUser">jjsilva5699@gmail.com</td>
-                <td class="td__tabla ">
-                  <button type="button" class="button__tabla">Editar</button>
-                </td>
-            </tr>
-            <tr class="fila__tabla">
-              <td class="td__tabla IdUsuario">1</td>
-              <td class="td__tabla NombreUsuario">Jose Julian Silva</td>
-              <td class="td__tabla DocumentoUsuario">1245643156</td>
-              <td class="td__tabla Rol">1</td>
-              <td class="td__tabla UsuarioUser">breiking</td>
-              <td class="td__tabla TelUser">3164458492</td>
-              <td class="td__tabla DireccionUser">hola hola hola</td>
-              <td class="td__tabla EmailUser">jjsilva5699@gmail.com</td>
-              <td class="td__tabla ">
-                <button type="button" class="button__tabla">Editar</button>
-              </td>
-            </tr>
-            <tr class="fila__tabla">
-              <td class="td__tabla IdUsuario">2</td>
-              <td class="td__tabla NombreUsuario">Jose Julian </td>
-              <td class="td__tabla DocumentoUsuario">1245643156</td>
-              <td class="td__tabla Rol">2</td>
-              <td class="td__tabla UsuarioUser">breiking</td>
-              <td class="td__tabla TelUser">3164458492</td>
-              <td class="td__tabla DireccionUser">hola hola hola</td>
-              <td class="td__tabla EmailUser">jjsilva5699@gmail.com</td>
-              <td class="td__tabla ">
-                <button type="button" class="button__tabla">Editar</button>
-              </td>
-            </tr>
-            <tr class="fila__tabla">
-              <td class="td__tabla IdUsuario">3</td>
-              <td class="td__tabla NombreUsuario">Jose  Silva</td>
-              <td class="td__tabla DocumentoUsuario">1245643156</td>
-              <td class="td__tabla Rol"></td>
-              <td class="td__tabla UsuarioUser">breiking</td>
-              <td class="td__tabla TelUser">3164458492</td>
-              <td class="td__tabla DireccionUser">hola hola hola</td>
-              <td class="td__tabla EmailUser">jjsilva5699@gmail.com</td>
-              <td class="td__tabla ">
-                <button type="button" class="button__tabla">Editar</button>
-              </td>
-            </tr>
+              
           </tbody>
         </table>
       </div>
