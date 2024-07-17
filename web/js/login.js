@@ -4,6 +4,9 @@
  */
 
 
+console.log(localStorage.getItem("session"));
+
+
 document.addEventListener('DOMContentLoaded', function() {
     const $cambiar = document.querySelector(".Ingresar");
     
@@ -31,7 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
             ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             ope.onload = function(){
                 if (ope.status === 200){
-                    console.log(ope.responseText)
                     let respuesta = JSON.parse(ope.responseText);
                     if (respuesta.error){
                         alert(respuesta.error);
@@ -39,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     else{
                         alert("Bienvenido " + respuesta.nombre);
                         localStorage.setItem("idUsuario", respuesta.idUsuario);
-                        console.log(respuesta.rol);
+                        localStorage.setItem("session", true);
 
                         switch (respuesta.rol){
                             case "1":

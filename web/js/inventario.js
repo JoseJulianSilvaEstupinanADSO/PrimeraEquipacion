@@ -7,6 +7,22 @@
 
 const $dom = document;
 
+
+function CloseSession(){
+        let $session = localStorage.getItem("session");
+        if ($session === "false" || $session === null) {
+            console.log("cerrado");
+            window.location.href = '../../index.jsp';
+        };
+    
+}
+CloseSession();
+
+setInterval(() => {
+    CloseSession();
+}, 1000);
+
+
 /*Se cambia el color de las filas inpares */
 (() =>{
     const $filas = $dom.querySelectorAll("tbody.body__tabla > tr.fila__tabla");

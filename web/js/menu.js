@@ -4,6 +4,7 @@
  */
 
 
+console.log(localStorage.getItem("session"));
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -13,4 +14,16 @@ document.addEventListener('DOMContentLoaded', function() {
     menuToggle.addEventListener('click', function() {
         menuList.classList.toggle('menu__lista--active');
     });
+});
+
+
+const $BtnSalir = document.querySelector(".Sign-out");
+
+
+
+$BtnSalir.addEventListener("click", function CloseSession(){
+    let cambio = localStorage.getItem("session");
+    cambio = false;
+    localStorage.setItem("session", cambio);
+    
 });

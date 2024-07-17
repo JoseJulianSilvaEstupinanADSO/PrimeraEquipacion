@@ -47,7 +47,7 @@
         </li>
       </ul>
       <div class="menu__salir">
-        <a href="../../index.jsp" class="menu__link menu__link--salir" ><span class="icono__span"><i class="fa-solid fa-right-from-bracket"></i></span>Sign out</a>
+        <a href="../../index.jsp" class="menu__link menu__link--salir Sign-out" ><span class="icono__span"><i class="fa-solid fa-right-from-bracket"></i></span>Sign out</a>
       </div>
     </section>
     <section class="facturas">
