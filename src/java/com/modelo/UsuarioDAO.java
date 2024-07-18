@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.mindrot.jbcrypt.BCrypt;
 /**
  *
  * @author Julian
@@ -24,25 +25,31 @@ public class UsuarioDAO extends Conexion {
         try {
             
             this.conectar();
-            String sql = "SELECT * FROM usuario WHERE usuario = ? AND contrasena = ?";
+            String sql = "SELECT * FROM usuario WHERE usuario = ? ";
             PreparedStatement pre = this.getCon().prepareStatement(sql);
             pre.setString(1, usuario);
-            pre.setString(2, contrasena);
             ResultSet rs;
             rs = pre.executeQuery();
             if (rs.next()) {
-                usuarioValido = new Usuario(
-                    rs.getString("id_usuario"),
-                    rs.getString("usuario"),
-                    rs.getString("contrasena"),
-                    rs.getString("documento"),
-                    rs.getString("nombre"),
-                    rs.getString("telefono"),
-                    rs.getString("direccion"),
-                    rs.getString("email"),
-                    rs.getString("edad"),
-                    rs.getString("id_rol")
-                );
+                
+                 String encriptada = rs.getString("contrasena");
+                 
+                 if (BCrypt.checkpw(contrasena, encriptada)) {
+                    
+                    usuarioValido = new Usuario(
+                        rs.getString("id_usuario"),
+                        rs.getString("usuario"),
+                        rs.getString("contrasena"),
+                        rs.getString("documento"),
+                        rs.getString("nombre"),
+                        rs.getString("telefono"),
+                        rs.getString("direccion"),
+                        rs.getString("email"),
+                        rs.getString("edad"),
+                        rs.getString("id_rol")
+                    );
+                }
+                
             }
             
         } catch (SQLException e) {
@@ -62,9 +69,11 @@ public class UsuarioDAO extends Conexion {
             this.conectar();
             String sql = "INSERT INTO usuario(usuario, contrasena, documento, nombre, telefono, direccion, email, edad) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
             
+            String password = BCrypt.hashpw(u.getContraseña(), BCrypt.gensalt());
+            
             PreparedStatement pre = this.getCon().prepareStatement(sql);
             pre.setString(1, u.getUsuario());
-            pre.setString(2, u.getContraseña());
+            pre.setString(2, password);
             pre.setString(3, u.getDocumento());
             pre.setString(4, u.getNombre());
             pre.setString(5, u.getTelefono());
@@ -132,15 +141,17 @@ public class UsuarioDAO extends Conexion {
         
         try {
             this.conectar();
-            String sql = "UPDATE usuario SET id_rol=?  WHERE id_usuario = ?";
+            String sql = "UPDATE usuario SET usuario = ?, id_rol = ?, nombre = ?, telefono = ?, direccion = ?, email = ? WHERE id_usuario = ?";
             
             PreparedStatement pre = this.getCon().prepareStatement(sql);
-            
-            System.out.println(u.getIdUsuario());
-            System.out.println(u.getRol());
-            
-            pre.setInt(1, Integer.parseInt(u.getRol()));
-            pre.setInt(2, Integer.parseInt(u.getIdUsuario()));
+                    
+            pre.setString(1, u.getUsuario());
+            pre.setInt(2, Integer.parseInt(u.getRol()));
+            pre.setString(3, u.getNombre());
+            pre.setString(4, u.getTelefono());
+            pre.setString(5, u.getDireccion());
+            pre.setString(6, u.getEmail());
+            pre.setInt(7, Integer.parseInt(u.getIdUsuario()));
  
             return pre.executeUpdate() > 0;
 
@@ -154,6 +165,53 @@ public class UsuarioDAO extends Conexion {
         } finally {
             this.desconectar();
         }
+        
+    }
+    
+    public  Usuario BuscarUsuario(String id){
+     
+        Usuario u = null;
+        
+        try {
+            
+            this.conectar();
+            String sql = "SELECT * FROM usuario WHERE id_usuario = ?";
+            
+            PreparedStatement pre = this.getCon().prepareStatement(sql);
+            
+            pre.setInt(1, Integer.parseInt(id));            
+            ResultSet rs;              
+            rs = pre.executeQuery();
+            
+            if (rs.next()) {
+                
+                u = new Usuario(
+                    rs.getString("id_usuario"),
+                    rs.getString("usuario"),
+                    rs.getString("contrasena"),
+                    rs.getString("documento"),
+                    rs.getString("nombre"),
+                    rs.getString("telefono"),
+                    rs.getString("direccion"),
+                    rs.getString("email"),
+                    rs.getString("edad"),
+                    rs.getString("id_rol")
+                );
+                
+            }
+            
+            
+        } catch (SQLException e) {
+            
+            e.printStackTrace();
+            
+        } finally {
+            
+            this.desconectar();
+        }
+        
+        
+        return u;
         
     }
        

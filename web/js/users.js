@@ -8,6 +8,20 @@
 const $dom = document;
 
 
+
+function CloseSession(){
+        let $session = localStorage.getItem("session");
+        if ($session === "false" || $session === null) {
+            console.log("cerrado");
+            window.location.href = '../../index.jsp';
+        };
+    
+}
+CloseSession();
+
+setInterval(() => {
+    CloseSession();
+}, 1000);
 /**
  * Se crean los eventos para cerrar el modal
  * 
@@ -243,16 +257,20 @@ table.addEventListener('click', function(event) {
 function Modificar() {
     
     const $id = $dom.querySelector(".form_Id").value;
+    const $nombre = $dom.querySelector(".form_Nombre").value;
+    const $documento = $dom.querySelector(".form_Doc").value;
     const $rol = $dom.querySelector(".form_Rol").value;
+    const $usuario = $dom.querySelector(".form_User").value;
+    const $telefono = $dom.querySelector(".form_Tel").value;
+    const $direccion = $dom.querySelector(".form_Direc").value;
+    const $correo = $dom.querySelector(".form_Email").value;
     
-    console.log($id + " " + $rol);
-    
+
    let ope = new XMLHttpRequest();
    ope.open("POST", "../../Usuarios?action=ModificarUsuario", true);
    ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
    ope.onload = function () {
      if(ope.status === 200){
-         console.log(ope.responseText);
          let respuesta = JSON.parse(ope.responseText);
             
          
@@ -272,7 +290,7 @@ function Modificar() {
          }
      }  
    };
-   ope.send("id=" + $id + "&id_rol=" + $rol);
+   ope.send("id=" + $id + "&id_rol=" + $rol + "&nombre=" + $nombre + "&documento=" + $documento + "&usuario=" + $usuario + "&telefono=" + $telefono + "&direccion=" + $direccion + "&correo=" + $correo + "&contrasena=" + null);
 };
 
 const $BtnModificar = $dom.querySelector(".ModificarUser");

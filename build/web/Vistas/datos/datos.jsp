@@ -59,7 +59,7 @@
           </li>
         </ul>
         <div class="menu__salir">
-          <a href="../../index.jsp" class="menu__link menu__link--salir" ><span class="icono__span"><i class="fa-solid fa-right-from-bracket"></i></span>Sign out</a>
+          <a href="../../index.jsp" class="menu__link menu__link--salir Sign-out" ><span class="icono__span"><i class="fa-solid fa-right-from-bracket"></i></span>Sign out</a>
         </div>
       </section>
       <section class="container--datos">
@@ -89,9 +89,10 @@
                             <div id="selec">
                                 <label class="label__modal" for="">Rol:</label>
                                 <select   class="input__modal form_Rol" name="" id="">
-                                  <option  value="sleccionar">Seleccionar Rol</option  >
-                                  <option disabled value="valor1">1</option >
-                                  <option disabled value="valor2">2</option >
+                                  <option disabled value="sleccionar">Seleccionar Rol</option  >
+                                  <option disabled value="1">1</option >
+                                  <option disabled value="2">2</option >
+                                  <option disabled value="3">3</option>
                                 </select>
                             </div>
                         </div>
@@ -116,7 +117,7 @@
                           </div>
                       </div>
                         <div class="form__content--buttons">
-                            <button type="submit" class="button__modal button__modal--inventario">Guardar Cambios</button>
+                            <button type="submit" class="button__modal button__modal--inventario  GuardarCambios">Guardar Cambios</button>
                             <button type="button" class="cambiar__contraseña">Cambiar Contraseña</button>
                         </div>
                     </div>

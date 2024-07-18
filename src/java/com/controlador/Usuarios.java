@@ -1,3 +1,5 @@
+
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
@@ -62,6 +64,12 @@ public class Usuarios extends HttpServlet {
                 case "ModificarUsuario":
                     
                     ModificarUsuario(request,response);
+                    
+                    break;
+                    
+                case "BuscarUsuario":
+                    
+                    BuscarUsuario(request,response);
                     
                     break;
                     
@@ -132,8 +140,15 @@ public class Usuarios extends HttpServlet {
         
         String idUsuario = request.getParameter("id");
         String rol = request.getParameter("id_rol");
+        String nombre = request.getParameter("nombre");
+        String documento = request.getParameter("documento");
+        String usuario = request.getParameter("usuario");
+        String telefono = request.getParameter("telefono");
+        String direccion = request.getParameter("direccion");
+        String correo = request.getParameter("correo");
+        String contrasena = request.getParameter("contrasena");
         
-        Usuario u = new Usuario(idUsuario,null,null,null,null,null,null,null,null, rol);
+        Usuario u = new Usuario(idUsuario,usuario,contrasena,documento,nombre,telefono,direccion,correo,null, rol);
         
         boolean resultado = modelo.ModificarUsuario(u);
         
@@ -147,6 +162,34 @@ public class Usuarios extends HttpServlet {
         
         
     }
+    
+    
+    private void BuscarUsuario(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        
+        String idUsuario = request.getParameter("id");
+        Usuario u = modelo.BuscarUsuario(idUsuario);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        if (u != null) {
+            String json = String.format("{\"idUsuario\": \"%s\", \"usuario\": \"%s\", \"nombre\": \"%s\", \"rol\": \"%s\", \"telefono\": \"%s\", \"direccion\": \"%s\", \"correo\": \"%s\", \"documento\": \"%s\", \"contrasena\": \"%s\"}",
+                u.getIdUsuario(), u.getUsuario(), u.getNombre(), u.getRol(), u.getTelefono(), u.getDireccion(), u.getEmail(), u.getDocumento(), u.getContraseña());
+            response.getWriter().write(json);
+        }
+        else{
+            response.getWriter().write("{\"error\": \"Usuario No encontrado\"}");
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
