@@ -77,7 +77,7 @@ function filas(){
 // Listar Toddos los usuarios Registrados en la base de datos//
 function CargarDatos() {
     const $BtnBusacar = $dom.querySelector("#BuscarUser");
-    $filas = $dom.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
+    const  $filas = $dom.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
     $filas.forEach((x) =>{
         x.remove();
     });

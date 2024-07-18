@@ -32,6 +32,15 @@ const $boton = document.getElementById("abrirModal");
 const $cerrar = document.getElementById("Cerrar__Modal");
 
 
+function CloseModal() {   
+    $modal.classList.add("cerrando");
+    setTimeout(function() {
+        $modal.style.display = "none";
+        $modal.classList.remove("cerrando");
+    }, 500);
+}
+
+
 $boton.addEventListener("click",function() {
   $modal.style.display = "block";
 });
@@ -69,4 +78,55 @@ window.addEventListener("click",function(event) {
 });
 
 
+// Registrar cliente //
+
+function RegistarCliente() {
+    
+    event.preventDefault();
+    
+    let $documento = document.querySelector(".documento_cliente").value;
+    let $nombre = document.querySelector(".nombre_cliente").value;
+    let $telefono = document.querySelector(".tefelono_cliente").value;
+   
+    
+    let num = 0;
+    
+    if ($documento.length > 0 && $nombre.length > 0 && $telefono.length > 0) {
+        num = 1;
+    }
+    
+    if (num === 1) {
+        
+        let ope = new XMLHttpRequest();
+        ope.open("POST", "../../Clientes?action=RegistrarUsuario", true);
+        ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        ope.onload = function(){
+            if (ope.status === 200) {
+                let respuesta = JSON.parse(ope.responseText);
+                console.log(respuesta);
+                if (respuesta.resultado) {
+                    const $modal = document.getElementById("ventanaModal");
+                    alert("Cliente Registrado");
+                    CloseModal();
+                    
+                }
+                else{
+                    alert("Error al Registrar el cliente");
+                }
+            }  
+        };
+        ope.send("nombre=" + $nombre + "&documento=" + $documento + "&telefono=" + $telefono)
+    }
+    else{
+        aler("Campos vacion");
+    }
+    
+    
+
+}
+
+
+const $BtnRegistrar = document.querySelector(".registar__clientes");
+
+$BtnRegistrar.addEventListener("submit", RegistarCliente);
 

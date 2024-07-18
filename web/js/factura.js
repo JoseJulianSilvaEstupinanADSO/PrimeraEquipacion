@@ -15,7 +15,10 @@ function CloseSession(){
         };
     
 }
-CloseSession();
+
+setInterval(() => {
+    CloseSession();
+}, 1000);
 
 
 

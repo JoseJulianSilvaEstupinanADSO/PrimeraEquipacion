@@ -76,23 +76,14 @@
             <th class="th__item">Acciones</th>
           </thead>
           <tbody class="body__tabla">
-            <tr class="fila__tabla">
-                <td class="td__tabla IdCliente">1</td>
-                <td class="td__tabla NombreProducto">1106544620</td>
-                <td class="td__tabla PrecioProducto">Ronaldo Messi</td>
-                <td class="td__tabla TallaProducto">123546351</td>
-                <td class="td__tabla ">
-                  <button type="button" class="button__tabla">Historial</button>
-                </td>
-            </tr>
           </tbody>
         </table>
       </div>
       <div class="container__buscar">
         <div class="buscar--cliente">
             <label class="label__buscar" for="">Buscar Cliente:</label>
-            <input class="input__buscar" type="text">
-            <button class="button__buscar">Buscar</button>
+            <input class="input__buscar bucar__cliente" type="text">
+            <button class="button__buscar Btn__buscar">Buscar</button>
         </div>
       </div>
     </section>
@@ -105,7 +96,7 @@
                 <img class="img__modal" src="../../img/logo.png" alt="">
                 <h2>Historial de cliente</h2>
                 <div class="numero__factura">
-                    <p class="Numero_factura"><b>Id Cliente: 25</b></p>
+                    <p class="Numero_factura Id_cliente"><b>Id Cliente: 25</b></p>
                 </div>
             </div>
             <h2 class="title__tabla--clientes">COMPRAS REALIZADAS</h2>
@@ -118,37 +109,37 @@
                     <th class="th__item">Id Vendedor</th>
                   </thead>
                   <tbody class="body__tabla">
-                    <tr class="fila__tabla fila__tabla--modal" >
+                    <tr class="fila__tabla--modal" >
                         <td class="td__tabla ">12</td>
                         <td class="td__tabla ">45</td>
                         <td class="td__tabla ">02/04/2024</td>
                         <td class="td__tabla ">1</td>
                     </tr>
-                    <tr class="fila__tabla fila__tabla--modal" >
+                    <tr class=" fila__tabla--modal" >
                         <td class="td__tabla ">12</td>
                         <td class="td__tabla ">45</td>
                         <td class="td__tabla ">02/04/2024</td>
                         <td class="td__tabla ">1</td>
                     </tr>
-                    <tr class="fila__tabla fila__tabla--modal" >
+                    <tr class=" fila__tabla--modal" >
                         <td class="td__tabla ">12</td>
                         <td class="td__tabla ">45</td>
                         <td class="td__tabla ">02/04/2024</td>
                         <td class="td__tabla ">1</td>
                     </tr>
-                    <tr class="fila__tabla fila__tabla--modal" >
+                    <tr class=" fila__tabla--modal" >
                         <td class="td__tabla ">12</td>
                         <td class="td__tabla ">45</td>
                         <td class="td__tabla ">02/04/2024</td>
                         <td class="td__tabla ">1</td>
                     </tr>
-                    <tr class="fila__tabla fila__tabla--modal" >
+                    <tr class=" fila__tabla--modal" >
                         <td class="td__tabla ">12</td>
                         <td class="td__tabla ">45</td>
                         <td class="td__tabla ">02/04/2024</td>
                         <td class="td__tabla ">1</td>
                     </tr>
-                    <tr class="fila__tabla fila__tabla--modal" >
+                    <tr class=" fila__tabla--modal" >
                         <td class="td__tabla ">12</td>
                         <td class="td__tabla ">45</td>
                         <td class="td__tabla ">02/04/2024</td>

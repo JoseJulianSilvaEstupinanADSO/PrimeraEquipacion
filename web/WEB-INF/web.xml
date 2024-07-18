@@ -12,6 +12,14 @@
         <servlet-name>Usuarios</servlet-name>
         <url-pattern>/Usuarios</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Clientes</servlet-name>
+        <servlet-class>com.controlador.Clientes</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Clientes</servlet-name>
+        <url-pattern>/Clientes</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

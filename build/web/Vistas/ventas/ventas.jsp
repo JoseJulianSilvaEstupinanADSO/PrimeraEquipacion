@@ -150,21 +150,21 @@
       <div id="ventanaModal" class="container__modal">
         <div class="contenido__modal">
           <h2 class="modal__title--ventas">REGISTRAR CLIENTE</h2>
-          <form action="" class="form__modal">
+          <form action="" class="form__modal  registar__clientes">
               <div class="div__form">
                   <label for="" class="">Documento: </label>
-                  <input type="text" class="modal__input">
+                  <input type="text" class="modal__input documento_cliente">
               </div>
               <div class="div__form">
                   <label for="" class="">Nombre: </label>
-                  <input type="text" class="modal__input">
+                  <input type="text" class="modal__input nombre_cliente">
               </div>
               <div class="div__form">
                   <label for="" class="">Telefono: </label>
-                  <input type="text" class="modal__input">
+                  <input type="text" class="modal__input tefelono_cliente">
               </div>
               <div class="div__buttons">
-                  <button type="submit" class="button button__modal">Registrar</button>
+                  <button type="submit" class="button button__modal registrar_cliente">Registrar</button>
                   <button type="button" id="Cerrar__Modal" class="button--alert button__modal button__modal--alert">Cancelar</button>
               </div>
           </form>

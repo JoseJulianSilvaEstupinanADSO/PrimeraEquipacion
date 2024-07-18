@@ -136,7 +136,7 @@ public class Usuarios extends HttpServlet {
         
     }
     
-    private void ModificarUsuario(HttpServletRequest request, HttpServletResponse response) throws  IOException{
+   private void ModificarUsuario(HttpServletRequest request, HttpServletResponse response) throws  IOException{
         
         String idUsuario = request.getParameter("id");
         String rol = request.getParameter("id_rol");
