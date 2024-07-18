@@ -130,3 +130,35 @@ const $BtnRegistrar = document.querySelector(".registar__clientes");
 
 $BtnRegistrar.addEventListener("submit", RegistarCliente);
 
+
+
+// Bucar Cliente   //
+
+function BuscarCliente() {
+    const $documento = $dom.querySelector(".documento").value;
+    if($documento !== ""){
+        
+        let ope = new XMLHttpRequest();
+        ope.open("POST", "../../Usuarios?action=BuscarCliente", true);
+        ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        ope.onload = function() {
+            if (ope.status === 200){
+                let respuesta = JSON.parse(ope.responseText);
+                if (respuesta.error){
+                    alert("Usuario no encontrado");
+                }
+                else{
+                    const $label = $dom.querySelector(".insertDocumento").value;
+                    let documento = respuesta.nombre;
+                    $label = documento;
+                }
+            }  
+        };
+        
+    ope.send("documento=" + $documento);
+    }
+}
+
+const Btn_buscar_cliente = document.querySelector(".Btn_busacar_cliente");
+
+Btn_buscar_cliente.addEventListener("click", BuscarCliente);

@@ -53,6 +53,11 @@ public class Clientes extends HttpServlet {
                     ListarUusuario(request,response);
                     
                     break;
+                    
+                case "BuscarCliente":
+                    
+                    BuscarCliente(request, response);
+                    break;
                 default:
                     throw new AssertionError();
             }
@@ -92,6 +97,23 @@ public class Clientes extends HttpServlet {
         json.append("]");
         response.getWriter().write(json.toString());
         
+    }
+    
+    private void BuscarCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        
+        String documento = request.getParameter("documento");
+        
+        Cliente c = modelo.BuscarCliente(documento);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        if (c != null) {
+            String json = String.format("{\"id_cliente\": \"%s\", \"documento\": \"%s\", \"nombre\": \"%s\", \"telefono\": \"%s\"}",
+                c.getId_cliente(), c.getDocumento(), c.getNombre(), c.getTelefono());
+            response.getWriter().write(json);
+        }
+        else{
+            response.getWriter().write("{\"error\": \"Cliente No encontrado\"}");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

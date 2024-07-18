@@ -69,9 +69,9 @@
             <div class="buscar">
               <h2 class="cliente__title">Cliente</h2>
               <div class="id__cliente">
-                <input type="number" id="cdCliente" class="codigo__cliente login__input" placeholder="Codigo Cliente">
-                <button type="button" class="button buscar__cliente">Buscar</button>
-                <input type="text" class="codigo__cliente cliente__nombre" readonly>
+                <input type="number" id="cdCliente" class="codigo__cliente login__input documento" placeholder="Codigo Cliente">
+                <button type="button" class="button buscar__cliente  Btn_busacar_cliente">Buscar</button>
+                <input type="text" class="codigo__cliente cliente__nombre insertDocumento" readonly>
               </div>
               <h2 class="cliente__title">Buscar Producto</h2>
               <div class="id__cliente">

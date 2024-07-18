@@ -85,4 +85,43 @@ public class ClienteDAO extends Conexion{
         return clientes;
     }
     
+    public Cliente BuscarCliente(String documento){
+        
+        Cliente c = null;
+        
+        try {
+            
+            this.conectar();
+            String sql = "SELECT * FROM cliente WHERE documento=?";
+            
+            PreparedStatement pre = this.getCon().prepareStatement(sql);
+            pre.setString(1, documento);
+            ResultSet rs;
+            rs = pre.executeQuery();
+            
+            if (rs.next()) {
+                c = new Cliente(               
+                    rs.getString("id_cliente"),
+                    rs.getString("documento"),
+                    rs.getString("nombre"),
+                    rs.getString("telefono")
+                );
+                
+            }
+            
+            
+            
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            
+        } finally {
+            this.desconectar();
+        }
+        
+        return c;
+        
+        
+    }
+    
 }
