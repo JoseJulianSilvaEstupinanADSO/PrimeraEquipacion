@@ -3,34 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/Css/datos.css</file>
-            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/js/datos.js</file>
-            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/js/inventario.js</file>
-            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/Vistas/admin/usuarios.jsp</file>
-            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/Css/usuarios.css</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/js/users.js</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/js/ventas.js</file>
             <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/src/java/com/controlador/Usuarios.java</file>
-            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/Css/style.css</file>
-            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/Css/inicio.css</file>
-            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/js/login.js</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/src/java/com/modelo/Usuario.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/src/java/com/modelo/ClienteDAO.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/Vistas/ventas/ventas.jsp</file>
             <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/src/java/com/modelo/UsuarioDAO.java</file>
-            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/Vistas/inventario/inventario.jsp</file>
-            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/Vistas/registro.jsp</file>
-            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/Css/clientes.css</file>
-            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/index.jsp</file>
             <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/js/clientes.js</file>
-            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/Css/componentes.css</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/src/java/com/controlador/Clientes.java</file>
             <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/Vistas/admin/clientes.jsp</file>
-            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/Css/variables.css</file>
-=======
-            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/src/java/com/controlador/Usuarios.java</file>
-            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/Vistas/facturas/facturas.jsp</file>
-            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/src/java/com/modelo/Usuario.java</file>
-            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/Vistas/admin/usuarios.jsp</file>
-            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/Vistas/datos/datos.jsp</file>
-            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/datos.js</file>
-            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/src/java/com/modelo/UsuarioDAO.java</file>
->>>>>>> 9c1a0683e0e898edf69633daed9056bf06bb17f4
         </group>
     </open-files>
 </project-private>
