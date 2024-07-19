@@ -139,7 +139,7 @@ function BuscarCliente() {
     if($documento !== ""){
         
         let ope = new XMLHttpRequest();
-        ope.open("POST", "../../Usuarios?action=BuscarCliente", true);
+        ope.open("POST", "../../Clientes?action=BuscarCliente", true);
         ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         ope.onload = function() {
             if (ope.status === 200){
@@ -148,9 +148,9 @@ function BuscarCliente() {
                     alert("Usuario no encontrado");
                 }
                 else{
-                    const $label = $dom.querySelector(".insertDocumento").value;
-                    let documento = respuesta.nombre;
-                    $label = documento;
+                    console.log(respuesta.nombre);
+                    const $label = $dom.querySelector(".insertDocumento");
+                    $label.value = respuesta.nombre;
                 }
             }  
         };
