@@ -11,6 +11,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.modelo.Producto;
+import com.modelo.ProductoDAO;
 
 /**
  *
@@ -19,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "Productos", urlPatterns = {"/Productos"})
 public class Productos extends HttpServlet {
 
+    
+    private ProductoDAO modelo = new ProductoDAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,18 +38,57 @@ public class Productos extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Productos</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Productos at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String accion = request.getParameter("action");
+        switch (accion) {
+            case "ListarTallas":
+                ListarTallas(request, response);
+                break;
+            case "RegistrarProducto":
+                RegistrarProducto(request, response);
+                break;
+            default:
+                throw new AssertionError();
         }
+    }
+    
+    private void ListarTallas(HttpServletRequest request, HttpServletResponse response) throws  ServletException, IOException{
+        
+        List<Producto> productos = modelo.ListarTallas();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        
+        StringBuilder json = new StringBuilder("[");
+        for (int i = 0; i < productos.size(); i++) {
+            Producto producto = productos.get(i);
+             json.append(String.format("{\"talla\": \"%s\"}",
+                    producto.getTalla()));
+            if (i < productos.size() - 1) {
+                json.append(",");
+            }
+        }
+        json.append("]");
+        response.getWriter().write(json.toString());
+    }
+    
+    private void RegistrarProducto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        
+        String nombre = request.getParameter("nombre");
+        String precio = request.getParameter("precio");
+        String talla = request.getParameter("talla");
+        String stock = request.getParameter("stock");
+        String tela = request.getParameter("tela");
+        System.out.println(nombre+precio+talla+stock +tela);
+        
+        Producto p = new Producto(null, talla, nombre, precio, stock, tela);
+        
+        boolean resultado = modelo.AgregarProducto(p);
+        
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write("{\"resultado\": " + resultado + "}");
+                
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

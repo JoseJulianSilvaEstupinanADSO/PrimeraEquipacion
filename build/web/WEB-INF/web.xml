@@ -20,6 +20,14 @@
         <servlet-name>Clientes</servlet-name>
         <url-pattern>/Clientes</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Productos</servlet-name>
+        <servlet-class>com.controlador.Productos</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Productos</servlet-name>
+        <url-pattern>/Productos</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

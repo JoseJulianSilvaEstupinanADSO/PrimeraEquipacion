@@ -16,11 +16,18 @@ function CloseSession(){
         };
     
 }
-CloseSession();
-
 setInterval(() => {
     CloseSession();
 }, 1000);
+
+function CloseModal() {   
+    $modal.classList.add("cerrando");
+    setTimeout(function() {
+        $modal.style.display = "none";
+        $modal.classList.remove("cerrando");
+    }, 500);
+}
+
 
 
 /*Se cambia el color de las filas inpares */
@@ -42,6 +49,8 @@ const $agregar = $dom.querySelector(".agregar__producto");
 $agregar.addEventListener("click", function () {
     $modal.style.display = "block";
     const $btn = $dom.querySelector(".button__modal--inventario");
+    $btn.classList.add("agregar__producto");
+    $btn.classList.remove("modificar__producto");
     $btn.innerText = "Agregar Producto";
     const $talla = $dom.querySelector(".form_talla");
     $talla.remove();
@@ -86,6 +95,8 @@ table.addEventListener('click', function(event) {
     const $modal = $dom.getElementById("ventanaModal");
     const $btn = $dom.querySelector(".button__modal--inventario");
     $btn.innerText = "Guardar Cambios";
+    $btn.classList.remove("agregar__producto");
+    $btn.classList.add("modificar__producto");
 
 
     $modal.style.display = "block";
@@ -117,10 +128,11 @@ table.addEventListener('click', function(event) {
 
     const $cambio = $dom.querySelector("#selec");
     const $input = $dom.createElement("input");
-
+    
 
     $input.classList.add("input__modal");
     $input.classList.add("form_talla");
+
 
     $cambio.appendChild($input);
 
@@ -173,3 +185,84 @@ window.addEventListener("click",function(event) {
     }, 500);
   }
 });
+
+//Listar Las Tallas en el slec//
+
+function ListarTallas() {
+    const $tallas = $dom.querySelector("select.form_talla");    
+    let ope = new XMLHttpRequest();
+    ope.open("GET", "../../Productos?action=ListarTallas", true);
+    ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    ope.onload = function () {
+        if (ope.status === 200){
+            let respuesta = JSON.parse(ope.responseText);        
+            respuesta.forEach((x) => {
+               let option = $dom.createElement("option") ;
+               option.innerText = x.talla;
+               $tallas.appendChild(option);
+            });
+            
+        }
+    };
+    ope.send();
+}
+
+$agregar.addEventListener("click", ListarTallas);
+
+//Agregar un Producto // 
+
+const $bnt_modal = $dom.querySelector(".button__modal--inventario");
+
+function AgregarModificarProducto() {
+    
+    const $id_producto = $dom.querySelector('.form_Id').value;
+    const $nombre_producto = $dom.querySelector(".form_Nombre").value;
+    const $precio_producto = $dom.querySelector(".form_Precio").value;
+    const $talla_producto = $dom.querySelector(".form_talla").value;
+    const $stock_producto = $dom.querySelector(".form_Stock").value;
+    const $tela_producto = $dom.querySelector(".form_Tela").value;
+    
+    
+    
+    if($bnt_modal.classList.contains('agregar__producto')){
+        const $inputs = $dom.querySelectorAll("div.form__content > div > input.llenar");
+        let num = 0;
+        $inputs.forEach((x) => {
+            if(x.value !== ""){
+                num = num +1;
+            }
+        });
+        if(num === $inputs.length-1){
+            
+            let ope = new XMLHttpRequest();
+            ope.open("POST", "../../Productos?action=RegistrarProducto", true);
+            ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            ope.onload = function () {
+                console.log(ope.status);
+                if (ope.status === 200){
+                    let respuesta = JSON.parse(ope.responseText);
+                    if(respuesta.error){
+                        alert("Producto agregado Correctamente");
+                        CloseModal();
+                    }
+                    else{
+                        alert("Error al agregar el producto");
+                    }
+                }
+                
+            };
+            ope.send("nombre=" + $nombre_producto + "&precio=" + $precio_producto + "&talla=" + $talla_producto + "&stock=" + $stock_producto + "&tela=" + $tela_producto);
+            
+            
+            
+        }
+
+    }
+    if($bnt_modal.classList.contains('modificar__producto')){
+        console.log("Modificar");
+    }
+    
+}
+
+$bnt_modal.addEventListener("click",AgregarModificarProducto);
+

@@ -25,7 +25,7 @@ public class Conexion {
     public void conectar(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/proyecto", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/db_proyecto", "root", "");
         } catch (Exception e) {
             System.out.println("Error al conectar a la base de datos"+ e.getMessage());
         }
