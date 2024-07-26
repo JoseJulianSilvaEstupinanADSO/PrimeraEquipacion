@@ -241,7 +241,7 @@ function AgregarModificarProducto() {
                 console.log(ope.status);
                 if (ope.status === 200){
                     let respuesta = JSON.parse(ope.responseText);
-                    if(respuesta.error){
+                    if(respuesta.resultado){
                         alert("Producto agregado Correctamente");
                         CloseModal();
                     }
