@@ -46,6 +46,9 @@ public class Productos extends HttpServlet {
             case "RegistrarProducto":
                 RegistrarProducto(request, response);
                 break;
+            case "ListarProductos":
+                ListarProductos(request, response);
+                break;
             default:
                 throw new AssertionError();
         }
@@ -88,6 +91,10 @@ public class Productos extends HttpServlet {
         response.getWriter().write("{\"resultado\": " + resultado + "}");
                 
         
+        
+    }
+    
+    private void  ListarProductos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         
     }
 

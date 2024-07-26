@@ -42,7 +42,6 @@ public class ProductoDAO extends Conexion{
             this.desconectar();
         }
         
-        System.out.println(tallas);
         
         return tallas;
     }
@@ -89,5 +88,38 @@ public class ProductoDAO extends Conexion{
         }
            return false;
     }
+    
+    public List<Producto> ListarProductos(){
+        List<Producto> productos = new ArrayList<>();
+        
+        try {
+            this.conectar();
+            
+            String sql = "SELECT producto.id_producto, nombre, precio, talla, stock, tela FROM producto JOIN producto_desc ON producto.id_producto = producto_desc.id_producto ";
+            PreparedStatement pre = this.getCon().prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            
+            while (rs.next()) {                
+                Producto p = new Producto();
+                p.setId_producto(rs.getString("id_producto"));
+                p.setNombre(rs.getString("nombre"));
+                p.setPrecio(rs.getString("precio"));
+                p.setTalla(rs.getString("talla"));
+                p.setStock(rs.getString("stock"));
+                p.setTela(rs.getString("tela"));
+                
+                productos.add(p);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            this.desconectar();
+        }
+        
+        
+        return productos;
+    }
+    
     
 }
