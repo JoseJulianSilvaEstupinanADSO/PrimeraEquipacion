@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Statement;
+
 
 /**
  *
@@ -34,7 +36,7 @@ public class ProductoDAO extends Conexion{
                 tallas.add(p);
             }
             
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             this.desconectar();
@@ -50,39 +52,42 @@ public class ProductoDAO extends Conexion{
             
             this.conectar();
             
-           String sql = "INSERT INTO producto(nombre, precio) VALUES (?,?) RETURNING id_producto";
-           PreparedStatement pre = this.getCon().prepareStatement(sql);
-           System.out.println(p.getNombre()+ "+ " + p.getPrecio());
+           String sql = "INSERT INTO producto(nombre, precio) VALUES (?,?)";
+           PreparedStatement pre = this.getCon().prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
            pre.setString(1, p.getNombre());
            pre.setInt(2, Integer.parseInt(p.getPrecio()));
            
-           ResultSet rs = pre.executeQuery();
+           int exito = pre.executeUpdate();
            
-           int id_producto = 0;
-           
-           if (rs.next()) {
-                id_producto = rs.getInt("id_producto");
-           }
-           
-            String sql2 = "INSERT INTO producto_desc(id_producto,talla,stock,tela) VALUES (?,?,?,?)";
-            PreparedStatement pre2 = this.getCon().prepareStatement(sql2);
-            pre2.setInt(1, id_producto);
-            pre2.setString(2, p.getTalla());
-            pre2.setInt(3, Integer.parseInt(p.getStock()));
-            pre2.setString(4, p.getTela());
-
+            if (exito > 0) {
+                ResultSet rs = pre.getGeneratedKeys();
+                if (rs.next()) {
+                    
+                    int id_producto = rs.getInt(1);
+                    
+                    System.out.println(id_producto+ " el id es");
+                    
+                    String sql2 = "INSERT INTO producto_desc(id_producto,talla,stock,tela) VALUES (?,?,?,?)";
+                    PreparedStatement pre2 = this.getCon().prepareStatement(sql2);
+                    pre2.setInt(1, id_producto);
+                    pre2.setString(2, p.getTalla());
+                    pre2.setInt(3, Integer.parseInt(p.getStock()));
+                    pre2.setString(4, p.getTela());
+                    
+                    pre2.executeUpdate();
+                    
+                    return true;
+                }
+            }
+         
+      
             
-            return pre2.executeUpdate() > 0;
-           
-           
-           
-            
-            
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return false;
         } finally {
             this.desconectar();
         }
+           return false;
     }
     
 }
