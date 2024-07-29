@@ -103,7 +103,7 @@ public class UsuarioDAO extends Conexion {
         try {
             
             this.conectar();
-            String sql = "SELECT * FROM usuario";
+            String sql = "SELECT * FROM usuario WHERE id_rol != 4";
             
             PreparedStatement pre = this.getCon().prepareStatement(sql);
                 

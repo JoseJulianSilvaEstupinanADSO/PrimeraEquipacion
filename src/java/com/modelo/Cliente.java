@@ -15,17 +15,17 @@ public class Cliente {
     private String documento;
     private String nombre;
     private String telefono;
+    private String rol;
 
-    public Cliente(String id_cliente, String documento, String nombre, String telefono) {
+    public Cliente() {
+    }
+   
+    public Cliente(String id_cliente, String documento, String nombre, String telefono, String rol) {
         this.id_cliente = id_cliente;
         this.documento = documento;
         this.nombre = nombre;
         this.telefono = telefono;
-    }
-
-    
-    
-    public Cliente() {
+        this.rol = rol;
     }
 
     public String getId_cliente() {
@@ -59,8 +59,13 @@ public class Cliente {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    
-    
-    
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
     
 }

@@ -64,8 +64,6 @@ public class ProductoDAO extends Conexion{
                     
                     int id_producto = rs.getInt(1);
                     
-                    System.out.println(id_producto+ " el id es");
-                    
                     String sql2 = "INSERT INTO producto_desc(id_producto,talla,stock,tela) VALUES (?,?,?,?)";
                     PreparedStatement pre2 = this.getCon().prepareStatement(sql2);
                     pre2.setInt(1, id_producto);
@@ -121,5 +119,78 @@ public class ProductoDAO extends Conexion{
         return productos;
     }
     
+    
+    public boolean ModificarProducto (Producto p) {
+        
+        try {
+            
+            this.conectar();
+            
+            String sql = "UPDATE producto p JOIN producto_desc pd ON p.id_producto = pd.id_producto JOIN talla t ON pd.talla = t.talla SET nombre = ?, precio = ?, stock = ? WHERE p.id_producto = ? AND t.talla=?";   
+            
+            PreparedStatement pre = this.getCon().prepareStatement(sql);
+            
+            System.out.println(p.getId_producto());
+            
+            pre.setString(1, p.getNombre());
+            pre.setInt(2, Integer.parseInt(p.getPrecio()));
+            pre.setInt(3, Integer.parseInt(p.getStock()));
+            pre.setInt(4, Integer.parseInt(p.getId_producto()));
+            pre.setString(5, p.getTalla());
+            
+            return pre.executeUpdate() > 0;
+            
+        } catch (SQLException e) {
+            
+            e.printStackTrace();
+            
+            return false;
+            
+            
+        } finally {
+            this.desconectar();
+            
+        }
+           
+    }
+    
+    public Producto BuscarProducto(String id_producto, String talla){
+        
+        Producto p = null;
+        
+        try {
+            
+            this.conectar();
+            String sql = "SELECT p.id_producto, p.nombre, p.precio, pd.stock, pd.talla, pd.tela FROM producto p JOIN producto_desc pd ON p.id_producto = pd.id_producto JOIN talla t ON pd.talla = t.talla WHERE p.id_producto = ? AND t.talla = ?";
+            
+            PreparedStatement pre = this.getCon().prepareStatement(sql);
+                    
+            pre.setInt(1, Integer.parseInt(id_producto));
+            pre.setString(2, talla);
+            
+            ResultSet rs;
+            rs = pre.executeQuery();
+            
+            if (rs.next()) {
+                p = new Producto(
+                        rs.getString("id_producto"),
+                        rs.getString("talla"),
+                        rs.getString("nombre"),
+                        rs.getString("precio"),
+                        rs.getString("stock"),
+                        rs.getString("tela")
+                );
+            }
+            System.out.println(p);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            this.desconectar();
+        }
+        
+        return p;
+        
+    }
     
 }

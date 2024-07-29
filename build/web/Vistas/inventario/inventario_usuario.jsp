@@ -51,10 +51,10 @@
       </div>
     </section>
     <section class="facturas">
-      <div class="header__productos">
-        <h1 class="producto__title">Gestion de Inventario</h1>
-        <button type="button" class="agregar__producto">Agragar Producto</button>
-      </div>
+        <div class="header__productos">
+            <h1 class="producto__title">Gestion de Inventario</h1>
+            <button type="button" class="agregar__producto">Agragar Producto</button>
+        </div>
       <div class="container__tabla">
         <table class="tabla--factura">
           <thead class="tabla__header">
@@ -67,66 +67,12 @@
             <th class="th__item">Acciones</th>
           </thead>
           <tbody class="body__tabla">
-            <tr class="fila__tabla">
-                <td class="td__tabla IdProducto">1</td>
-                <td class="td__tabla NombreProducto">Casima Real Madrid</td>
-                <td class="td__tabla PrecioProducto">120000</td>
-                <td class="td__tabla TallaProducto">M</td>
-                <td class="td__tabla StockProducto">67</td>
-                <td class="td__tabla TelaProducto">Lino</td>
-                <td class="td__tabla ">
-                  <button type="button" class="button__tabla">Editar</button>
-                </td>
-            </tr>
-            <tr class="fila__tabla">
-                <td class="td__tabla IdProducto">1</td>
-                <td class="td__tabla NombreProducto">Casima Real Madrid</td>
-                <td class="td__tabla PrecioProducto">120000</td>
-                <td class="td__tabla TallaProducto">M</td>
-                <td class="td__tabla StockProducto">67</td>
-                <td class="td__tabla TelaProducto">Lino</td>
-                <td class="td__tabla ">
-                  <button type="button" class="button__tabla">Editar</button>
-                </td>
-            </tr>
-            <tr class="fila__tabla">
-                <td class="td__tabla IdProducto">1</td>
-                <td class="td__tabla NombreProducto">Casima Real Madrid</td>
-                <td class="td__tabla PrecioProducto">120000</td>
-                <td class="td__tabla TallaProducto">M</td>
-                <td class="td__tabla StockProducto">67</td>
-                <td class="td__tabla TelaProducto">Lino</td>
-                <td class="td__tabla ">
-                  <button type="button" class="button__tabla">Editar</button>
-                </td>
-            </tr>
-            <tr class="fila__tabla">
-                <td class="td__tabla IdProducto">1</td>
-                <td class="td__tabla NombreProducto">Casima Real Madrid</td>
-                <td class="td__tabla PrecioProducto">120000</td>
-                <td class="td__tabla TallaProducto">M</td>
-                <td class="td__tabla StockProducto">67</td>
-                <td class="td__tabla TelaProducto">Lino</td>
-                <td class="td__tabla ">
-                  <button type="button" class="button__tabla">Editar</button>
-                </td>
-            </tr>
-            <tr class="fila__tabla">
-                <td class="td__tabla IdProducto">1</td>
-                <td class="td__tabla NombreProducto">Casima Real Madrid</td>
-                <td class="td__tabla PrecioProducto">120000</td>
-                <td class="td__tabla TallaProducto">M</td>
-                <td class="td__tabla StockProducto">67</td>
-                <td class="td__tabla TelaProducto">Lino</td>
-                <td class="td__tabla ">
-                  <button type="button" class="button__tabla">Editar</button>
-                </td>
-            </tr>
+
           </tbody>
         </table>
       </div>
       <div class="container__buscar">
-        <div class="buscar--inventario">
+        <div class="buscar">
             <label class="label__buscar" for="">Buscar Producto:</label>
             <input class="input__buscar" type="text">
             <button class="button__buscar">Buscar</button>
@@ -148,17 +94,17 @@
                         <div class="form__content">
                             <div>
                                 <label class="label__modal" for="">Id:</label>
-                                <input class="input__modal form_Id" type="text">
+                                <input disabled="" class="input__modal llenar form_Id" type="number">
                             </div>
                             <div>
                                 <label class="label__modal" for="">Nombre:</label>
-                                <input class="input__modal form_Nombre" type="text">
+                                <input class="input__modal llenar form_Nombre" type="text">
                             </div>
                         </div>
                         <div class="form__content">
                             <div>
                                 <label class="label__modal" for="">Precio:</label>
-                                <input class="input__modal form_Precio" type="text">
+                                <input class="input__modal llenar form_Precio" type="text">
                             </div>
                             <div id="selec">
                                 <label class="label__modal" for="">Talla:</label>
@@ -168,15 +114,15 @@
                         <div class="form__content">
                             <div>
                                 <label class="label__modal" for="">Stock:</label>
-                                <input class="input__modal form_Stock" type="text">
+                                <input class="input__modal llenar form_Stock" type="text">
                             </div>
                             <div>
                                 <label class="label__modal" for="">Tela:</label>
-                                <input class="input__modal form_Tela" type="text">
+                                <input class="input__modal llenar form_Tela" type="text">
                             </div>
                         </div>
                         <div class="form__content--buttons">
-                            <button type="submit" class="button__modal button__modal--inventario">Guardar Cambios</button>
+                            <button type="button" class="button__modal button__modal--inventario">Guardar Cambios</button>
                             <button type="button" class="button__modal  button--alert modal__cancelar">Cancelar</button>
                         </div>
                     </div>

@@ -119,6 +119,7 @@ function ListarClientes() {
             const $tbody = $dom.querySelector(".body__tabla");
             const $frag = $dom.createDocumentFragment();
             
+            
             respuesta.forEach((x) => {
                
                 const $fila = $dom.createElement("tr");

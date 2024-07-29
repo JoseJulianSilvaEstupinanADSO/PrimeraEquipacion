@@ -51,8 +51,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
   color: var(--primario);
 }
 .cliente__nombre{
+  margin-bottom: 20px;
   width: 195px;
-  margin-left: 30px;
   border: solid 0.5px var(--gray)
 }
 .buscar__btn{
@@ -167,10 +167,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
   margin: 0;
 }
 .datos__producto{
-  margin-top: 30px;
-}
-.margin--top{
-  margin-top: 30px;
+  margin-top: 20px;
 }
 .total{
   padding-bottom: var(--padding);

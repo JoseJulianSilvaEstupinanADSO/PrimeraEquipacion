@@ -79,61 +79,7 @@
             <th class="th__item">Acciones</th>
           </thead>
           <tbody class="body__tabla">
-            <tr class="fila__tabla">
-                <td class="td__tabla IdProducto">1</td>
-                <td class="td__tabla NombreProducto">Casima Real Madrid</td>
-                <td class="td__tabla PrecioProducto">12000</td>
-                <td class="td__tabla TallaProducto">2</td>
-                <td class="td__tabla StockProducto">67</td>
-                <td class="td__tabla TelaProducto">Lino</td>
-                <td class="td__tabla ">
-                  <button type="button" class="button__tabla">Editar</button>
-                </td>
-            </tr>
-            <tr class="fila__tabla">
-                <td class="td__tabla IdProducto">1</td>
-                <td class="td__tabla NombreProducto">Casima Real Madrid</td>
-                <td class="td__tabla PrecioProducto">123000</td>
-                <td class="td__tabla TallaProducto">M</td>
-                <td class="td__tabla StockProducto">67</td>
-                <td class="td__tabla TelaProducto">Lino</td>
-                <td class="td__tabla ">
-                  <button type="button" class="button__tabla">Editar</button>
-                </td>
-            </tr>
-            <tr class="fila__tabla">
-                <td class="td__tabla IdProducto">1</td>
-                <td class="td__tabla NombreProducto">Casima Real Madrid</td>
-                <td class="td__tabla PrecioProducto">124000</td>
-                <td class="td__tabla TallaProducto">L</td>
-                <td class="td__tabla StockProducto">67</td>
-                <td class="td__tabla TelaProducto">Lino</td>
-                <td class="td__tabla ">
-                  <button type="button" class="button__tabla">Editar</button>
-                </td>
-            </tr>
-            <tr class="fila__tabla">
-                <td class="td__tabla IdProducto">1</td>
-                <td class="td__tabla NombreProducto">Casima Real Madrid</td>
-                <td class="td__tabla PrecioProducto">125000</td>
-                <td class="td__tabla TallaProducto">X</td>
-                <td class="td__tabla StockProducto">67</td>
-                <td class="td__tabla TelaProducto">Lino</td>
-                <td class="td__tabla ">
-                  <button type="button" class="button__tabla">Editar</button>
-                </td>
-            </tr>
-            <tr class="fila__tabla">
-                <td class="td__tabla IdProducto">1</td>
-                <td class="td__tabla NombreProducto">Casima Real Madrid</td>
-                <td class="td__tabla PrecioProducto">126000</td>
-                <td class="td__tabla TallaProducto">XL</td>
-                <td class="td__tabla StockProducto">67</td>
-                <td class="td__tabla TelaProducto">Lino</td>
-                <td class="td__tabla ">
-                  <button type="button" class="button__tabla">Editar</button>
-                </td>
-            </tr>
+
           </tbody>
         </table>
       </div>

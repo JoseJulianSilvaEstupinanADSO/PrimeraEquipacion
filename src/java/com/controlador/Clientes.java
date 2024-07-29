@@ -71,7 +71,7 @@ public class Clientes extends HttpServlet {
         String documento = request.getParameter("documento");
         String telefono = request.getParameter("telefono");
         
-        Cliente c = new Cliente(null, documento, nombre, telefono);
+        Cliente c = new Cliente(null, documento, nombre, telefono, "4");
         
         boolean resultado = modelo.RegistrarCliente(c);
         response.setContentType("application/json");

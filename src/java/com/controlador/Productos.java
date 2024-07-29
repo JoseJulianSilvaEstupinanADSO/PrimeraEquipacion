@@ -24,17 +24,8 @@ import com.modelo.ProductoDAO;
 @WebServlet(name = "Productos", urlPatterns = {"/Productos"})
 public class Productos extends HttpServlet {
 
-    
+    private static final long serialVersionUID = 1L;
     private ProductoDAO modelo = new ProductoDAO();
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -48,6 +39,12 @@ public class Productos extends HttpServlet {
                 break;
             case "ListarProductos":
                 ListarProductos(request, response);
+                break;
+            case "ModificarProducto":
+                ModificarProducto(request, response);
+                break;
+            case "BuscarProducto":
+                BuscarProducto(request, response);
                 break;
             default:
                 throw new AssertionError();
@@ -95,9 +92,65 @@ public class Productos extends HttpServlet {
     }
     
     private void  ListarProductos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        List<Producto> productos = modelo.ListarProductos();    
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        
+        StringBuilder json = new StringBuilder("[");
+        for (int i = 0; i < productos.size(); i++) {
+            Producto p = productos.get(i);
+             json.append(String.format("{\"id_producto\": \"%s\", \"nombre\": \"%s\", \"precio\": \"%s\", \"talla\": \"%s\", \"stock\": \"%s\", \"tela\": \"%s\"}",
+                    p.getId_producto(), p.getNombre(), p.getPrecio(), p.getTalla(), p.getStock(), p.getTela()));
+            if (i < productos.size() - 1) {
+                json.append(",");
+            }
+        }
+        json.append("]");
+        response.getWriter().write(json.toString());
+    }
+    
+    private void  ModificarProducto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        
+        String id_producto = request.getParameter("id_producto");
+        String nombre = request.getParameter("nombre");
+        String stock = request.getParameter("stock");
+        String precio = request.getParameter("precio");
+        String talla = request.getParameter("talla");
+        
+        Producto p = new Producto(id_producto, talla, nombre, precio, stock, null);
+        
+         boolean resultado = modelo.ModificarProducto(p);
+         
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        
+        String jsonResponse = "{\"resultado\": " + resultado + "}";
+
+        
+        response.getWriter().write(jsonResponse);
+    }
+    
+    private void BuscarProducto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        
+        String id_producto = request.getParameter("id_producto");
+        String talla = request.getParameter("talla");
+        Producto p = modelo.BuscarProducto(id_producto, talla);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        if (p != null) {
+            String json = String.format("{\"id_usuario\": \"%s\", \"nombre\": \"%s\", \"precio\": \"%s\"}",
+                p.getId_producto(), p.getNombre(), p.getPrecio());
+            response.getWriter().write(json);
+        }
+        else{
+            response.getWriter().write("{\"error\": \"Usuario No encontrado\"}");
+        }
+        
+        
         
     }
-
+    
+      
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

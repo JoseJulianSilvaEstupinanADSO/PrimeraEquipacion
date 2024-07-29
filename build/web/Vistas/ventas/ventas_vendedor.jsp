@@ -53,27 +53,31 @@
           <a href="../../index.jsp" class="menu__link menu__link--salir Sign-out" ><span class="icono__span"><i class="fa-solid fa-right-from-bracket"></i></span>Sign out</a>
         </div>
       </section>
-      <section class="container__factura">
+           <section class="container__factura">
         <div class="fatura__buscar">
+          <h1 class="title">REALIZAR VENTA</h1>
           <form action="" class="form__datos">
             <div class="buscar">
               <h2 class="cliente__title">Cliente</h2>
               <div class="id__cliente">
-                <input type="number" id="cdCliente" class="codigo__cliente login__input" placeholder="Codigo Cliente">
-                <button type="button" class="button buscar__cliente">Buscar</button>
-                <input type="text" class="codigo__cliente cliente__nombre" readonly>
+                <input type="number" id="cdCliente" class="codigo__cliente login__input documento" placeholder="Codigo Cliente">
+                <button type="button" class="button buscar__cliente  Btn_busacar_cliente">Buscar</button>
+                <input type="text" class="codigo__cliente cliente__nombre insertDocumento" readonly>
               </div>
               <h2 class="cliente__title">Buscar Producto</h2>
               <div class="id__cliente">
-                <input type="number" id="cdProducto" class="codigo__cliente login__input" placeholder="Codigo Producto" >
-                <button type="button" class="button buscar__cliente">Buscar</button>
-                <input placeholder="Nombre" type="text" class="codigo__cliente cliente__nombre" readonly>
+                  <div>
+                    <input type="number" id="cdProducto" class="codigo__cliente login__input" placeholder="Codigo Producto" >
+                      <select name="select" class="codigo__cliente cliente__nombre margin margin--top">
+                        <option value="value1">Seleccionar Talla</option>
+                      </select>
+                    <button type="button" class="button buscar__cliente">Buscar</button>
+                      
+                  </div>
                 <div class="datos__producto">
+                <input placeholder="Nombre" type="text" class="codigo__cliente cliente__nombre" readonly>
                   <input placeholder="Precio" type="text" class="codigo__cliente cliente__nombre margin" readonly>
                   <input placeholder="Cantidad" type="number" class="codigo__cliente cliente__nombre ">
-                  <select name="select" class="codigo__cliente cliente__nombre margin margin--top">
-                    <option value="value1">Seleccionar Talla</option>
-                  </select>
                 </div>
               </div>
               <div class="buscar__btn">
@@ -100,9 +104,29 @@
                             <td class="precio__producto tabla__td">120000</td>
                             <td class="cantidad__producto tabla__td">1</td>
                             <td class="tabla__td">
-                              <button type="button" class=" button__link">Eliminar</button>
+                              <button type="button" class=" button__link BtnEliminar">Eliminar</button>
                             </td>
-                      </tr>
+                        </tr>
+                        <tr class="tabla__fila">
+                          <td class="id__producto tabla__td">1</td>
+                          <td class="nombre__producto tabla__td">Camisa Real Madrid</td>
+                          <td class="talla__producto tabla__td">M</td>
+                          <td class="precio__producto tabla__td">120000</td>
+                          <td class="cantidad__producto tabla__td">2</td>
+                          <td class="tabla__td">
+                            <button type="button" class=" button__link BtnEliminar">Eliminar</button>
+                          </td>
+                        </tr>
+                        <tr class="tabla__fila">
+                          <td class="id__producto tabla__td">1</td>
+                          <td class="nombre__producto tabla__td">Camisa Real Madrid</td>
+                          <td class="talla__producto tabla__td">M</td>
+                          <td class="precio__producto tabla__td">120000</td>
+                          <td class="cantidad__producto tabla__td">3</td>
+                          <td class="tabla__td">
+                            <button type="button" class=" button__link BtnEliminar">Eliminar</button>
+                          </td>
+                        </tr>
                     </tbody>
                 </table>
               </div>
@@ -120,26 +144,27 @@
       <div id="ventanaModal" class="container__modal">
         <div class="contenido__modal">
           <h2 class="modal__title--ventas">REGISTRAR CLIENTE</h2>
-          <form action="" class="form__modal">
+          <form action="" class="form__modal  registar__clientes">
               <div class="div__form">
                   <label for="" class="">Documento: </label>
-                  <input type="text" class="modal__input">
+                  <input type="text" class="modal__input documento_cliente">
               </div>
               <div class="div__form">
                   <label for="" class="">Nombre: </label>
-                  <input type="text" class="modal__input">
+                  <input type="text" class="modal__input nombre_cliente">
               </div>
               <div class="div__form">
                   <label for="" class="">Telefono: </label>
-                  <input type="text" class="modal__input">
+                  <input type="text" class="modal__input tefelono_cliente">
               </div>
               <div class="div__buttons">
-                  <button type="submit" class="button button__modal">Registrar</button>
+                  <button type="submit" class="button button__modal registrar_cliente">Registrar</button>
                   <button type="button" id="Cerrar__Modal" class="button--alert button__modal button__modal--alert">Cancelar</button>
               </div>
           </form>
+        </div>
       </div>
-    </div>
+  
   </main>
   <script src="../../js/ventas.js"></script>
   <script src="../../js/menu.js"></script>

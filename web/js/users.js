@@ -22,6 +22,17 @@ CloseSession();
 setInterval(() => {
     CloseSession();
 }, 1000);
+
+
+function CloseModal() {   
+    $modal.classList.add("cerrando");
+    setTimeout(function() {
+        $modal.style.display = "none";
+        $modal.classList.remove("cerrando");
+    }, 500);
+}
+
+
 /**
  * Se crean los eventos para cerrar el modal
  * 
@@ -277,10 +288,7 @@ function Modificar() {
          if(respuesta.resultado){
              alert("Usuario Modificado");
              
-             const $filas = document.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
-             $filas.forEach((x) => {
-                 x.remove();
-             });
+             CloseModal();
              CargarDatos();
              
              

@@ -25,12 +25,13 @@ public class ClienteDAO extends Conexion{
             
             this.conectar();
             
-            String sql = "INSERT INTO cliente(documento, nombre, telefono) VALUES (?,?,?)";
-            
+            String sql = "INSERT INTO usuario(documento, nombre, telefono, id_rol) VALUES (?,?,?,?)";
+
             PreparedStatement pre = this.getCon().prepareStatement(sql);
             pre.setString(1, c.getDocumento());
             pre.setString(2, c.getNombre());
             pre.setString(3, c.getTelefono());
+            pre.setInt(4, Integer.parseInt(c.getRol()));
             
             return pre.executeUpdate() > 0;
             
@@ -54,7 +55,7 @@ public class ClienteDAO extends Conexion{
             
             this.conectar();
 
-            String sql = "SELECT * FROM cliente";
+            String sql = "SELECT * FROM usuario WHERE id_rol=4";
 
             PreparedStatement pre = this.getCon().prepareStatement(sql);
 
@@ -63,7 +64,7 @@ public class ClienteDAO extends Conexion{
             while (rs.next()) {                
                 Cliente c = new Cliente();
                 
-                c.setId_cliente(rs.getString("id_cliente"));
+                c.setId_cliente(rs.getString("id_usuario"));
                 c.setNombre(rs.getString("nombre"));
                 c.setDocumento(rs.getString("documento"));
                 c.setTelefono(rs.getString("telefono"));
@@ -92,7 +93,7 @@ public class ClienteDAO extends Conexion{
         try {
             
             this.conectar();
-            String sql = "SELECT * FROM cliente WHERE documento=?";
+            String sql = "SELECT * FROM usuario WHERE documento=?";
             
             PreparedStatement pre = this.getCon().prepareStatement(sql);
             pre.setString(1, documento);
@@ -101,10 +102,11 @@ public class ClienteDAO extends Conexion{
             
             if (rs.next()) {
                 c = new Cliente(               
-                    rs.getString("id_cliente"),
+                    rs.getString("id_usuario"),
                     rs.getString("documento"),
                     rs.getString("nombre"),
-                    rs.getString("telefono")
+                    rs.getString("telefono"),
+                    rs.getString("id_rol")
                 );
                 
             }

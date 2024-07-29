@@ -175,3 +175,5 @@
 26-Jul-2024 15:39:22.337 INFO [http-nio-8080-exec-23] org.apache.catalina.core.ApplicationContext.log Manager: restart: Reloading web application '/PrimeraEquipacion'
 26-Jul-2024 15:39:22.786 INFO [http-nio-8080-exec-27] org.apache.catalina.core.ApplicationContext.log Manager: list: Listing contexts for virtual host 'localhost'
 26-Jul-2024 15:39:22.792 INFO [http-nio-8080-exec-29] org.apache.catalina.core.ApplicationContext.log Manager: restart: Reloading web application '/PrimeraEquipacion'
+26-Jul-2024 17:03:18.320 INFO [http-nio-8080-exec-40] org.apache.catalina.core.ApplicationContext.log Manager: list: Listing contexts for virtual host 'localhost'
+26-Jul-2024 17:03:18.323 INFO [http-nio-8080-exec-34] org.apache.catalina.core.ApplicationContext.log Manager: restart: Reloading web application '/PrimeraEquipacion'

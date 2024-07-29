@@ -46,6 +46,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     padding: var(--padding);
     margin-left: var(--margin);
 }
+.buscar--cliente{
+    margin-bottom: 20px;
+}
 .label__buscar{
     font-weight: bold;
     font-size: 1.3rem;

@@ -31,15 +31,14 @@ function CloseModal() {
 
 
 /*Se cambia el color de las filas inpares */
-(() =>{
-    const $filas = $dom.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
-    $filas.forEach((fila,index) =>{
-        if (index % 2 !== 0) {
-            fila.style.background = "#DBDADA";
-        }
-    });
-})
-();
+function filas(){
+    $filas = $dom.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
+        $filas.forEach((fila,index) =>{
+            if (index % 2 !== 0) {
+                fila.style.background = "#DBDADA";
+            }
+        });  
+}
 
 const $modal = $dom.getElementById("ventanaModal");
 
@@ -244,6 +243,7 @@ function AgregarModificarProducto() {
                     if(respuesta.resultado){
                         alert("Producto agregado Correctamente");
                         CloseModal();
+                        ListarProductos();
                     }
                     else{
                         alert("Error al agregar el producto");
@@ -260,9 +260,150 @@ function AgregarModificarProducto() {
     }
     if($bnt_modal.classList.contains('modificar__producto')){
         console.log("Modificar");
+        const $id_producto = $dom.querySelector('.form_Id').value;
+        const $nombre_producto = $dom.querySelector(".form_Nombre").value;
+        const $precio_producto = $dom.querySelector(".form_Precio").value;
+        const $stock_producto = $dom.querySelector(".form_Stock").value;
+        const $talla_producto = $dom.querySelector(".form_talla").value;
+        
+        let ope = new XMLHttpRequest();
+            ope.open("POST", "../../Productos?action=ModificarProducto", true);
+            ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            ope.onload = function () {
+                console.log(ope.status);
+                if (ope.status === 200){
+                    let respuesta = JSON.parse(ope.responseText);
+                    if(respuesta.resultado){
+                        alert("Producto Modificado Correctamente");
+                        CloseModal();
+                        ListarProductos();
+                    }
+                    else{
+                        alert("Error al Modificar el producto");
+                    }
+                }
+                
+            };
+            ope.send("id_producto=" + $id_producto + "&nombre=" + $nombre_producto + "&precio=" + $precio_producto + "&stock=" + $stock_producto + "&talla=" + $talla_producto);
     }
-    
 }
 
 $bnt_modal.addEventListener("click",AgregarModificarProducto);
 
+
+
+// Listar Produectos //
+
+function ListarProductos() {
+    
+    const  $filas = $dom.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
+    $filas.forEach((x) =>{
+        x.remove();
+    });
+    
+    let ope = new XMLHttpRequest();
+    ope.open("GET","../../Productos?action=ListarProductos", true );
+    ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    ope.onload = function() {
+        
+        if (ope.status === 200){
+            let respuesta = JSON.parse(ope.responseText);
+            const $tbody = $dom.querySelector(".body__tabla");
+            const $frag = $dom.createDocumentFragment();
+            
+            respuesta.forEach((x) => {
+
+                const $fila = $dom.createElement("tr");
+                $fila.classList.add("fila__tabla"); 
+                
+                const $colId = $dom.createElement("td");
+                $colId.classList.add("td__tabla");
+                $colId.classList.add("IdProducto");
+                
+                $colId.innerText = x.id_producto;
+                
+                const $colNom = $dom.createElement("td");
+                $colNom.classList.add("td__tabla");
+                $colNom.classList.add("NombreProducto");
+                
+                $colNom.innerText = x.nombre;
+                
+                const $colPre = $dom.createElement("td");
+                $colPre.classList.add("td__tabla");
+                $colPre.classList.add("PrecioProducto");
+                
+                $colPre.innerText = x.precio;
+                
+                const $colTalla = $dom.createElement("td");
+                $colTalla.classList.add("td__tabla");
+                $colTalla.classList.add("TallaProducto");
+                
+                $colTalla.innerText = x.talla;
+                
+                const $colStock = $dom.createElement("td");
+                $colStock.classList.add("td__tabla");
+                $colStock.classList.add("StockProducto");
+                
+                $colStock.innerText = x.stock;
+                
+                const $colTela = $dom.createElement("td");
+                $colTela.classList.add("td__tabla");
+                $colTela.classList.add("TelaProducto");
+                
+                $colTela.innerText = x.tela;
+                
+                const $colBtn = $dom.createElement("td");
+                $colBtn.classList.add("td__tabla");
+                
+                const $BtnEdit = $dom.createElement("button");
+                $BtnEdit.classList.add("button__tabla");
+                
+                $BtnEdit.innerText = "Editar";
+                
+                $colBtn.appendChild($BtnEdit);
+                $fila.appendChild($colId);
+                $fila.appendChild($colNom);
+                $fila.appendChild($colPre);
+                $fila.appendChild($colTalla);
+                $fila.appendChild($colStock);
+                $fila.appendChild($colTela);
+                $fila.appendChild($colBtn);
+                
+                $frag.appendChild($fila);
+            });
+            $tbody.appendChild($frag);
+            filas();
+        }
+    };
+    ope.send();
+}
+ListarProductos();
+
+
+//Buscar Cliente en especifico//
+
+function Buscar(){
+    const $label = $dom.querySelector(".input__buscar").value;
+    const $filas = document.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
+    let num = 0;
+    
+    $filas.forEach((fila) => {
+        let id = fila.querySelector(".IdProducto").innerText;
+        let nombre = fila.querySelector(".NombreProducto").innerText;
+        
+        if (id !== $label){
+            fila.style.display = "none";
+            num = num+1;
+        }
+        else{
+            fila.style.display = "";
+        }
+    });
+    
+    if (num === $filas.length){
+        ListarProductos();
+    }
+}
+
+const $BtnBuscar = $dom.querySelector(".button__buscar");
+$BtnBuscar.addEventListener("click", Buscar);
