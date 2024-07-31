@@ -53,10 +53,10 @@
           <a href="../../index.jsp" class="menu__link menu__link--salir Sign-out" ><span class="icono__span"><i class="fa-solid fa-right-from-bracket"></i></span>Sign out</a>
         </div>
       </section>
-           <section class="container__factura">
+        <section class="container__factura">
         <div class="fatura__buscar">
           <h1 class="title">REALIZAR VENTA</h1>
-          <form action="" class="form__datos">
+          <form action="" class="form__datos" novalidate>
             <div class="buscar">
               <h2 class="cliente__title">Cliente</h2>
               <div class="id__cliente">
@@ -67,21 +67,21 @@
               <h2 class="cliente__title">Buscar Producto</h2>
               <div class="id__cliente">
                   <div>
-                    <input type="number" id="cdProducto" class="codigo__cliente login__input" placeholder="Codigo Producto" >
-                      <select name="select" class="codigo__cliente cliente__nombre margin margin--top">
-                        <option value="value1">Seleccionar Talla</option>
+                      <input type="number" id="cdProducto" class="codigo__cliente login__input" placeholder="Codigo Producto" required>
+                    <select name="select" class="codigo__cliente cliente__nombre margin tallas" id="tallas">
+                        <option>Seleccionar Talla</option>
                       </select>
-                    <button type="button" class="button buscar__cliente">Buscar</button>
+                    <button type="button" class="button buscar__cliente" id="buscar_producto">Buscar</button>
                       
                   </div>
                 <div class="datos__producto">
-                <input placeholder="Nombre" type="text" class="codigo__cliente cliente__nombre" readonly>
-                  <input placeholder="Precio" type="text" class="codigo__cliente cliente__nombre margin" readonly>
-                  <input placeholder="Cantidad" type="number" class="codigo__cliente cliente__nombre ">
+                    <input placeholder="Nombre" type="text" id="nombre_produc" class="codigo__cliente cliente__nombre" readonly required>
+                    <input placeholder="Precio" type="text" id="precio_produc" class="codigo__cliente cliente__nombre margin" readonly required>
+                    <input placeholder="Cantidad" type="number" id="cant_produc" class="codigo__cliente cliente__nombre " required>
                 </div>
               </div>
               <div class="buscar__btn">
-                <button type="button" class="button button__agregar">Agregar Producto</button>
+                  <button type="button" class="button button__agregar" id="agregar_producto">Agregar Producto</button>
                 <button type="button" id="abrirModal" class="button button__agregar  button__agregar--color">Agragar Cliente</button>
               </div>
             </div>
@@ -97,45 +97,19 @@
                         <th>Acciones</th>
                     </thead>
                     <tbody class="tabla__tb">
-                        <tr class="tabla__fila">
-                            <td class="id__producto tabla__td">1</td>
-                            <td class="nombre__producto tabla__td">Camisa Real Madrid</td>
-                            <td class="talla__producto tabla__td">M</td>
-                            <td class="precio__producto tabla__td">120000</td>
-                            <td class="cantidad__producto tabla__td">1</td>
-                            <td class="tabla__td">
-                              <button type="button" class=" button__link BtnEliminar">Eliminar</button>
-                            </td>
-                        </tr>
-                        <tr class="tabla__fila">
-                          <td class="id__producto tabla__td">1</td>
-                          <td class="nombre__producto tabla__td">Camisa Real Madrid</td>
-                          <td class="talla__producto tabla__td">M</td>
-                          <td class="precio__producto tabla__td">120000</td>
-                          <td class="cantidad__producto tabla__td">2</td>
-                          <td class="tabla__td">
-                            <button type="button" class=" button__link BtnEliminar">Eliminar</button>
-                          </td>
-                        </tr>
-                        <tr class="tabla__fila">
-                          <td class="id__producto tabla__td">1</td>
-                          <td class="nombre__producto tabla__td">Camisa Real Madrid</td>
-                          <td class="talla__producto tabla__td">M</td>
-                          <td class="precio__producto tabla__td">120000</td>
-                          <td class="cantidad__producto tabla__td">3</td>
-                          <td class="tabla__td">
-                            <button type="button" class=" button__link BtnEliminar">Eliminar</button>
-                          </td>
-                        </tr>
+                       
                     </tbody>
                 </table>
               </div>
               <div class="generar__factura">
                 <div class="buttons__facturas">
-                  <button type="submit" class="button button__form btn__ventas">Generar Factura</button>
+                   <button type="button" class="button button__form btn__ventas">Generar Factura</button>
                   <button type="button" class="button__link button__link--size btn__ventas">Cancelar</button>
                 </div>
-                <h2 class="total">TOTAL: 1000000</h2>
+                  <div class="total__precio">
+                   <h2 class="total">TOTAL</h2>
+                   <h2 class="total total__factura"></h2>      
+                </div>
               </div>
             </div>
           </form>

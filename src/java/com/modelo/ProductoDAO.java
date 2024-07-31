@@ -71,7 +71,7 @@ public class ProductoDAO extends Conexion{
                     pre2.setInt(3, Integer.parseInt(p.getStock()));
                     pre2.setString(4, p.getTela());
                     
-                    pre2.executeUpdate();
+                  
                     
                     return true;
                 }
@@ -80,7 +80,10 @@ public class ProductoDAO extends Conexion{
       
             
         } catch (SQLException e) {
+            
+            e.printStackTrace();
             return false;
+            
         } finally {
             this.desconectar();
         }

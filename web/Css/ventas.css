@@ -178,7 +178,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 .modal__title--ventas{
   text-align: center;
 }
-
+total__precio{
+    align-items: center;
+    display: flex;
+    gap: 10px;
+}
 
 
 /*  Adaptacion de items para la vista Venatas*/
