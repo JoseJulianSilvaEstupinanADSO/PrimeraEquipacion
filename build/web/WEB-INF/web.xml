@@ -28,6 +28,14 @@
         <servlet-name>Productos</servlet-name>
         <url-pattern>/Productos</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Facturas</servlet-name>
+        <servlet-class>com.controlador.Facturas</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Facturas</servlet-name>
+        <url-pattern>/Facturas</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

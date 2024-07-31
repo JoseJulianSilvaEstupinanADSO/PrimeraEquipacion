@@ -80,6 +80,7 @@ function eliminar(){
         boton.addEventListener('click', function() {
             const fila = this.closest('tr'); // Selecciona la fila más cercana al botón clicado
             fila.remove(); // Elimina la fila
+            total();
         });
     }); 
 }, 1000);   
@@ -231,8 +232,8 @@ function BuscarProducto() {
                 let respuesta = JSON.parse(ope.responseText);
                 let $nombre = $dom.querySelector("#nombre_produc");
                 let $precio = $dom.querySelector("#precio_produc");
-                $nombre.value = respuesta.nombre
-                $precio.value = respuesta.precio
+                $nombre.value = respuesta.nombre;
+                $precio.value = respuesta.precio;
                 
             }
         };
@@ -245,20 +246,20 @@ $buscarp.addEventListener("click", BuscarProducto);
 
 //Agregar Productos a la tabla Factura//
 
-const $pro_items = $dom.querySelectorAll("input[required]")
-const $btn_agregar_pro = $dom.querySelector("#agregar_producto")
+const $pro_items = $dom.querySelectorAll("input[required]");
+const $btn_agregar_pro = $dom.querySelector("#agregar_producto");
 
 function AgragarProdutoTabla(items) {
     let num = 0;
     items.forEach((x) => {
         if (x.value !== "") {
             num+=1;
-            x.classList.remove("alert")
+            x.classList.remove("alert");
         }
         else{
-            x.classList.add("alert")
+            x.classList.add("alert");
         }
-    })
+    });
     if (num === items.length){
         const $tbody = $dom.querySelector("tbody.tabla__tb");
         
@@ -323,10 +324,25 @@ function AgragarProdutoTabla(items) {
             x.value = "";
         });
         $talla.value = "Seleccionar Talla";
-    }
+        
+    }  
+    total();
 }
 
 
 $btn_agregar_pro.addEventListener("click", (() => {
     AgragarProdutoTabla($pro_items);
-}))
+}));
+
+//Calcular el tottal de la factura //
+function total() {
+    let $total = $dom.querySelector(".total__factura");
+    let $filas = $dom.querySelectorAll("tbody.tabla__tb > tr.tabla__fila");
+    let total = 0;
+    $filas.forEach((fila) =>{
+        let $precio = fila.querySelector(".precio__producto");
+        let precio = Number($precio.innerText);
+        total+= precio;
+    })
+    $total.innerText = "TOTAL: " + total;
+}
