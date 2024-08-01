@@ -37550,3 +37550,16 @@
 0:0:0:0:0:0:0:1 - - [31/Jul/2024:16:49:13 -0500] "GET /PrimeraEquipacion/Css/ventas.css HTTP/1.1" 304 -
 0:0:0:0:0:0:0:1 - - [31/Jul/2024:16:49:13 -0500] "GET /PrimeraEquipacion/Productos?action=ListarTallas HTTP/1.1" 200 77
 0:0:0:0:0:0:0:1 - - [31/Jul/2024:16:49:13 -0500] "GET /favicon.ico HTTP/1.1" 404 698
+0:0:0:0:0:0:0:1 - - [31/Jul/2024:17:31:16 -0500] "GET /PrimeraEquipacion/Vistas/ventas/ventas.jsp?select=Seleccionar+Talla HTTP/1.1" 200 7627
+0:0:0:0:0:0:0:1 - - [31/Jul/2024:17:31:16 -0500] "GET /PrimeraEquipacion/js/ventas.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [31/Jul/2024:17:31:16 -0500] "GET /PrimeraEquipacion/Css/ventas.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [31/Jul/2024:17:31:16 -0500] "GET /PrimeraEquipacion/Productos?action=ListarTallas HTTP/1.1" 200 77
+0:0:0:0:0:0:0:1 - - [31/Jul/2024:17:34:30 -0500] "GET /PrimeraEquipacion/Vistas/inicio.jsp HTTP/1.1" 200 3184
+0:0:0:0:0:0:0:1 - - [31/Jul/2024:17:34:31 -0500] "GET /PrimeraEquipacion/index.jsp HTTP/1.1" 200 1890
+0:0:0:0:0:0:0:1 - - [31/Jul/2024:17:34:32 -0500] "GET /PrimeraEquipacion/index.jsp HTTP/1.1" 200 1890
+127.0.0.1 - - [31/Jul/2024:17:36:59 -0500] "HEAD /netbeans-tomcat-status-test HTTP/1.1" 404 -
+127.0.0.1 - root [31/Jul/2024:17:36:59 -0500] "GET /manager/text/ HTTP/1.1" 200 44
+127.0.0.1 - - [31/Jul/2024:17:36:59 -0500] "HEAD /netbeans-tomcat-status-test HTTP/1.1" 404 -
+127.0.0.1 - root [31/Jul/2024:17:36:59 -0500] "GET /manager/text/ HTTP/1.1" 200 44
+127.0.0.1 - - [31/Jul/2024:17:36:59 -0500] "HEAD /netbeans-tomcat-status-test HTTP/1.1" 404 -
+127.0.0.1 - root [31/Jul/2024:17:36:59 -0500] "GET /manager/text/ HTTP/1.1" 200 44
