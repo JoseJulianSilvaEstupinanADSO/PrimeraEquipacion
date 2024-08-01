@@ -59,7 +59,7 @@ public class ProductoDAO extends Conexion {
             this.conectar();
             
             // Consulta SQL para insertar un nuevo producto
-            String sql = "INSERT INTO producto(nombre, precio) VALUES (?,?)";
+            String sql = "INSERT INTO producto(nombre, precio,estado) VALUES (?,?,1)";
             PreparedStatement pre = this.getCon().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pre.setString(1, p.getNombre());
             pre.setInt(2, Integer.parseInt(p.getPrecio()));
@@ -111,7 +111,7 @@ public class ProductoDAO extends Conexion {
             this.conectar();
             
             // Consulta SQL para seleccionar todos los productos y sus detalles
-            String sql = "SELECT producto.id_producto, nombre, precio, talla, stock, tela FROM producto JOIN producto_desc ON producto.id_producto = producto_desc.id_producto";
+            String sql = "SELECT producto.id_producto, nombre, precio, estado, talla, stock, tela FROM producto JOIN producto_desc ON producto.id_producto = producto_desc.id_producto WHERE producto.estado=1 ";
             PreparedStatement pre = this.getCon().prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
             
@@ -181,7 +181,7 @@ public class ProductoDAO extends Conexion {
             this.conectar();
             
             // Consulta SQL para seleccionar un producto específico por ID y talla
-            String sql = "SELECT p.id_producto, p.nombre, p.precio, pd.stock, pd.talla, pd.tela FROM producto p JOIN producto_desc pd ON p.id_producto = pd.id_producto JOIN talla t ON pd.talla = t.talla WHERE p.id_producto = ? AND t.talla = ?";
+            String sql = "SELECT p.id_producto, p.nombre, p.precio, p.estado, pd.stock, pd.talla, pd.tela FROM producto p JOIN producto_desc pd ON p.id_producto = pd.id_producto JOIN talla t ON pd.talla = t.talla WHERE p.id_producto = ? AND t.talla = ?";
             PreparedStatement pre = this.getCon().prepareStatement(sql);
                     
             pre.setInt(1, Integer.parseInt(id_producto));
@@ -197,7 +197,8 @@ public class ProductoDAO extends Conexion {
                         rs.getString("nombre"),
                         rs.getString("precio"),
                         rs.getString("stock"),
-                        rs.getString("tela")
+                        rs.getString("tela"),
+                        rs.getString("estado")
                 );
             }
             System.out.println(p); // Imprime el producto encontrado
