@@ -15,6 +15,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     align-content: center;
     flex-wrap: wrap;
 }
+.tabla__profact{
+    width: 100%;
+}
+.fila__tabla--tamaño{
+    height: 55px;
+}
 
 @media (max-width: 500px){
     .label__buscar{

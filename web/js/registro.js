@@ -3,8 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/javascript.js to edit this template
  */
 
-
+const $dom = document;
 const $cambiar = document.querySelector(".Registrar");
+const error = $dom.querySelector(".container__modal--error");
+const $titleError = $dom.querySelector(".title_error");
+const $paragrahp = $dom.querySelector(".paragrahp__error");
 
 $cambiar.addEventListener("click", function () {
     const $input = document.querySelectorAll("div > input.login__input");
@@ -49,5 +52,13 @@ $cambiar.addEventListener("click", function () {
         };
         ope.send("usuario=" + $usuario + "&contrasena=" + $contrasena + "&documento=" + $documento + "&nombre=" + $nombre + "&telefono=" + $telefono + "&direccion=" + $direccion + "&email=" + $email + "&edad=" + $edad);
 
-    };
+    }
+    else{
+        $titleError.innerText = "Error campos vacios";
+        $paragrahp.innerText = "Por favor llene todos los campos";
+        error.style.display = "block";
+        setTimeout(() => {
+            error.style.display = "none";
+        }, 2000);
+    }
 });

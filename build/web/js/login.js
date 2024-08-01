@@ -3,10 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/javascript.js to edit this template
  */
 
-
-console.log(localStorage.getItem("session"));
-
-
+const $dom = document;
+const error = $dom.querySelector(".container__modal--error");
+const $titleError = $dom.querySelector(".title_error");
+const $paragrahp = $dom.querySelector(".paragrahp__error");
 document.addEventListener('DOMContentLoaded', function() {
     const $cambiar = document.querySelector(".Ingresar");
     
@@ -36,10 +36,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (ope.status === 200){
                     let respuesta = JSON.parse(ope.responseText);
                     if (respuesta.error){
-                        alert(respuesta.error);
+                        $titleError.innerText = "Error en credenciales";
+                        $paragrahp.innerText = "Usuaro o contraseña incorrectos";
+                        error.style.display = "block";
+                        setTimeout(() => {
+                            error.style.display = "none";
+                        }, 2000)
                     }
                     else{
-                        alert("Bienvenido " + respuesta.nombre);
                         localStorage.setItem("idUsuario", respuesta.idUsuario);
                         localStorage.setItem("session", true);
 
@@ -59,6 +63,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             };
             ope.send("usuario=" + $usuario + "&contrasena=" + $contraseña);
+        }
+        else{
+            $titleError.innerText = "Error campos vacios";
+            $paragrahp.innerText = "Por favor llene todos los campos";
+            error.style.display = "block";
+            setTimeout(() => {
+                error.style.display = "none";
+            }, 2000)
         }
     });
 });

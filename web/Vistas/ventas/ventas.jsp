@@ -147,6 +147,12 @@
           </form>
         </div>
       </div>
+    <div class="container__modal--error">
+        <div class="contenido__modal--error">
+            <h1 class="title_error"></h1>
+            <p class="paragrahp__error"></p>
+        </div>
+    </div>
   
   </main>
   <script src="../../js/ventas.js"></script>

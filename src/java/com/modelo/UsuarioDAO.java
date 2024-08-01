@@ -103,7 +103,7 @@ public class UsuarioDAO extends Conexion {
         try {
             
             this.conectar();
-            String sql = "SELECT * FROM usuario WHERE id_rol != 4";
+            String sql = "SELECT * FROM usuario WHERE id_rol != 4 OR id_rol IS NULL";
             
             PreparedStatement pre = this.getCon().prepareStatement(sql);
                 
@@ -212,6 +212,29 @@ public class UsuarioDAO extends Conexion {
         
         
         return u;
+        
+    }
+    
+    public boolean ModificarContraseña(String contrasena, String id_usuario) {
+        
+        try {
+            
+            this.conectar();
+            String password = BCrypt.hashpw(contrasena, BCrypt.gensalt());
+            String sql = "UPDATE usuario SET contrasena = ? WHERE id_usuario = ?";
+            PreparedStatement pre = this.getCon().prepareStatement(sql);
+            pre.setString(1, password);
+            pre.setInt(2, Integer.parseInt(id_usuario));
+            
+            return pre.executeUpdate() > 0;
+            
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return  false;
+        } finally {
+            this.desconectar();
+        }
         
     }
        

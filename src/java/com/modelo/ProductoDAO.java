@@ -64,6 +64,8 @@ public class ProductoDAO extends Conexion{
                     
                     int id_producto = rs.getInt(1);
                     
+                    System.out.println(id_producto);
+                    
                     String sql2 = "INSERT INTO producto_desc(id_producto,talla,stock,tela) VALUES (?,?,?,?)";
                     PreparedStatement pre2 = this.getCon().prepareStatement(sql2);
                     pre2.setInt(1, id_producto);
@@ -71,7 +73,7 @@ public class ProductoDAO extends Conexion{
                     pre2.setInt(3, Integer.parseInt(p.getStock()));
                     pre2.setString(4, p.getTela());
                     
-                  
+                    pre2.executeUpdate();
                     
                     return true;
                 }

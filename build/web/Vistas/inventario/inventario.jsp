@@ -84,10 +84,10 @@
         </table>
       </div>
       <div class="container__buscar">
-        <div class="buscar">
+        <div class="buscar--cliente">
             <label class="label__buscar" for="">Buscar Producto:</label>
-            <input class="input__buscar" type="text">
-            <button class="button__buscar">Buscar</button>
+            <input class="input__buscar bucar__cliente" type="text">
+            <button class="button__buscar Btn__buscar">Buscar</button>
         </div>
       </div>
     </section>
@@ -116,7 +116,7 @@
                         <div class="form__content">
                             <div>
                                 <label class="label__modal" for="">Precio:</label>
-                                <input class="input__modal llenar form_Precio" type="text">
+                                <input class="input__modal llenar form_Precio" type="number">
                             </div>
                             <div id="selec">
                                 <label class="label__modal" for="">Talla:</label>
@@ -126,13 +126,13 @@
                         <div class="form__content">
                             <div>
                                 <label class="label__modal" for="">Stock:</label>
-                                <input class="input__modal llenar form_Stock" type="text">
+                                <input class="input__modal llenar form_Stock" type="number">
                             </div>
                             <div>
-                                <label class="label__modal" for="">Tela:</label>
+                                <label class="label__modal" for="tela">Tela:</label>
                                 <input class="input__modal llenar form_Tela" type="text">
                             </div>
-                        </div>
+                        </div>     
                         <div class="form__content--buttons">
                             <button type="button" class="button__modal button__modal--inventario">Guardar Cambios</button>
                             <button type="button" class="button__modal  button--alert modal__cancelar">Cancelar</button>
@@ -140,6 +140,12 @@
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+    <div class="container__modal--error">
+        <div class="contenido__modal--error">
+            <h1 class="title_error"></h1>
+            <p class="paragrahp__error"></p>
         </div>
     </div>
   </main>

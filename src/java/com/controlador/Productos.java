@@ -77,7 +77,6 @@ public class Productos extends HttpServlet {
         String talla = request.getParameter("talla");
         String stock = request.getParameter("stock");
         String tela = request.getParameter("tela");
-        System.out.println(nombre+precio+talla+stock +tela);
         
         Producto p = new Producto(null, talla, nombre, precio, stock, tela);
         

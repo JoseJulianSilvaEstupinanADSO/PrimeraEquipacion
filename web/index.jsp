@@ -38,8 +38,14 @@
                 </div>
             </form>
         </div>
+        <div class="container__modal--error">
+          <div class="contenido__modal--error">
+              <h1 class="title_error"></h1>
+              <p class="paragrahp__error"></p>
+              
+          </div>
+         </div>
  
-    </body>
     <script type="module" src="js/login.js"></script>
     </body>
 </html>

@@ -6,7 +6,9 @@
 
 
 const $dom = document;
-
+const error = $dom.querySelector(".container__modal--error");
+const $titleError = $dom.querySelector(".title_error");
+const $paragrahp = $dom.querySelector(".paragrahp__error");
 
 function CloseSession(){
         let $session = localStorage.getItem("session");
@@ -70,7 +72,9 @@ $agregar.addEventListener("click", function () {
     const $precio_producto = $dom.querySelector(".form_Precio");
     const $stock_producto = $dom.querySelector(".form_Stock");
     const $tela_producto = $dom.querySelector(".form_Tela");
-
+    
+    $tela_producto.removeAttribute("readonly", "");
+    
     $id_producto.value = "";
     $nombre_producto.value = "";
     $precio_producto.value = "";
@@ -221,8 +225,6 @@ function AgregarModificarProducto() {
     const $stock_producto = $dom.querySelector(".form_Stock").value;
     const $tela_producto = $dom.querySelector(".form_Tela").value;
     
-    
-    
     if($bnt_modal.classList.contains('agregar__producto')){
         const $inputs = $dom.querySelectorAll("div.form__content > div > input.llenar");
         let num = 0;
@@ -232,7 +234,7 @@ function AgregarModificarProducto() {
             }
         });
         if(num === $inputs.length-1){
-            
+
             let ope = new XMLHttpRequest();
             ope.open("POST", "../../Productos?action=RegistrarProducto", true);
             ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -241,20 +243,38 @@ function AgregarModificarProducto() {
                 if (ope.status === 200){
                     let respuesta = JSON.parse(ope.responseText);
                     if(respuesta.resultado){
-                        alert("Producto agregado Correctamente");
+                        $titleError.innerText = "Exito";
+                        $paragrahp.innerText = "Producto agregado";
+                        error.style.display = "block";
+                        setTimeout(() => {
+                            error.style.display = "none";
+                        }, 2000);
                         CloseModal();
                         ListarProductos();
                     }
                     else{
-                        alert("Error al agregar el producto");
+                        $titleError.innerText = "Error al agregar";
+                        $paragrahp.innerText = "Verifique que los campos coincidan con el tipo de dato";
+                        error.style.display = "block";
+                        setTimeout(() => {
+                            error.style.display = "none";
+                        }, 2000);
                     }
                 }
-                
+
             };
             ope.send("nombre=" + $nombre_producto + "&precio=" + $precio_producto + "&talla=" + $talla_producto + "&stock=" + $stock_producto + "&tela=" + $tela_producto);
-            
-            
-            
+
+
+
+        }
+        else{
+            $titleError.innerText = "Error campos vacios";
+            $paragrahp.innerText = "Por favor llene todos los campos";
+            error.style.display = "block";
+            setTimeout(() => {
+                error.style.display = "none";
+            }, 2000);
         }
 
     }
@@ -265,7 +285,7 @@ function AgregarModificarProducto() {
         const $precio_producto = $dom.querySelector(".form_Precio").value;
         const $stock_producto = $dom.querySelector(".form_Stock").value;
         const $talla_producto = $dom.querySelector(".form_talla").value;
-        
+
         let ope = new XMLHttpRequest();
             ope.open("POST", "../../Productos?action=ModificarProducto", true);
             ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -274,18 +294,28 @@ function AgregarModificarProducto() {
                 if (ope.status === 200){
                     let respuesta = JSON.parse(ope.responseText);
                     if(respuesta.resultado){
-                        alert("Producto Modificado Correctamente");
+                        $titleError.innerText = "Exito";
+                        $paragrahp.innerText = "Producto Modificado";
+                        error.style.display = "block";
+                        setTimeout(() => {
+                            error.style.display = "none";
+                        }, 2000);
                         CloseModal();
                         ListarProductos();
                     }
                     else{
-                        alert("Error al Modificar el producto");
+                        $titleError.innerText = "Error al Modificar";
+                        $paragrahp.innerText = "Verifique que los campos coincidan con el tipo de dato";
+                        error.style.display = "block";
+                        setTimeout(() => {
+                            error.style.display = "none";
+                        }, 2000);
                     }
                 }
-                
+
             };
             ope.send("id_producto=" + $id_producto + "&nombre=" + $nombre_producto + "&precio=" + $precio_producto + "&stock=" + $stock_producto + "&talla=" + $talla_producto);
-    }
+    }    
 }
 
 $bnt_modal.addEventListener("click",AgregarModificarProducto);
@@ -402,6 +432,12 @@ function Buscar(){
     
     if (num === $filas.length){
         ListarProductos();
+        $titleError.innerText = "Producto no encontrado";
+        $paragrahp.innerText = "Verifique el id del producto";
+        error.style.display = "block";
+        setTimeout(() => {
+            error.style.display = "none";
+        }, 2000);
     }
 }
 

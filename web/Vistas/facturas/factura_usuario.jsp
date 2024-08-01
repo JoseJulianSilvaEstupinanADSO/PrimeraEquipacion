@@ -60,46 +60,13 @@
           <thead class="tabla__header">
             <th class="th__item">Id Factura</th>
             <th class="th__item">Fecha Facturacion</th>
-            <th class="th__item">Id Cliente</th>
+            <th class="th__item">Documento Cliente</th>
             <th class="th__item">Id Venta</th>
             <th class="th__item">Id Usuario</th>
             <th class="th__item">Total</th>
             <th class="th__item">Acciones</th>
           </thead>
           <tbody class="body__tabla">
-            <tr class="fila__tabla">
-                <td class="td__tabla IdFactura">1</td>
-                <td class="td__tabla Fecha">12/08/2004</td>
-                <td class="td__tabla ">54</td>
-                <td class="td__tabla ">6</td>
-                <td class="td__tabla ">6</td>
-                <td class="td__tabla Total">1500000</td>
-                <td class="td__tabla">
-                  <button type="button" class="button__tabla FacturaDetalles">Detalles</button>
-                </td>
-            </tr>
-            <tr class="fila__tabla">
-              <td class="td__tabla IdFactura">2</td>
-              <td class="td__tabla Fecha">12/08/2024</td>
-              <td class="td__tabla ">54</td>
-              <td class="td__tabla ">6</td>
-              <td class="td__tabla ">6</td>
-              <td class="td__tabla Total">1500000</td>
-              <td class="td__tabla">
-                <button type="button" class="button__tabla FacturaDetalles">Detalles</button>
-              </td>
-            </tr>
-            <tr class="fila__tabla">
-              <td class="td__tabla IdFactura">3</td>
-              <td class="td__tabla Fecha">12/08/2014</td>
-              <td class="td__tabla ">54</td>
-              <td class="td__tabla ">6</td>
-              <td class="td__tabla ">6</td>
-              <td class="td__tabla Total">1500000</td>
-              <td class="td__tabla">
-                <button type="button"  class="button__tabla FacturaDetalles">Detalles</button>
-              </td>
-            </tr>
           </tbody>
         </table>
       </div>
@@ -120,12 +87,12 @@
               <img class="img__modal" src="../../img/logo.png" alt="">
               <h2>Detalles de Factura</h2>
               <div class="numero__factura">
-                  <p class="Numero_factura">Numero: 120</p>
-                  <p class="fecha__factura">Fecha: 12/06/2024</p>
+                  <p class="Numero_factura"></p>
+                  <p class="fecha__factura"></p>
               </div>
           </div>
-          <div class="container__tabla container__tabla--modal ">
-              <table class="tabla--factura">
+          <div class="container__tabla container__tabla--modal tabla ">
+              <table class="tabla__profact">
                 <thead class="tabla__header">
                   <th class="th__item">Id Producto</th>
                   <th class="th__item">Nombre</th>
@@ -133,76 +100,21 @@
                   <th class="th__item">Talla</th>
                   <th class="th__item">Cantidad</th>
                 </thead>
-                <tbody class="body__tabla">
-                  <tr class="fila__tabla fila__tabla--modal" >
-                      <td class="td__tabla ">1</td>
-                      <td class="td__tabla ">Primera Equipacion Real Madrid</td>
-                      <td class="td__tabla ">120000</td>
-                      <td class="td__tabla ">M</td>
-                      <td class="td__tabla ">1</td>
-                  </tr>
-                  <tr class="fila__tabla fila__tabla--modal" >
-                      <td class="td__tabla ">1</td>
-                      <td class="td__tabla ">Primera Equipacion Real Madrid</td>
-                      <td class="td__tabla ">120000</td>
-                      <td class="td__tabla ">M</td>
-                      <td class="td__tabla ">1</td>
-                  </tr>
-                  <tr class="fila__tabla fila__tabla--modal" >
-                      <td class="td__tabla ">1</td>
-                      <td class="td__tabla ">Primera Equipacion Real Madrid</td>
-                      <td class="td__tabla ">120000</td>
-                      <td class="td__tabla ">M</td>
-                      <td class="td__tabla ">1</td>
-                  </tr>
-                  <tr class="fila__tabla fila__tabla--modal" >
-                      <td class="td__tabla ">1</td>
-                      <td class="td__tabla ">Primera Equipacion Real Madrid</td>
-                      <td class="td__tabla ">120000</td>
-                      <td class="td__tabla ">M</td>
-                      <td class="td__tabla ">1</td>
-                  </tr>
-                  <tr class="fila__tabla fila__tabla--modal" >
-                      <td class="td__tabla ">1</td>
-                      <td class="td__tabla ">Primera Equipacion Real Madrid</td>
-                      <td class="td__tabla ">120000</td>
-                      <td class="td__tabla ">M</td>
-                      <td class="td__tabla ">1</td>
-                  </tr>
-                  <tr class="fila__tabla fila__tabla--modal" >
-                      <td class="td__tabla ">1</td>
-                      <td class="td__tabla ">Primera Equipacion Real Madrid</td>
-                      <td class="td__tabla ">120000</td>
-                      <td class="td__tabla ">M</td>
-                      <td class="td__tabla ">1</td>
-                  </tr>
-                  <tr class="fila__tabla fila__tabla--modal" >
-                      <td class="td__tabla ">1</td>
-                      <td class="td__tabla ">Primera Equipacion Real Madrid</td>
-                      <td class="td__tabla ">120000</td>
-                      <td class="td__tabla ">M</td>
-                      <td class="td__tabla ">1</td>
-                  </tr>
-                  <tr class="fila__tabla fila__tabla--modal" >
-                      <td class="td__tabla ">1</td>
-                      <td class="td__tabla ">Primera Equipacion Real Madrid</td>
-                      <td class="td__tabla ">120000</td>
-                      <td class="td__tabla ">M</td>
-                      <td class="td__tabla ">1</td>
-                  </tr>
-                  
+                <tbody class="body__tabla body__tabla--modal">           
                 </tbody>
               </table>
           </div>
           <div class="personas">
-            <div>
-              <p><b>Facturado por:</b> Jose Julian Silva </p>
-              <p><b>Cliente:</b> Churro perez </p>
-            </div>
-              <h2 class="total total--facturas">TOTAL: 1000000</h2>
+              <h2 class="total total--facturas"></h2>
           </div>
       </div>
   </div>
+    <div class="container__modal--error">
+      <div class="contenido__modal--error">
+          <h1 class="title_error"></h1>
+          <p class="paragrahp__error"></p>
+      </div>
+     </div>
   </main>
   <script src="../../js/factura.js"></script>
   <script src="../../js/menu.js"></script>

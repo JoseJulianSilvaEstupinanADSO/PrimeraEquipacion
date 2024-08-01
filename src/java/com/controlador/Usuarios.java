@@ -15,9 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
-
+import org.mindrot.jbcrypt.BCrypt;
 import com.modelo.Usuario;
 import com.modelo.UsuarioDAO;
+import java.rmi.ServerError;
 
 /**
  *
@@ -70,6 +71,12 @@ public class Usuarios extends HttpServlet {
                 case "BuscarUsuario":
                     
                     BuscarUsuario(request,response);
+                    
+                    break;
+                    
+                case "ModificarContraseña":
+                    
+                    ModificarContraseña(request,response);
                     
                     break;
                     
@@ -164,7 +171,7 @@ public class Usuarios extends HttpServlet {
     }
     
     
-    private void BuscarUsuario(HttpServletRequest request, HttpServletResponse response) throws IOException{
+    private void BuscarUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException ,IOException{
         
         String idUsuario = request.getParameter("id");
         Usuario u = modelo.BuscarUsuario(idUsuario);
@@ -178,6 +185,32 @@ public class Usuarios extends HttpServlet {
         else{
             response.getWriter().write("{\"error\": \"Usuario No encontrado\"}");
         }
+    }
+    
+    private void ModificarContraseña(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        String id_usuario = request.getParameter("id_usuario");
+        String contrasena = request.getParameter("contrasena");
+        String nueva = request.getParameter("nueva");
+        Usuario u = modelo.BuscarUsuario(id_usuario);
+        
+        String con = u.getContraseña();
+        
+        boolean respuesta = false;
+        
+        if (BCrypt.checkpw(contrasena, con)){  
+            
+            respuesta = modelo.ModificarContraseña(nueva, id_usuario);
+        }
+        
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        String jsonResponse = "{\"resultado\": " + respuesta + "}";
+
+
+        response.getWriter().write(jsonResponse);
+        
     }
     
     

@@ -55,7 +55,7 @@ public class ClienteDAO extends Conexion{
             
             this.conectar();
 
-            String sql = "SELECT * FROM usuario WHERE id_rol=4";
+            String sql = "SELECT * FROM usuario";
 
             PreparedStatement pre = this.getCon().prepareStatement(sql);
 

@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.modelo.FacturaDAO;
 import com.modelo.Factura;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author Julian
@@ -36,6 +38,18 @@ public class Facturas extends HttpServlet {
             case "AgregarProdcutosFactura":
                 AgregarProdcutosFactura(request, response);
                 
+                break;
+            case "ListarFacturas":
+                ListarFacturas(request, response);
+                
+                break;
+            case "ListarProductosFactura":
+                ListarProductosFactura(request, response);
+
+                break;
+            case "ClientesCompras":
+                ClientesCompras(request, response);
+
                 break;
             default:
                 throw new AssertionError();
@@ -78,6 +92,67 @@ public class Facturas extends HttpServlet {
 
         
         response.getWriter().write(jsonResponse);
+    } 
+    
+    private void ListarFacturas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        List<Factura> facturas = modelo.ListarFacturas();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        
+        StringBuilder json = new StringBuilder("[");
+        for (int i = 0; i < facturas.size(); i++) {
+            Factura f = facturas.get(i);
+             json.append(String.format("{\"id_venta\": \"%s\", \"id_usuario\": \"%s\", \"id_factura\": \"%s\", \"fecha_facturacion\": \"%s\", \"doc_cliente\": \"%s\", \"total\": \"%s\"}",
+                    f.getId_venta(), f.getId_usuario(), f.getId_factura(), f.getFecha(), f.getDoc_cliente(), f.getTotal()));
+            if (i < facturas.size() - 1) {
+                json.append(",");
+            }
+        }
+        json.append("]");
+        response.getWriter().write(json.toString());
+    }
+    
+    private void  ListarProductosFactura(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        
+        String id_factura = request.getParameter("id_factura");
+        
+        List<Factura> productos = modelo.ListarProductoFactura(id_factura);
+        
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        
+        StringBuilder json = new StringBuilder("[");
+        for (int i = 0; i < productos.size(); i++) {
+            Factura f = productos.get(i);
+             json.append(String.format("{\"id_producto\": \"%s\", \"precio\": \"%s\", \"cantidad\": \"%s\", \"nombre\": \"%s\", \"talla\": \"%s\"}",
+                    f.getId_producto(), f.getPrecio(), f.getCantidad(), f.getNombre_p(), f.getTalla()));
+            if (i < productos.size() - 1) {
+                json.append(",");
+            }
+        }
+        json.append("]");
+        response.getWriter().write(json.toString());
+        
+    }
+    
+    private void ClientesCompras(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String doc_cliente = request.getParameter("doc_cliente");
+        List<Factura> compras = modelo.ClientesCompras(doc_cliente);
+        
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        
+        StringBuilder json = new StringBuilder("[");
+        for (int i = 0; i < compras.size(); i++) {
+            Factura f = compras.get(i);
+             json.append(String.format("{\"id_venta\": \"%s\", \"id_factura\": \"%s\", \"fecha_facturacion\": \"%s\", \"id_usuario\": \"%s\"}",
+                    f.getId_venta(), f.getId_factura(), f.getFecha(), f.getId_usuario()));
+            if (i < compras.size() - 1) {
+                json.append(",");
+            }
+        }
+        json.append("]");
+        response.getWriter().write(json.toString());
     } 
     
     

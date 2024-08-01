@@ -96,7 +96,7 @@
                 <img class="img__modal" src="../../img/logo.png" alt="">
                 <h2>Historial de cliente</h2>
                 <div class="numero__factura">
-                    <p class="Numero_factura Id_cliente"><b>Id Cliente: 25</b></p>
+                    <p class="Numero_factura Id_cliente"><b></b></p>
                 </div>
             </div>
             <h2 class="title__tabla--clientes">COMPRAS REALIZADAS</h2>
@@ -108,46 +108,22 @@
                     <th class="th__item">Fecha</th>
                     <th class="th__item">Id Vendedor</th>
                   </thead>
-                  <tbody class="body__tabla">
+                  <tbody class="body__tabla body__tabla--modal">
                     <tr class="fila__tabla--modal" >
-                        <td class="td__tabla ">12</td>
-                        <td class="td__tabla ">45</td>
-                        <td class="td__tabla ">02/04/2024</td>
-                        <td class="td__tabla ">1</td>
-                    </tr>
-                    <tr class=" fila__tabla--modal" >
-                        <td class="td__tabla ">12</td>
-                        <td class="td__tabla ">45</td>
-                        <td class="td__tabla ">02/04/2024</td>
-                        <td class="td__tabla ">1</td>
-                    </tr>
-                    <tr class=" fila__tabla--modal" >
-                        <td class="td__tabla ">12</td>
-                        <td class="td__tabla ">45</td>
-                        <td class="td__tabla ">02/04/2024</td>
-                        <td class="td__tabla ">1</td>
-                    </tr>
-                    <tr class=" fila__tabla--modal" >
-                        <td class="td__tabla ">12</td>
-                        <td class="td__tabla ">45</td>
-                        <td class="td__tabla ">02/04/2024</td>
-                        <td class="td__tabla ">1</td>
-                    </tr>
-                    <tr class=" fila__tabla--modal" >
-                        <td class="td__tabla ">12</td>
-                        <td class="td__tabla ">45</td>
-                        <td class="td__tabla ">02/04/2024</td>
-                        <td class="td__tabla ">1</td>
-                    </tr>
-                    <tr class=" fila__tabla--modal" >
-                        <td class="td__tabla ">12</td>
-                        <td class="td__tabla ">45</td>
-                        <td class="td__tabla ">02/04/2024</td>
-                        <td class="td__tabla ">1</td>
+                        <td class="td__tabla idventa">12</td>
+                        <td class="td__tabla idfactura">45</td>
+                        <td class="td__tabla date">02/04/2024</td>
+                        <td class="td__tabla idvendedor">1</td>
                     </tr>
                   </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+    <div class="container__modal--error">
+        <div class="contenido__modal--error">
+            <h1 class="title_error"></h1>
+            <p class="paragrahp__error"></p>
         </div>
     </div>
   </main>

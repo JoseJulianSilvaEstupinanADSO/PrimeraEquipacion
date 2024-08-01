@@ -41,7 +41,7 @@ public class FacturaDAO extends Conexion{
                     PreparedStatement pre2 = this.getCon().prepareStatement(sql2,Statement.RETURN_GENERATED_KEYS);
                     pre2.setString(1, f.getFecha());
                     pre2.setInt(2, id_venta);
-                    pre2.setString(3, f.getId_usuario());
+                    pre2.setString(3, f.getDoc_cliente());
                     pre2.setInt(4, Integer.parseInt(total));
                     
                     int exito2 = pre2.executeUpdate();
@@ -89,7 +89,16 @@ public class FacturaDAO extends Conexion{
                 pre3.setInt(3, Integer.parseInt(f.getCantidad()));
                 pre3.setDouble(4, Double.parseDouble(f.getPrecio()));
 
-                return  pre3.executeUpdate() > 0;
+                pre3.executeUpdate();
+                
+                String sql = "UPDATE producto_desc SET stock = stock - ? WHERE id_producto = ?";
+                
+                PreparedStatement pre = this.getCon().prepareStatement(sql);
+                
+                pre.setInt(1, Integer.parseInt(f.getCantidad()));
+                pre.setInt(2, Integer.parseInt(f.getId_producto()));
+                
+                return pre.executeUpdate() > 0;
             
             
             
@@ -103,6 +112,108 @@ public class FacturaDAO extends Conexion{
             this.desconectar();
         }
 
+    }
+    
+    public List<Factura> ListarFacturas() {
+        List<Factura> facturas = new ArrayList<>();
+        
+        try {
+            
+            this.conectar();
+            String sql = "SELECT f.id_factura, f.fecha_facturacion, f.id_venta, f.doc_cliente, f.total, v.id_usuario FROM factura f JOIN venta v ON f.id_venta = v.id_venta";
+            
+            PreparedStatement pre = this.getCon().prepareStatement(sql);
+            
+            ResultSet rs = pre.executeQuery();
+            
+            while (rs.next()) {                
+                Factura f = new Factura();
+                
+                f.setId_venta(rs.getString("id_venta"));
+                f.setId_usuario(rs.getString("id_usuario"));
+                f.setId_factura(rs.getString("id_factura"));
+                f.setFecha(rs.getString("fecha_facturacion"));
+                f.setDoc_cliente(rs.getString("doc_cliente"));
+                f.setTotal(rs.getString("total"));
+
+                facturas.add(f);
+            }
+            
+            
+        } catch (SQLException e) {
+        } finally {
+            this.desconectar();
+        }
+        
+        
+        return facturas;
+    }
+    
+    public List<Factura> ListarProductoFactura(String id_factura) {
+        List<Factura> productos = new ArrayList<>();
+        
+        try {
+            
+            this.conectar();
+            
+            String sql = "SELECT fp.id_producto, fp.precio, fp.cantidad, p.nombre, pd.talla FROM factura_producto fp JOIN producto p ON fp.id_producto = p.id_producto JOIN producto_desc pd ON p.id_producto = pd.id_producto WHERE fp.id_factura = ?";
+            
+            PreparedStatement pre = this.getCon().prepareStatement(sql);
+            pre.setInt(1, Integer.parseInt(id_factura));
+            ResultSet rs = pre.executeQuery();
+            
+            while (rs.next()) {                
+                Factura f = new Factura();
+                
+                f.setId_producto(rs.getString("id_producto"));
+                f.setPrecio(rs.getString("precio"));
+                f.setCantidad(rs.getString("cantidad"));
+                f.setNombre_p(rs.getString("nombre"));
+                f.setTalla(rs.getString("talla"));
+                
+                productos.add(f);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            
+        } finally {
+            this.desconectar();
+        }
+        
+        
+        return  productos;
+    }
+    
+    public List<Factura> ClientesCompras(String doc_cliente) {
+        List<Factura> compras = new ArrayList<>();
+        
+        try {
+            
+            this.conectar();
+            
+            String sql = "SELECT f.id_venta, f.id_factura, f.fecha_facturacion, v.id_usuario FROM factura f JOIN venta v ON f.id_venta = v.id_venta WHERE f.doc_cliente = ?";
+            PreparedStatement pre = this.getCon().prepareStatement(sql);
+            pre.setString(1, doc_cliente);
+            
+            ResultSet rs = pre.executeQuery();
+            
+            while (rs.next()) {                
+                Factura c = new Factura();
+                c.setId_venta(rs.getString("id_venta"));
+                c.setId_factura(rs.getString("id_factura"));
+                c.setFecha(rs.getString("fecha_facturacion"));
+                c.setId_usuario(rs.getString("id_usuario"));
+                
+                compras.add(c);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+        }
+        
+        return compras;
     }
     
 }

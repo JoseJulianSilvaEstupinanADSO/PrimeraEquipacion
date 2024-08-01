@@ -6,7 +6,9 @@
 
 
 const $dom = document;
-
+const error = $dom.querySelector(".container__modal--error");
+const $titleError = $dom.querySelector(".title_error");
+const $paragrahp = $dom.querySelector(".paragrahp__error");
 
 
 function CloseSession(){
@@ -286,15 +288,17 @@ function Modificar() {
             
          
          if(respuesta.resultado){
-             alert("Usuario Modificado");
+             $titleError.innerText = "Exito";
+            $paragrahp.innerText = "Usuario Modificado";
+            error.style.display = "block";
+            setTimeout(() => {
+                error.style.display = "none";
+            }, 2000);
              
              CloseModal();
              CargarDatos();
              
              
-         }
-         else{
-             alert("Error al Modificar el Usuario");
          }
      }  
    };
@@ -312,7 +316,7 @@ function Buscar() {
     let num = 0;
     $filas.forEach((fila) => {
 
-       let documento = fila.querySelector(".DocumentoUsuario").innerText;
+       let documento = fila.querySelector(".IdUsuario").innerText;
        
         if (documento !== $Label){
             fila.style.display = "none";
@@ -324,6 +328,12 @@ function Buscar() {
     });
     
     if(num === $filas.length){
+        $titleError.innerText = "Usuario no encontrado";
+        $paragrahp.innerText = "Verifique el id del Usuario";
+        error.style.display = "block";
+        setTimeout(() => {
+            error.style.display = "none";
+        }, 2000);
         CargarDatos();
     }
 }

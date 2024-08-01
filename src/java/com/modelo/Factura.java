@@ -4,6 +4,8 @@
  */
 package com.modelo;
 
+import java.util.stream.Stream;
+
 /**
  *
  * @author Julian
@@ -18,11 +20,22 @@ public class Factura {
     private String doc_cliente;
     private String cantidad;
     private String precio;
+    private String total;
+    private String nombre_p;
+    private String talla;
+
+    public String getTalla() {
+        return talla;
+    }
+
+    public void setTalla(String talla) {
+        this.talla = talla;
+    }
 
     public Factura() {
         
     }
-
+   
     public Factura(String id_venta, String id_usuario, String id_factura, String id_producto, String fecha, String doc_cliente, String cantidad, String precio) {
         this.id_venta = id_venta;
         this.id_usuario = id_usuario;
@@ -33,8 +46,24 @@ public class Factura {
         this.cantidad = cantidad;
         this.precio = precio;
     }
-    
 
+    public String getNombre_p() {
+        return nombre_p;
+    }
+
+    public void setNombre_p(String nombre_p) {
+        this.nombre_p = nombre_p;
+    }
+ 
+
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
+    }
+    
     public String getId_venta() {
         return id_venta;
     }
