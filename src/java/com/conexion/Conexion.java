@@ -12,31 +12,41 @@ import java.sql.DriverManager;
  * @author Julian
  */
 public class Conexion {
-    private Connection con;
+    private Connection con; // Objeto Connection para manejar la conexión a la base de datos
 
+    // Retorna la conexión actual
     public Connection getCon() {
         return con;
     }
 
+    // Establece la conexión
     public void setCon(Connection con) {
         this.con = con;
     }
     
-    public void conectar(){
+    // Método para conectar a la base de datos
+    public void conectar() {
         try {
+            // Carga el driver de MySQL
             Class.forName("com.mysql.jdbc.Driver");
+            // Establece la conexión a la base de datos
             con = DriverManager.getConnection("jdbc:mysql://localhost/db_proyecto", "root", "");
         } catch (Exception e) {
-            System.out.println("Error al conectar a la base de datos"+ e.getMessage());
+            // Maneja cualquier excepción que ocurra al conectar
+            System.out.println("Error al conectar a la base de datos: " + e.getMessage());
         }
     }
-    public void desconectar(){
+
+    // Método para cerrar la conexión a la base de datos
+    public void desconectar() {
         try {
-            if (!con.isClosed()) {
+            // Verifica si la conexión no está cerrada antes de intentar cerrarla
+            if (con != null && !con.isClosed()) {
                 con.close();
             }
         } catch (Exception e) {
-            System.out.println("Error al cerrar la conexion"+ e.getMessage());
+            // Maneja cualquier excepción que ocurra al cerrar la conexión
+            System.out.println("Error al cerrar la conexión: " + e.getMessage());
         }
     }
 }
