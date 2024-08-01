@@ -5,7 +5,9 @@
 
 
 const $dom = document;
-
+const error = $dom.querySelector(".container__modal--error");
+const $titleError = $dom.querySelector(".title_error");
+const $paragrahp = $dom.querySelector(".paragrahp__error");
 
 function CloseSession(){
         let $session = localStorage.getItem("session");
@@ -51,21 +53,76 @@ const table = $dom.querySelector('.tabla--factura');
 
 table.addEventListener('click', function(event) {
    if (event.target.classList.contains('button__tabla')) {
+       
     const $modal = $dom.getElementById("ventanaModal");
     $modal.style.display = "block";
+    
+    const  $filas = $dom.querySelectorAll("tbody.body__tabla > tr.fila__tabla--modal");
+        $filas.forEach((x) =>{
+            x.remove();
+        });
 
     const row = event.target.closest('tr');
     const $id = row.querySelector('td.IdCliente');
 
-
-
     let id = Number($id.innerText);
 
-
-    const $id_form = $dom.querySelector('.Id_cliente');
-
-
+    const $id_form = $dom.querySelector('p.Id_cliente > b');
+    
     $id_form.innerText = "Numero: " + id;
+    
+    let $doc = row.querySelector(".documento__cliente");
+    let doc = $doc.innerText;
+    
+    let ope = new XMLHttpRequest();
+        ope.open("POST","../../Facturas?action=ClientesCompras", true );
+        ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        ope.onload = function() {
+            if (ope.status === 200) {
+                let respuesta = JSON.parse(ope.responseText);
+                const $tbody = $dom.querySelector("tbody.body__tabla--modal");
+                respuesta.forEach((x) => {
+                    const $fila = $dom.createElement("tr");
+                    $fila.classList.add("fila__tabla--modal"); 
+
+                    const $colId_venta = $dom.createElement("td");
+                    $colId_venta.classList.add("td__tabla");
+                    $colId_venta.classList.add("idventa");
+
+                    $colId_venta.innerText = x.id_venta;
+
+                    const $colidfac = $dom.createElement("td");
+                    $colidfac.classList.add("td__tabla");
+                    $colidfac.classList.add("idfactura");
+
+                    $colidfac.innerText = x.id_factura;
+
+                    const $coldate = $dom.createElement("td");
+                    $coldate.classList.add("td__tabla");
+                    $coldate.classList.add("date");
+
+                    $coldate.innerText = x.fecha_facturacion;
+
+                    const $colidven = $dom.createElement("td");
+                    $colidven.classList.add("td__tabla");
+                    $colidven.classList.add("idvendedor");
+
+                    $colidven.innerText = x.id_usuario;
+
+
+                    $fila.appendChild($colId_venta);
+                    $fila.appendChild($colidfac);
+                    $fila.appendChild($coldate);
+                    $fila.appendChild($colidven);
+
+                    $tbody.appendChild($fila);
+
+                });
+                filas();
+                
+            }
+        };
+        ope.send("doc_cliente=" + doc);
      
     filasModal();
 
@@ -104,7 +161,7 @@ window.addEventListener("click",function(event) {
 function ListarClientes() {
     
     
-     const  $filas = $dom.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
+    const  $filas = $dom.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
     $filas.forEach((x) =>{
         x.remove();
     });
@@ -196,9 +253,16 @@ function Buscar(){
     });
     
     if (num === $filas.length){
+        $titleError.innerText = "Cliente no encontrado";
+        $paragrahp.innerText = "Verifique el documento del Cliente";
+        error.style.display = "block";
+        setTimeout(() => {
+            error.style.display = "none";
+        }, 2000);
         ListarClientes();
     }
 }
 
 const $BtnBuscar = $dom.querySelector(".Btn__buscar");
 $BtnBuscar.addEventListener("click", Buscar);
+

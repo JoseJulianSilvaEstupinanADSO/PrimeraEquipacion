@@ -4,7 +4,9 @@
  */
 
 const $dom = document;
-
+const error = $dom.querySelector(".container__modal--error");
+const $titleError = $dom.querySelector(".title_error");
+const $paragrahp = $dom.querySelector(".paragrahp__error");
 
 function CloseSession(){
         let $session = localStorage.getItem("session");
@@ -60,14 +62,68 @@ const $cambiar = document.querySelector(".Cambiar");
 
 $cambiar.addEventListener("click", async function () {
     const $input = document.querySelectorAll("div.div__form > input.modal__input");
+    let num = 0;
     $input.forEach(x => {
         if (x.value.length == 0) {
             x.classList.add("alert");
+            $titleError.innerText = "Error campos vacios";
+            $paragrahp.innerText = "Por favor llene todos los campos";
+            error.style.display = "block";
+            setTimeout(() => {
+                error.style.display = "none";
+            }, 2000)
         }
         else{
             x.classList.remove("alert");
+            num+=1;
         }
     });
+    
+    if (num === $input.length) {
+        const $actual = $dom.querySelector(".password_actual");
+        const $nueva = $dom.querySelector(".password_nueva");
+        const $confirm = $dom.querySelector(".password_confrm");
+        
+        let actual = $actual.value;
+        let confirm = $confirm.value;
+        let nueva = $nueva.value;
+        
+        if (nueva === confirm) {
+            console.log("hola")
+            let idUsuario = localStorage.getItem("idUsuario");
+            let ope = new XMLHttpRequest();
+            ope.open("POST", "../../Usuarios?action=ModificarContraseña", true);
+            ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            ope.onload = function() {
+                if (ope.status === 200) {
+                    let respuesta = JSON.parse(ope.responseText);
+                    if (respuesta.resultado) {
+                        let cambio = localStorage.getItem("session");
+                        cambio = false;
+                        localStorage.setItem("session", cambio);
+                    }
+                    else{
+                        $titleError.innerText = "Error al cambiar la contraseña";
+                        $paragrahp.innerText = "La contraseña actual no coincide con la registrada";
+                        error.style.display = "block";
+                        setTimeout(() => {
+                            error.style.display = "none";
+                        }, 2000)
+                    }
+                }
+            }
+            ope.send("id_usuario=" + idUsuario + "&contrasena=" + actual + "&nueva=" + nueva);
+        }
+        else{
+            $titleError.innerText = "Error al confirmar la nueva contraseña";
+            $paragrahp.innerText = "Por favor asegurese de que las dos contraseñas sean identicas";
+            error.style.display = "block";
+            setTimeout(() => {
+                error.style.display = "none";
+            }, 2000)
+        }
+        
+    }
 });
 
 //----------------------------------------------------------------------------
@@ -166,16 +222,35 @@ function Modificar(event){
                  let respuesta = JSON.parse(ope.responseText);
                  
                  if(respuesta.resultado){
-                     alert("Usuario Modificado");
+                     
+                    $titleError.innerText = "Exito";
+                    $paragrahp.innerText = "Usuario Modificado";
+                    error.style.display = "block";
+                    setTimeout(() => {
+                        error.style.display = "none";
+                    }, 2000)
 
                  }
                  else{
-                     alert("Error al Modificar el Usuario");
+                    $titleError.innerText = "Error al modificar el usuario";
+                    $paragrahp.innerText = "Hubo algun conflicto con los datos, Intentelo denuevo";
+                    error.style.display = "block";
+                    setTimeout(() => {
+                        error.style.display = "none";
+                    }, 2000)
                  }
              }  
            };
            ope.send("id=" + $id + "&id_rol=" + $rol + "&nombre=" + $nombre + "&documento=" + $documento + "&usuario=" + $usuario + "&telefono=" + $telefono + "&direccion=" + $direccion + "&correo=" + $correo + "&contrasena=" + null);
 
+        }
+        else{
+            $titleError.innerText = "Capos vacios";
+            $paragrahp.innerText = "Favor llenar todos los campos";
+            error.style.display = "block";
+            setTimeout(() => {
+                error.style.display = "none";
+            }, 2000)
         }
 
 }

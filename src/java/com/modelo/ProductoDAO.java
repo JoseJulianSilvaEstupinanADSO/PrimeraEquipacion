@@ -17,18 +17,23 @@ import java.sql.Statement;
  *
  * @author Propietario
  */
-public class ProductoDAO extends Conexion{
+// Clase ProductoDAO que extiende de Conexion, manejando operaciones CRUD para la entidad Producto
+public class ProductoDAO extends Conexion {
     
-    public List<Producto> ListarTallas(){
+    // Método para listar todas las tallas disponibles
+    public List<Producto> ListarTallas() {
         List<Producto> tallas = new ArrayList<>();
         
         try {
+            // Conecta a la base de datos
             this.conectar();
             
+            // Consulta SQL para seleccionar todas las tallas
             String sql = "SELECT * FROM talla";
             PreparedStatement pre = this.getCon().prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
             
+            // Procesa los resultados y agrega las tallas a la lista
             while (rs.next()) {                
                 Producto p = new Producto();
                 p.setTalla(rs.getString("talla"));
@@ -37,33 +42,39 @@ public class ProductoDAO extends Conexion{
             }
             
         } catch (SQLException e) {
+            // Maneja cualquier excepción SQL
             e.printStackTrace();
         } finally {
+            // Desconecta de la base de datos
             this.desconectar();
         }
-        
         
         return tallas;
     }
     
+    // Método para agregar un nuevo producto a la base de datos
     public boolean AgregarProducto(Producto p) {
         try {
-            
+            // Conecta a la base de datos
             this.conectar();
             
-           String sql = "INSERT INTO producto(nombre, precio) VALUES (?,?)";
-           PreparedStatement pre = this.getCon().prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-           pre.setString(1, p.getNombre());
-           pre.setInt(2, Integer.parseInt(p.getPrecio()));
-           
-           int exito = pre.executeUpdate();
-           
+            // Consulta SQL para insertar un nuevo producto
+            String sql = "INSERT INTO producto(nombre, precio) VALUES (?,?)";
+            PreparedStatement pre = this.getCon().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            pre.setString(1, p.getNombre());
+            pre.setInt(2, Integer.parseInt(p.getPrecio()));
+            
+            // Ejecuta la consulta de inserción y obtiene el ID generado
+            int exito = pre.executeUpdate();
+            
             if (exito > 0) {
                 ResultSet rs = pre.getGeneratedKeys();
                 if (rs.next()) {
-                    
                     int id_producto = rs.getInt(1);
                     
+                    System.out.println(id_producto); // Imprime el ID del producto
+                    
+                    // Consulta SQL para insertar detalles del producto en otra tabla
                     String sql2 = "INSERT INTO producto_desc(id_producto,talla,stock,tela) VALUES (?,?,?,?)";
                     PreparedStatement pre2 = this.getCon().prepareStatement(sql2);
                     pre2.setInt(1, id_producto);
@@ -71,35 +82,40 @@ public class ProductoDAO extends Conexion{
                     pre2.setInt(3, Integer.parseInt(p.getStock()));
                     pre2.setString(4, p.getTela());
                     
-                  
+                    // Ejecuta la inserción de detalles del producto
+                    pre2.executeUpdate();
                     
-                    return true;
+                    return true; // Retorna true si la operación fue exitosa
                 }
             }
          
-      
-            
         } catch (SQLException e) {
-            
+            // Maneja cualquier excepción SQL y retorna false
             e.printStackTrace();
             return false;
             
         } finally {
+            // Desconecta de la base de datos
             this.desconectar();
         }
-           return false;
+        
+        return false;
     }
     
-    public List<Producto> ListarProductos(){
+    // Método para listar todos los productos con sus detalles
+    public List<Producto> ListarProductos() {
         List<Producto> productos = new ArrayList<>();
         
         try {
+            // Conecta a la base de datos
             this.conectar();
             
-            String sql = "SELECT producto.id_producto, nombre, precio, talla, stock, tela FROM producto JOIN producto_desc ON producto.id_producto = producto_desc.id_producto ";
+            // Consulta SQL para seleccionar todos los productos y sus detalles
+            String sql = "SELECT producto.id_producto, nombre, precio, talla, stock, tela FROM producto JOIN producto_desc ON producto.id_producto = producto_desc.id_producto";
             PreparedStatement pre = this.getCon().prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
             
+            // Procesa los resultados y agrega los productos a la lista
             while (rs.next()) {                
                 Producto p = new Producto();
                 p.setId_producto(rs.getString("id_producto"));
@@ -113,66 +129,66 @@ public class ProductoDAO extends Conexion{
             }
             
         } catch (SQLException e) {
+            // Maneja cualquier excepción SQL
             e.printStackTrace();
         } finally {
+            // Desconecta de la base de datos
             this.desconectar();
         }
-        
         
         return productos;
     }
     
-    
-    public boolean ModificarProducto (Producto p) {
-        
+    // Método para modificar un producto existente en la base de datos
+    public boolean ModificarProducto(Producto p) {
         try {
-            
+            // Conecta a la base de datos
             this.conectar();
             
-            String sql = "UPDATE producto p JOIN producto_desc pd ON p.id_producto = pd.id_producto JOIN talla t ON pd.talla = t.talla SET nombre = ?, precio = ?, stock = ? WHERE p.id_producto = ? AND t.talla=?";   
-            
+            // Consulta SQL para actualizar los detalles del producto
+            String sql = "UPDATE producto p JOIN producto_desc pd ON p.id_producto = pd.id_producto JOIN talla t ON pd.talla = t.talla SET nombre = ?, precio = ?, stock = ? WHERE p.id_producto = ? AND t.talla=?";
             PreparedStatement pre = this.getCon().prepareStatement(sql);
             
-            System.out.println(p.getId_producto());
+            System.out.println(p.getId_producto()); // Imprime el ID del producto
             
+            // Establece los valores para la consulta de actualización
             pre.setString(1, p.getNombre());
             pre.setInt(2, Integer.parseInt(p.getPrecio()));
             pre.setInt(3, Integer.parseInt(p.getStock()));
             pre.setInt(4, Integer.parseInt(p.getId_producto()));
             pre.setString(5, p.getTalla());
             
+            // Ejecuta la actualización y retorna true si la operación fue exitosa
             return pre.executeUpdate() > 0;
             
         } catch (SQLException e) {
-            
+            // Maneja cualquier excepción SQL y retorna false
             e.printStackTrace();
-            
             return false;
             
-            
         } finally {
+            // Desconecta de la base de datos
             this.desconectar();
-            
         }
-           
     }
     
-    public Producto BuscarProducto(String id_producto, String talla){
-        
+    // Método para buscar un producto específico por ID y talla
+    public Producto BuscarProducto(String id_producto, String talla) {
         Producto p = null;
         
         try {
-            
+            // Conecta a la base de datos
             this.conectar();
-            String sql = "SELECT p.id_producto, p.nombre, p.precio, pd.stock, pd.talla, pd.tela FROM producto p JOIN producto_desc pd ON p.id_producto = pd.id_producto JOIN talla t ON pd.talla = t.talla WHERE p.id_producto = ? AND t.talla = ?";
             
+            // Consulta SQL para seleccionar un producto específico por ID y talla
+            String sql = "SELECT p.id_producto, p.nombre, p.precio, pd.stock, pd.talla, pd.tela FROM producto p JOIN producto_desc pd ON p.id_producto = pd.id_producto JOIN talla t ON pd.talla = t.talla WHERE p.id_producto = ? AND t.talla = ?";
             PreparedStatement pre = this.getCon().prepareStatement(sql);
                     
             pre.setInt(1, Integer.parseInt(id_producto));
             pre.setString(2, talla);
             
-            ResultSet rs;
-            rs = pre.executeQuery();
+            // Ejecuta la consulta y procesa los resultados
+            ResultSet rs = pre.executeQuery();
             
             if (rs.next()) {
                 p = new Producto(
@@ -184,16 +200,17 @@ public class ProductoDAO extends Conexion{
                         rs.getString("tela")
                 );
             }
-            System.out.println(p);
+            System.out.println(p); // Imprime el producto encontrado
             
         } catch (SQLException e) {
+            // Maneja cualquier excepción SQL
             e.printStackTrace();
         } finally {
+            // Desconecta de la base de datos
             this.desconectar();
         }
         
         return p;
-        
     }
-    
 }
+

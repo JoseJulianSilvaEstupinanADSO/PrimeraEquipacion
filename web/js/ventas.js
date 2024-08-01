@@ -3,7 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/javascript.js to edit this template
  */
 
-
+const $dom = document;
+const error = $dom.querySelector(".container__modal--error");
+const $titleError = $dom.querySelector(".title_error");
+const $paragrahp = $dom.querySelector(".paragrahp__error");
 
 function CloseSession(){
         let $session = localStorage.getItem("session");
@@ -19,7 +22,6 @@ setInterval(() => {
     CloseSession();
 }, 1000);
 
-const $dom = document;
 
 //MODAL-----------------------------------------------------------------------
 
@@ -43,6 +45,12 @@ function CloseModal() {
 
 $boton.addEventListener("click",function() {
   $modal.style.display = "block";
+    let documento = document.querySelector(".documento_cliente");
+    let nombre = document.querySelector(".nombre_cliente");
+    let telefono = document.querySelector(".tefelono_cliente");
+    documento.value = "";
+    nombre.value = "";
+    telefono.value = "";
 });
 
 $cerrar.addEventListener("click", function () {
@@ -93,17 +101,19 @@ function RegistarCliente() {
     
     event.preventDefault();
     
-    let $documento = document.querySelector(".documento_cliente").value;
-    let $nombre = document.querySelector(".nombre_cliente").value;
-    let $telefono = document.querySelector(".tefelono_cliente").value;
+    let documento = document.querySelector(".documento_cliente");
+    let nombre = document.querySelector(".nombre_cliente");
+    let telefono = document.querySelector(".tefelono_cliente");
    
+   $documento = documento.value;
+   $nombre = nombre.value;
+   $telefono = telefono.value;
     
     let num = 0;
     
-    if ($documento.length > 0 && $nombre.length > 0 && $telefono.length > 0) {
+    if ($documento.length === 10 && $nombre.length > 0 && $telefono.length === 10) {
         num = 1;
-    }
-    
+    }    
     if (num === 1) {
         
         let ope = new XMLHttpRequest();
@@ -115,19 +125,28 @@ function RegistarCliente() {
                 console.log(respuesta);
                 if (respuesta.resultado) {
                     const $modal = document.getElementById("ventanaModal");
-                    alert("Cliente Registrado");
+                    $titleError.innerText = "Exito";
+                    $paragrahp.innerText = "Cliente registrado con exito";
+                    error.style.display = "block";
+                    setTimeout(() => {
+                        error.style.display = "none";
+                    }, 2000);
+                    
+                    
                     CloseModal();
                     
-                }
-                else{
-                    alert("Error al Registrar el cliente");
                 }
             }  
         };
         ope.send("nombre=" + $nombre + "&documento=" + $documento + "&telefono=" + $telefono);
     }
     else{
-        aler("Campos vacion");
+        $titleError.innerText = "Error al registrar";
+        $paragrahp.innerText = "Verifique que no hayan campos vacios o que el telefono y documento tengan 10 caracteres";
+        error.style.display = "block";
+        setTimeout(() => {
+            error.style.display = "none";
+        }, 2000);
     }
     
     
@@ -144,9 +163,10 @@ $BtnRegistrar.addEventListener("submit", RegistarCliente);
 // Bucar Cliente   //
 
 function BuscarCliente() {
-    const $documento = $dom.querySelector(".documento").value;
-    if($documento !== ""){
-        
+    const $documento = $dom.querySelector(".documento");
+    let valor = $documento.value;
+    if(valor !== ""){
+        $documento.classList.remove("alert");
         let ope = new XMLHttpRequest();
         ope.open("POST", "../../Clientes?action=BuscarCliente", true);
         ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -154,17 +174,31 @@ function BuscarCliente() {
             if (ope.status === 200){
                 let respuesta = JSON.parse(ope.responseText);
                 if (respuesta.error){
-                    alert("Usuario no encontrado");
+                    $documento.classList.add("alert");
+                    $titleError.innerText = "Cliente no encontrado";
+                    $paragrahp.innerText = "Verifique el documento del cliente";
+                    error.style.display = "block";
+                    setTimeout(() => {
+                        error.style.display = "none";
+                    }, 2000);
                 }
                 else{
-                    console.log(respuesta.nombre);
                     const $label = $dom.querySelector(".insertDocumento");
                     $label.value = respuesta.nombre;
                 }
             }  
         };
         
-    ope.send("documento=" + $documento);
+    ope.send("documento=" + valor);
+    }
+    else{
+        $documento.classList.add("alert");
+        $titleError.innerText = "Error campo vacio";
+        $paragrahp.innerText = "Por favor llene todos los campos";
+        error.style.display = "block";
+        setTimeout(() => {
+            error.style.display = "none";
+        }, 2000);
     }
 }
 
@@ -214,6 +248,12 @@ function BuscarProducto() {
     }
     else{
         $label.classList.add("alert");
+        $titleError.innerText = "Error campos vacios";
+        $paragrahp.innerText = "Por favor llene todos los campos";
+        error.style.display = "block";
+        setTimeout(() => {
+            error.style.display = "none";
+        }, 2000);
     }
     if (talla !== "Seleccionar Talla"){
         $selec.classList.remove("alert"); 
@@ -221,6 +261,12 @@ function BuscarProducto() {
     }
     else{
         $selec.classList.add("alert");
+        $titleError.innerText = "Error talla no seleccionada";
+        $paragrahp.innerText = "Seleccione una talla";
+        error.style.display = "block";
+        setTimeout(() => {
+            error.style.display = "none";
+        }, 2000);
     }
     if (num === 2){
         
@@ -258,6 +304,13 @@ function AgragarProdutoTabla(items) {
         }
         else{
             x.classList.add("alert");
+             $titleError.innerText = "Error campos vacios";
+            $paragrahp.innerText = "Por favor llene todos los campos";
+            error.style.display = "block";
+            setTimeout(() => {
+                error.style.display = "none";
+            }, 2000);
+            
         }
     });
     if (num === items.length){
@@ -418,7 +471,12 @@ function NuevaVenta() {
         
     }
     else{
-        console.log("no");
+        $titleError.innerText = "No hay datos para añadir";
+        $paragrahp.innerText = "Agrege productos a la factura";
+        error.style.display = "block";
+        setTimeout(() => {
+            error.style.display = "none";
+        }, 2000);
     }
     
 }

@@ -24,130 +24,164 @@ import com.modelo.ProductoDAO;
 @WebServlet(name = "Productos", urlPatterns = {"/Productos"})
 public class Productos extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
-    private ProductoDAO modelo = new ProductoDAO();
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String accion = request.getParameter("action");
-        switch (accion) {
-            case "ListarTallas":
-                ListarTallas(request, response);
-                break;
-            case "RegistrarProducto":
-                RegistrarProducto(request, response);
-                break;
-            case "ListarProductos":
-                ListarProductos(request, response);
-                break;
-            case "ModificarProducto":
-                ModificarProducto(request, response);
-                break;
-            case "BuscarProducto":
-                BuscarProducto(request, response);
-                break;
-            default:
-                throw new AssertionError();
-        }
-    }
-    
-    private void ListarTallas(HttpServletRequest request, HttpServletResponse response) throws  ServletException, IOException{
-        
+    // Clase controladora para manejar las solicitudes relacionadas con los productos
+ private static final long serialVersionUID = 1L;
+
+ // Instancia de ProductoDAO para interactuar con la base de datos
+ private ProductoDAO modelo = new ProductoDAO();
+
+ protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
+     response.setContentType("text/html;charset=UTF-8");
+
+     // Obtiene la acción desde los parámetros de la solicitud
+     String accion = request.getParameter("action");
+
+     // Selecciona la acción a realizar según el valor de 'accion'
+     switch (accion) {
+         case "ListarTallas":
+             // Llama al método ListarTallas
+             ListarTallas(request, response);
+             break;
+
+         case "RegistrarProducto":
+             // Llama al método RegistrarProducto
+             RegistrarProducto(request, response);
+             break;
+
+         case "ListarProductos":
+             // Llama al método ListarProductos
+             ListarProductos(request, response);
+             break;
+
+         case "ModificarProducto":
+             // Llama al método ModificarProducto
+             ModificarProducto(request, response);
+             break;
+
+         case "BuscarProducto":
+             // Llama al método BuscarProducto
+             BuscarProducto(request, response);
+             break;
+
+         default:
+             // Lanza una excepción si la acción no coincide con ninguna conocida
+             throw new AssertionError();
+     }
+ }
+
+//  Método para listar las tallas de los productos
+    private void ListarTallas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Obtiene la lista de tallas desde el modelo
         List<Producto> productos = modelo.ListarTallas();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        
+
+        // Construye un array JSON con las tallas
         StringBuilder json = new StringBuilder("[");
         for (int i = 0; i < productos.size(); i++) {
             Producto producto = productos.get(i);
-             json.append(String.format("{\"talla\": \"%s\"}",
-                    producto.getTalla()));
+            json.append(String.format("{\"talla\": \"%s\"}", producto.getTalla()));
             if (i < productos.size() - 1) {
                 json.append(",");
             }
         }
         json.append("]");
+
+        // Escribe el JSON en la respuesta
         response.getWriter().write(json.toString());
     }
-    
-    private void RegistrarProducto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        
+
+    // Método para registrar un nuevo producto
+    private void RegistrarProducto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Obtiene los parámetros de la solicitud
         String nombre = request.getParameter("nombre");
         String precio = request.getParameter("precio");
         String talla = request.getParameter("talla");
         String stock = request.getParameter("stock");
         String tela = request.getParameter("tela");
-        System.out.println(nombre+precio+talla+stock +tela);
-        
+
+        // Crea un objeto Producto con los datos obtenidos
         Producto p = new Producto(null, talla, nombre, precio, stock, tela);
-        
+
+        // Llama al modelo para agregar el producto y obtiene el resultado
         boolean resultado = modelo.AgregarProducto(p);
-        
+
+        // Configura la respuesta como JSON y establece la codificación
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
+
+        // Escribe el resultado en la respuesta
         response.getWriter().write("{\"resultado\": " + resultado + "}");
-                
-        
-        
     }
-    
-    private void  ListarProductos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        List<Producto> productos = modelo.ListarProductos();    
+
+    // Método para listar todos los productos
+    private void ListarProductos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Obtiene la lista de productos desde el modelo
+        List<Producto> productos = modelo.ListarProductos();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        
+
+        // Construye un array JSON con los productos
         StringBuilder json = new StringBuilder("[");
         for (int i = 0; i < productos.size(); i++) {
             Producto p = productos.get(i);
-             json.append(String.format("{\"id_producto\": \"%s\", \"nombre\": \"%s\", \"precio\": \"%s\", \"talla\": \"%s\", \"stock\": \"%s\", \"tela\": \"%s\"}",
+            json.append(String.format("{\"id_producto\": \"%s\", \"nombre\": \"%s\", \"precio\": \"%s\", \"talla\": \"%s\", \"stock\": \"%s\", \"tela\": \"%s\"}",
                     p.getId_producto(), p.getNombre(), p.getPrecio(), p.getTalla(), p.getStock(), p.getTela()));
             if (i < productos.size() - 1) {
                 json.append(",");
             }
         }
         json.append("]");
+
+        // Escribe el JSON en la respuesta
         response.getWriter().write(json.toString());
     }
-    
-    private void  ModificarProducto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        
+
+    // Método para modificar un producto existente
+    private void ModificarProducto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Obtiene los parámetros de la solicitud
         String id_producto = request.getParameter("id_producto");
         String nombre = request.getParameter("nombre");
         String stock = request.getParameter("stock");
         String precio = request.getParameter("precio");
         String talla = request.getParameter("talla");
-        
+
+        // Crea un objeto Producto con los datos obtenidos
         Producto p = new Producto(id_producto, talla, nombre, precio, stock, null);
-        
-         boolean resultado = modelo.ModificarProducto(p);
-         
+
+        // Llama al modelo para modificar el producto y obtiene el resultado
+        boolean resultado = modelo.ModificarProducto(p);
+
+        // Configura la respuesta como JSON y establece la codificación
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        
-        String jsonResponse = "{\"resultado\": " + resultado + "}";
 
-        
+        // Escribe el resultado en la respuesta
+        String jsonResponse = "{\"resultado\": " + resultado + "}";
         response.getWriter().write(jsonResponse);
     }
-    
-    private void BuscarProducto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        
+
+    // Método para buscar un producto
+    private void BuscarProducto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Obtiene los parámetros de la solicitud
         String id_producto = request.getParameter("id_producto");
         String talla = request.getParameter("talla");
+
+        // Llama al modelo para buscar el producto y obtiene el resultado
         Producto p = modelo.BuscarProducto(id_producto, talla);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
+
         if (p != null) {
+            // Construye un JSON con los datos del producto encontrado
             String json = String.format("{\"id_usuario\": \"%s\", \"nombre\": \"%s\", \"precio\": \"%s\"}",
-                p.getId_producto(), p.getNombre(), p.getPrecio());
+                    p.getId_producto(), p.getNombre(), p.getPrecio());
             response.getWriter().write(json);
-        }
-        else{
+        } else {
+            // Escribe un mensaje de error en la respuesta si no se encuentra el producto
             response.getWriter().write("{\"error\": \"Usuario No encontrado\"}");
         }
-        
-        
-        
     }
     
       

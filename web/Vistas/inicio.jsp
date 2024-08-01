@@ -67,6 +67,13 @@
           <img class="logo__imagen" src="../img/logo.png" alt="">
         </div>
       </section>
+      <div class="container__modal--error">
+          <div class="contenido__modal--error">
+              <h1 class="title_error">Error</h1>
+              <p class="paragrahp__error">Error Usuario O contraseña Incorrectos</p>
+              
+          </div>
+      </div>
   </main>
   <script src="../js/menu.js"></script>
   <script src="../js/inicio.js"></script>

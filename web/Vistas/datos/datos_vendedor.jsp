@@ -121,15 +121,15 @@
           <form action="" class="form__modal">
               <div class="div__form">
                   <label for="" class="">Contraseña Actual: </label>
-                  <input type="password" class="modal__input">
+                  <input type="password" class="modal__input password_actual">
               </div>
               <div class="div__form">
                   <label for="" class="">Nueva Contraseña: </label>
-                  <input type="password" class="modal__input">
+                  <input type="password" class="modal__input password_nueva">
               </div>
               <div class="div__form">
                   <label for="" class="">Confirme Contraseña: </label>
-                  <input type="password" class="modal__input">
+                  <input type="password" class="modal__input password_confrm">
               </div>
               <div class="div__buttons">
                   <button type="button" class="button button__modal Cambiar">Cambiar</button>
@@ -138,6 +138,13 @@
           </form>
         </div>
       </div>
+      <div class="container__modal--error">
+        <div class="contenido__modal--error">
+            <h1 class="title_error"></h1>
+            <p class="paragrahp__error"></p>
+
+        </div>
+       </div>
   </main>
     <script src="../../js/menu.js"></script>
   <script src="../../js/datos.js" type="module"></script>

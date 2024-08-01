@@ -37,84 +37,104 @@ public class Clientes extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        
-        String action = request.getParameter("action");
-        
-        if(action != null){
-            switch (action) {
-                case "RegistrarUsuario":
-                    ReguistrarUsuario(request, response);
-                    
-                    break;
-                    
-                case "ListarUsuario":
-                    ListarUusuario(request,response);
-                    
-                    break;
-                    
-                case "BuscarCliente":
-                    
-                    BuscarCliente(request, response);
-                    break;
-                default:
-                    throw new AssertionError();
-            }
+        throws ServletException, IOException {
+    response.setContentType("text/html;charset=UTF-8");
+    
+    // Obtiene la acción a realizar desde los parámetros de la solicitud
+    String action = request.getParameter("action");
+    
+    if(action != null){
+        switch (action) {
+            // Si la acción es "RegistrarUsuario", llama al método ReguistrarUsuario
+            case "RegistrarUsuario":
+                ReguistrarUsuario(request, response);
+                break;
+                
+            // Si la acción es "ListarUsuario", llama al método ListarUusuario
+            case "ListarUsuario":
+                ListarUusuario(request, response);
+                break;
+                
+            // Si la acción es "BuscarCliente", llama al método BuscarCliente
+            case "BuscarCliente":
+                BuscarCliente(request, response);
+                break;
+                
+            // Si la acción no coincide con ninguna de las anteriores, lanza un error
+            default:
+                throw new AssertionError();
         }
+    }
+}
 
-    }
+// Método para registrar un usuario
+private void ReguistrarUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    // Obtiene los parámetros de la solicitud
+    String nombre = request.getParameter("nombre");
+    String documento = request.getParameter("documento");
+    String telefono = request.getParameter("telefono");
     
-    private void  ReguistrarUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       
-        String nombre = request.getParameter("nombre");
-        String documento = request.getParameter("documento");
-        String telefono = request.getParameter("telefono");
-        
-        Cliente c = new Cliente(null, documento, nombre, telefono, "4");
-        
-        boolean resultado = modelo.RegistrarCliente(c);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write("{\"resultado\": " + resultado + "}");
-        
-        
-    }
-    private void  ListarUusuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        List<Cliente> clientes = modelo.ListarClientes();
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        StringBuilder json = new StringBuilder("[");
-        for (int i = 0; i < clientes.size(); i++) {
-            Cliente c = clientes.get(i);
-             json.append(String.format("{\"id_cliente\": \"%s\", \"documento\": \"%s\", \"nombre\": \"%s\", \"telefono\": \"%s\"}",
-                    c.getId_cliente(), c.getDocumento(), c.getNombre(), c.getTelefono()));
-            if (i < clientes.size() - 1) {
-                json.append(",");
-            }
+    // Crea un nuevo objeto Cliente con los datos obtenidos
+    Cliente c = new Cliente(null, documento, nombre, telefono, "4");
+    
+    // Llama al modelo para registrar el cliente y obtiene el resultado
+    boolean resultado = modelo.RegistrarCliente(c);
+    
+    // Configura la respuesta como JSON
+    response.setContentType("application/json");
+    response.setCharacterEncoding("UTF-8");
+    
+    // Escribe el resultado en la respuesta
+    response.getWriter().write("{\"resultado\": " + resultado + "}");
+}
+
+// Método para listar usuarios
+private void ListarUusuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    // Obtiene la lista de clientes del modelo
+    List<Cliente> clientes = modelo.ListarClientes();
+    
+    // Configura la respuesta como JSON
+    response.setContentType("application/json");
+    response.setCharacterEncoding("UTF-8");
+    
+    // Construye un objeto JSON con la lista de clientes
+    StringBuilder json = new StringBuilder("[");
+    for (int i = 0; i < clientes.size(); i++) {
+        Cliente c = clientes.get(i);
+        json.append(String.format("{\"id_cliente\": \"%s\", \"documento\": \"%s\", \"nombre\": \"%s\", \"telefono\": \"%s\"}",
+                c.getId_cliente(), c.getDocumento(), c.getNombre(), c.getTelefono()));
+        if (i < clientes.size() - 1) {
+            json.append(",");
         }
-        json.append("]");
-        response.getWriter().write(json.toString());
-        
     }
+    json.append("]");
     
-    private void BuscarCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        
-        String documento = request.getParameter("documento");
-        
-        Cliente c = modelo.BuscarCliente(documento);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        if (c != null) {
-            String json = String.format("{\"id_cliente\": \"%s\", \"documento\": \"%s\", \"nombre\": \"%s\", \"telefono\": \"%s\"}",
+    // Escribe el JSON en la respuesta
+    response.getWriter().write(json.toString());
+}
+
+// Método para buscar un cliente
+private void BuscarCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    // Obtiene el documento del cliente a buscar desde los parámetros de la solicitud
+    String documento = request.getParameter("documento");
+    
+    // Llama al modelo para buscar el cliente y obtiene el resultado
+    Cliente c = modelo.BuscarCliente(documento);
+    
+    // Configura la respuesta como JSON
+    response.setContentType("application/json");
+    response.setCharacterEncoding("UTF-8");
+    
+    // Si se encuentra el cliente, construye un objeto JSON con sus datos
+    if (c != null) {
+        String json = String.format("{\"id_cliente\": \"%s\", \"documento\": \"%s\", \"nombre\": \"%s\", \"telefono\": \"%s\"}",
                 c.getId_cliente(), c.getDocumento(), c.getNombre(), c.getTelefono());
-            response.getWriter().write(json);
-        }
-        else{
-            response.getWriter().write("{\"error\": \"Cliente No encontrado\"}");
-        }
+        response.getWriter().write(json);
+    } else {
+        // Si no se encuentra el cliente, escribe un mensaje de error en la respuesta
+        response.getWriter().write("{\"error\": \"Cliente No encontrado\"}");
     }
+}
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
