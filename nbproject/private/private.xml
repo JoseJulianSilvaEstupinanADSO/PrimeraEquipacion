@@ -2,15 +2,17 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
-            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/menu.js</file>
-            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/src/java/com/modelo/Factura.java</file>
-            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/factura.js</file>
-            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/login.js</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/js/inventario.js</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/js/ventas.js</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/src/java/com/controlador/Productos.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/src/java/com/controlador/Facturas.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/src/java/com/modelo/Producto.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/src/java/com/modelo/ClienteDAO.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/src/java/com/modelo/UsuarioDAO.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/index.jsp</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/src/java/com/modelo/ProductoDAO.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/Vistas/inicio.jsp</file>
         </group>
->>>>>>> b0e32463cde634a2e0f2031c63d043c8c611d40a
     </open-files>
 </project-private>

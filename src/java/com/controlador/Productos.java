@@ -175,8 +175,8 @@ public class Productos extends HttpServlet {
 
         if (p != null) {
             // Construye un JSON con los datos del producto encontrado
-            String json = String.format("{\"id_usuario\": \"%s\", \"nombre\": \"%s\", \"precio\": \"%s\", \"estado\": \"%s\"}",
-                    p.getId_producto(), p.getNombre(), p.getPrecio(), p.getEstado());
+            String json = String.format("{\"id_usuario\": \"%s\", \"nombre\": \"%s\", \"precio\": \"%s\", \"estado\": \"%s\", \"stock\": \"%s\"}",
+                    p.getId_producto(), p.getNombre(), p.getPrecio(), p.getEstado(), p.getStock());
             response.getWriter().write(json);
             System.out.println(p.getEstado());
         } else {

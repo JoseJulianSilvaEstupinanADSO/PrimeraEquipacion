@@ -232,7 +232,8 @@ ListarTallas();
 //Buscar Producto para agregarlo a la factura//
 
 const $buscarp = $dom.querySelector("button#buscar_producto");
-
+let stock = 0;
+let estado = 0;
 function BuscarProducto() {
     $label = $dom.querySelector("input#cdProducto");
     $selec = $dom.querySelector("select#tallas");
@@ -276,10 +277,34 @@ function BuscarProducto() {
         ope.onload = function() {
             if (ope.status === 200){
                 let respuesta = JSON.parse(ope.responseText);
-                let $nombre = $dom.querySelector("#nombre_produc");
-                let $precio = $dom.querySelector("#precio_produc");
-                $nombre.value = respuesta.nombre;
-                $precio.value = respuesta.precio;
+                if(respuesta.error){
+                    $titleError.innerText = "Error Producto no encontrado";
+                    $paragrahp.innerText = "Producto en estado inhabilitado o Error en datos ingresados";
+                    error.style.display = "block";
+                    setTimeout(() => {
+                        error.style.display = "none";
+                    }, 2000);
+                }
+                else{
+                    let $nombre = $dom.querySelector("#nombre_produc");
+                    let $precio = $dom.querySelector("#precio_produc");
+                    $nombre.value = respuesta.nombre;
+                    $precio.value = respuesta.precio;
+                    stock = Number(respuesta.stock);
+                    estado = Number(respuesta.estado);   
+                }
+                if (respuesta.stock <= 10) {
+                    console.log("si")
+                    $titleError.innerText = "Estock del producto bajo";
+                    $paragrahp.innerText = "El estock actual del producto es: " + respuesta.stock;
+                    error.style.display = "block";
+                    setTimeout(() => {
+                        error.style.display = "none";
+                    }, 2000);
+                }
+                else{
+                    console.log("no")
+                }
                 
             }
         };
@@ -304,7 +329,7 @@ function AgragarProdutoTabla(items) {
         }
         else{
             x.classList.add("alert");
-             $titleError.innerText = "Error campos vacios";
+            $titleError.innerText = "Error campos vacios";
             $paragrahp.innerText = "Por favor llene todos los campos";
             error.style.display = "block";
             setTimeout(() => {
@@ -313,14 +338,15 @@ function AgragarProdutoTabla(items) {
             
         }
     });
-    if (num === items.length){
+    const $cant = $dom.querySelector("#cant_produc").value;
+    let cant = Number($cant);
+    if (num === items.length & stock > cant){
         const $tbody = $dom.querySelector("tbody.tabla__tb");
         
         const $id = $dom.querySelector("#cdProducto").value;
         const $nombre = $dom.querySelector("#nombre_produc").value;
         const $talla = $dom.querySelector("#tallas");
         const $precio = $dom.querySelector("#precio_produc").value;
-        const $cant = $dom.querySelector("#cant_produc").value;
         
         talla = $talla.value;
         
@@ -378,7 +404,15 @@ function AgragarProdutoTabla(items) {
         });
         $talla.value = "Seleccionar Talla";
         
-    }  
+    }
+    else{
+        $titleError.innerText = "Stock insuficiente";
+        $paragrahp.innerText = "El stock del produdco no es suficiente para realizar la venta";
+        error.style.display = "block";
+        setTimeout(() => {
+            error.style.display = "none";
+        }, 2000);
+    }
     total();
 }
 
@@ -397,7 +431,7 @@ function total() {
         let $precio = fila.querySelector(".precio__producto");
         let precio = Number($precio.innerText);
         total+= precio;
-    })
+    });
     $total.innerText = total;
 }
 

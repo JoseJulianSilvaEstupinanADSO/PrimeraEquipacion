@@ -181,7 +181,7 @@ public class ProductoDAO extends Conexion {
             this.conectar();
             
             // Consulta SQL para seleccionar un producto específico por ID y talla
-            String sql = "SELECT p.id_producto, p.nombre, p.precio, p.estado, pd.stock, pd.talla, pd.tela FROM producto p JOIN producto_desc pd ON p.id_producto = pd.id_producto JOIN talla t ON pd.talla = t.talla WHERE p.id_producto = ? AND t.talla = ?";
+            String sql = "SELECT p.id_producto, p.nombre, p.precio, p.estado, pd.stock, pd.talla, pd.tela FROM producto p JOIN producto_desc pd ON p.id_producto = pd.id_producto JOIN talla t ON pd.talla = t.talla WHERE p.id_producto = ? AND t.talla = ? AND estado = 1";
             PreparedStatement pre = this.getCon().prepareStatement(sql);
                     
             pre.setInt(1, Integer.parseInt(id_producto));
