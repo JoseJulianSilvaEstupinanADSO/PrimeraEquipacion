@@ -246,14 +246,15 @@ function Buscar(){
     let num = 0;
     
     $filas.forEach((fila) => {
+        let otra = fila.querySelector(".Fecha").innerText;
         let id = fila.querySelector(".IdFactura").innerText;
         
-        if (id !== $label){
-            fila.style.display = "none";
-            num = num+1;
+        if (id === $label || otra === $label){
+            fila.style.display = "";
         }
         else{
-            fila.style.display = "";
+            num = num+1;
+            fila.style.display = "none";
         }
     });
     

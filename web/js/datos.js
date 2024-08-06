@@ -46,7 +46,7 @@ $cerrar.addEventListener("click", function () {
     }, 500);
 });
 window.addEventListener("click",function(event) {
-  if (event.target == $modal) {
+  if (event.target === $modal) {
     $modal.classList.add("cerrando");
     setTimeout(function() {
         $modal.style.display = "none";
@@ -64,14 +64,14 @@ $cambiar.addEventListener("click", async function () {
     const $input = document.querySelectorAll("div.div__form > input.modal__input");
     let num = 0;
     $input.forEach(x => {
-        if (x.value.length == 0) {
+        if (x.value.length === 0) {
             x.classList.add("alert");
             $titleError.innerText = "Error campos vacios";
             $paragrahp.innerText = "Por favor llene todos los campos";
             error.style.display = "block";
             setTimeout(() => {
                 error.style.display = "none";
-            }, 2000)
+            }, 2000);
         }
         else{
             x.classList.remove("alert");
@@ -89,7 +89,6 @@ $cambiar.addEventListener("click", async function () {
         let nueva = $nueva.value;
         
         if (nueva === confirm) {
-            console.log("hola")
             let idUsuario = localStorage.getItem("idUsuario");
             let ope = new XMLHttpRequest();
             ope.open("POST", "../../Usuarios?action=ModificarContraseña", true);
@@ -108,10 +107,10 @@ $cambiar.addEventListener("click", async function () {
                         error.style.display = "block";
                         setTimeout(() => {
                             error.style.display = "none";
-                        }, 2000)
+                        }, 2000);
                     }
                 }
-            }
+            };
             ope.send("id_usuario=" + idUsuario + "&contrasena=" + actual + "&nueva=" + nueva);
         }
         else{
@@ -120,7 +119,7 @@ $cambiar.addEventListener("click", async function () {
             error.style.display = "block";
             setTimeout(() => {
                 error.style.display = "none";
-            }, 2000)
+            }, 2000);
         }
         
     }
@@ -228,7 +227,7 @@ function Modificar(event){
                     error.style.display = "block";
                     setTimeout(() => {
                         error.style.display = "none";
-                    }, 2000)
+                    }, 2000);
 
                  }
                  else{
@@ -237,7 +236,7 @@ function Modificar(event){
                     error.style.display = "block";
                     setTimeout(() => {
                         error.style.display = "none";
-                    }, 2000)
+                    }, 2000);
                  }
              }  
            };
@@ -250,7 +249,7 @@ function Modificar(event){
             error.style.display = "block";
             setTimeout(() => {
                 error.style.display = "none";
-            }, 2000)
+            }, 2000);
         }
 
 }

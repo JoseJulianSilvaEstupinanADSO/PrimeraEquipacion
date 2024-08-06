@@ -315,15 +315,16 @@ function Buscar() {
     const $filas = document.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
     let num = 0;
     $filas.forEach((fila) => {
-
+       let otra = fila.querySelector(".DocumentoUsuario").innerText;
+       console.log(otra);
        let documento = fila.querySelector(".IdUsuario").innerText;
        
-        if (documento !== $Label){
-            fila.style.display = "none";
-            num = num+1;
+        if (documento === $Label || otra === $Label){
+            fila.style.display = "";
         }
         else{
-            fila.style.display = "";
+            num = num+1;
+            fila.style.display = "none";
         }
     });
     

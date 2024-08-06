@@ -4,6 +4,12 @@
  */
 
 const $dom = document;
+
+const $pago_c = $dom.querySelector("#pago_cliente");
+const $vuelta_c = $dom.querySelector("#vueltos_cliente");
+
+
+
 const error = $dom.querySelector(".container__modal--error");
 const $titleError = $dom.querySelector(".title_error");
 const $paragrahp = $dom.querySelector(".paragrahp__error");
@@ -232,7 +238,8 @@ ListarTallas();
 //Buscar Producto para agregarlo a la factura//
 
 const $buscarp = $dom.querySelector("button#buscar_producto");
-
+let stock = 0;
+let estado = 0;
 function BuscarProducto() {
     $label = $dom.querySelector("input#cdProducto");
     $selec = $dom.querySelector("select#tallas");
@@ -268,6 +275,21 @@ function BuscarProducto() {
             error.style.display = "none";
         }, 2000);
     }
+    
+    let $filas = $dom.querySelectorAll("tbody.tabla__tb > tr.tabla__fila");  
+        $filas.forEach((fila) => {
+            let id = fila.querySelector(".id__producto").innerText;
+            if (id === $label.value) {
+                num-=1;
+                $titleError.innerText = "Error producto ya registrado";
+                $paragrahp.innerText = "El producto ya se encuantra listado";
+                error.style.display = "block";
+                setTimeout(() => {
+                    error.style.display = "none";
+                }, 2000);
+            }
+        });
+    
     if (num === 2){
         
         let ope = new XMLHttpRequest();
@@ -276,10 +298,34 @@ function BuscarProducto() {
         ope.onload = function() {
             if (ope.status === 200){
                 let respuesta = JSON.parse(ope.responseText);
-                let $nombre = $dom.querySelector("#nombre_produc");
-                let $precio = $dom.querySelector("#precio_produc");
-                $nombre.value = respuesta.nombre;
-                $precio.value = respuesta.precio;
+                if(respuesta.error){
+                    $titleError.innerText = "Error Producto no encontrado";
+                    $paragrahp.innerText = "Producto en estado inhabilitado o Error en datos ingresados";
+                    error.style.display = "block";
+                    setTimeout(() => {
+                        error.style.display = "none";
+                    }, 2000);
+                }
+                else{
+                    let $nombre = $dom.querySelector("#nombre_produc");
+                    let $precio = $dom.querySelector("#precio_produc");
+                    $nombre.value = respuesta.nombre;
+                    $precio.value = respuesta.precio;
+                    stock = Number(respuesta.stock);
+                    estado = Number(respuesta.estado);   
+                }
+                if (respuesta.stock <= 10) {
+                    console.log("si")
+                    $titleError.innerText = "Estock del producto bajo";
+                    $paragrahp.innerText = "El estock actual del producto es: " + respuesta.stock;
+                    error.style.display = "block";
+                    setTimeout(() => {
+                        error.style.display = "none";
+                    }, 2000);
+                }
+                else{
+                    console.log("no")
+                }
                 
             }
         };
@@ -304,81 +350,93 @@ function AgragarProdutoTabla(items) {
         }
         else{
             x.classList.add("alert");
-             $titleError.innerText = "Error campos vacios";
+            $titleError.innerText = "Error campos vacios";
             $paragrahp.innerText = "Por favor llene todos los campos";
             error.style.display = "block";
             setTimeout(() => {
                 error.style.display = "none";
             }, 2000);
-            
         }
-    });
+    });   
+    const $cant = $dom.querySelector("#cant_produc").value;
+    let cant = Number($cant);
     if (num === items.length){
-        const $tbody = $dom.querySelector("tbody.tabla__tb");
+        if (stock >= cant) {
+            
+            const $tbody = $dom.querySelector("tbody.tabla__tb");
+
+            const $id = $dom.querySelector("#cdProducto").value;
+            const $nombre = $dom.querySelector("#nombre_produc").value;
+            const $talla = $dom.querySelector("#tallas");
+            const $precio = $dom.querySelector("#precio_produc").value;
+
+            talla = $talla.value;
+
+            const $tr = $dom.createElement("tr");
+            $tr.classList.add("tabla__fila");
+
+            const $td1 = $dom.createElement("td");
+            $td1.classList.add("id__producto");
+            $td1.classList.add("tabla__td");
+            $td1.innerText = $id;
+
+            const $td2 = $dom.createElement("td");
+            $td2.classList.add("nombre__producto");
+            $td2.classList.add("tabla__td");
+            $td2.innerText = $nombre;
+
+            const $td3 = $dom.createElement("td");
+            $td3.classList.add("talla__producto");
+            $td3.classList.add("tabla__td");
+            $td3.innerText = talla;
+
+
+            const $td4 = $dom.createElement("td");
+            $td4.classList.add("precio__producto");
+            $td4.classList.add("tabla__td");
+            $td4.innerText = Number($precio) * Number($cant);
+
+            const $td5 = $dom.createElement("td");
+            $td5.classList.add("cantidad__producto");
+            $td5.classList.add("tabla__td");
+            $td5.innerText = $cant;
+
+            const $td6 = $dom.createElement("td");
+            $td6.classList.add("tabla__td");
+
+            const $btn = $dom.createElement("button");
+            $btn.classList.add("button__link");
+            $btn.classList.add("BtnEliminar");
+            $btn.setAttribute("type", "button");
+            $btn.innerText = "Eliminar";
+
+            $td6.appendChild($btn);
+
+            $tr.appendChild($td1);
+            $tr.appendChild($td2);
+            $tr.appendChild($td3);
+            $tr.appendChild($td4);
+            $tr.appendChild($td5);
+            $tr.appendChild($td6);
+
+            $tbody.appendChild($tr);
+
+            items.forEach((x) => {
+                x.value = "";
+            });
+            $talla.value = "Seleccionar Talla";
         
-        const $id = $dom.querySelector("#cdProducto").value;
-        const $nombre = $dom.querySelector("#nombre_produc").value;
-        const $talla = $dom.querySelector("#tallas");
-        const $precio = $dom.querySelector("#precio_produc").value;
-        const $cant = $dom.querySelector("#cant_produc").value;
+        }
         
-        talla = $talla.value;
-        
-        const $tr = $dom.createElement("tr");
-        $tr.classList.add("tabla__fila");
-        
-        const $td1 = $dom.createElement("td");
-        $td1.classList.add("id__producto");
-        $td1.classList.add("tabla__td");
-        $td1.innerText = $id;
-        
-        const $td2 = $dom.createElement("td");
-        $td2.classList.add("nombre__producto");
-        $td2.classList.add("tabla__td");
-        $td2.innerText = $nombre;
-        
-        const $td3 = $dom.createElement("td");
-        $td3.classList.add("talla__producto");
-        $td3.classList.add("tabla__td");
-        $td3.innerText = talla;
-        
-        
-        const $td4 = $dom.createElement("td");
-        $td4.classList.add("precio__producto");
-        $td4.classList.add("tabla__td");
-        $td4.innerText = Number($precio) * Number($cant);
-        
-        const $td5 = $dom.createElement("td");
-        $td5.classList.add("cantidad__producto");
-        $td5.classList.add("tabla__td");
-        $td5.innerText = $cant;
-        
-        const $td6 = $dom.createElement("td");
-        $td6.classList.add("tabla__td");
-        
-        const $btn = $dom.createElement("button");
-        $btn.classList.add("button__link");
-        $btn.classList.add("BtnEliminar");
-        $btn.setAttribute("type", "button");
-        $btn.innerText = "Eliminar";
-        
-        $td6.appendChild($btn);
-        
-        $tr.appendChild($td1);
-        $tr.appendChild($td2);
-        $tr.appendChild($td3);
-        $tr.appendChild($td4);
-        $tr.appendChild($td5);
-        $tr.appendChild($td6);
-        
-        $tbody.appendChild($tr);
-        
-        items.forEach((x) => {
-            x.value = "";
-        });
-        $talla.value = "Seleccionar Talla";
-        
-    }  
+        else{
+            $titleError.innerText = "Stock insuficiente";
+            $paragrahp.innerText = "El stock del produdco no es suficiente para realizar la venta";
+            error.style.display = "block";
+            setTimeout(() => {
+                error.style.display = "none";
+            }, 2000);
+        }
+    }
     total();
 }
 
@@ -397,7 +455,7 @@ function total() {
         let $precio = fila.querySelector(".precio__producto");
         let precio = Number($precio.innerText);
         total+= precio;
-    })
+    });
     $total.innerText = total;
 }
 
@@ -423,53 +481,66 @@ function NuevaVenta() {
     
     let total = $total.innerText;
     
+    let pago = $pago_c.value;
     
     if ($filas.length > 0) {
-        let ope = new XMLHttpRequest();
-        ope.open("POST", "../../Facturas?action=NuevaVenta", true);
-        ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        ope.onload = function(){
-            if (ope.status === 200) {
-                let respuesta = JSON.parse(ope.responseText);
+        if (Number(total) <= Number(pago)){
+            $vuelta_c.value = Number(pago) - Number(total);
+            let ope = new XMLHttpRequest();
+            ope.open("POST", "../../Facturas?action=NuevaVenta", true);
+            ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            ope.onload = function(){
+                if (ope.status === 200) {
+                    let respuesta = JSON.parse(ope.responseText);
 
-                if (respuesta.resultado) {
-                    $filas.forEach((fila) => {
-                        let id_factura = respuesta.resultado;
-                        let $id_producto = fila.querySelector(".id__producto");
-                        let $cantidad = fila.querySelector(".cantidad__producto ");
-                        let $precio = fila.querySelector(".precio__producto ");
-                        
-                        let id_producto = $id_producto.innerText;
-                        let cantidad = $cantidad.innerText;
-                        let precio = $precio.innerText;
-                        
-                        let ope2 = new XMLHttpRequest();
-                        ope2.open("POST", "../../Facturas?action=AgregarProdcutosFactura", true);
-                        ope2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                        ope2.onload = function(){
-                            if (ope.status === 200){
-                                let respuesta2 = JSON.parse(ope2.responseText);
-                            }
-                        };
-                        ope2.send("id_factura=" + id_factura + "&id_producto=" + id_producto + "&cantidad=" + cantidad + "&precion="+ precio);
-                        
-                        fila.remove();
+                    if (respuesta.resultado) {
+                        $filas.forEach((fila) => {
+                            let id_factura = respuesta.resultado;
+                            let $id_producto = fila.querySelector(".id__producto");
+                            let $cantidad = fila.querySelector(".cantidad__producto ");
+                            let $precio = fila.querySelector(".precio__producto ");
 
-                    });
+                            let id_producto = $id_producto.innerText;
+                            let cantidad = $cantidad.innerText;
+                            let precio = $precio.innerText;
+
+                            let ope2 = new XMLHttpRequest();
+                            ope2.open("POST", "../../Facturas?action=AgregarProdcutosFactura", true);
+                            ope2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                            ope2.onload = function(){
+                                if (ope.status === 200){
+                                    let respuesta2 = JSON.parse(ope2.responseText);
+                                }
+                            };
+                            ope2.send("id_factura=" + id_factura + "&id_producto=" + id_producto + "&cantidad=" + cantidad + "&precion="+ precio);
+
+                            fila.remove();
+
+                        });
+
+                    }
+
+                    let cliente = $dom.querySelector(".cliente__nombre");
+                    cliente.value = "";
+                    $doc_cliente.value = "";
+
+
 
                 }
-                
-                let cliente = $dom.querySelector(".cliente__nombre");
-                cliente.value = "";
-                $doc_cliente.value = "";
-                
+            };
+            ope.send("id_usuario=" + id_usuario + "&fecha=" + fecha_factura + "&doc_cliente=" + doc_cliente + "&total=" + total);
 
-
-            }
-        };
-        ope.send("id_usuario=" + id_usuario + "&fecha=" + fecha_factura + "&doc_cliente=" + doc_cliente + "&total=" + total);
-        
+        }
+        else{
+            $titleError.innerText = "Pago Insuficiente";
+            $paragrahp.innerText = "El monto total de la compra es mayor al pago del cliente";
+            error.style.display = "block";
+            setTimeout(() => {
+                error.style.display = "none";
+            }, 2000);
+        }
     }
+    
     else{
         $titleError.innerText = "No hay datos para añadir";
         $paragrahp.innerText = "Agrege productos a la factura";

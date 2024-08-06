@@ -102,7 +102,7 @@ public class Productos extends HttpServlet {
         String tela = request.getParameter("tela");
 
         // Crea un objeto Producto con los datos obtenidos
-        Producto p = new Producto(null, talla, nombre, precio, stock, tela);
+        Producto p = new Producto(null, talla, nombre, precio, stock, tela, null);
 
         // Llama al modelo para agregar el producto y obtiene el resultado
         boolean resultado = modelo.AgregarProducto(p);
@@ -148,7 +148,7 @@ public class Productos extends HttpServlet {
         String talla = request.getParameter("talla");
 
         // Crea un objeto Producto con los datos obtenidos
-        Producto p = new Producto(id_producto, talla, nombre, precio, stock, null);
+        Producto p = new Producto(id_producto, talla, nombre, precio, stock, null, null);
 
         // Llama al modelo para modificar el producto y obtiene el resultado
         boolean resultado = modelo.ModificarProducto(p);
@@ -175,9 +175,10 @@ public class Productos extends HttpServlet {
 
         if (p != null) {
             // Construye un JSON con los datos del producto encontrado
-            String json = String.format("{\"id_usuario\": \"%s\", \"nombre\": \"%s\", \"precio\": \"%s\"}",
-                    p.getId_producto(), p.getNombre(), p.getPrecio());
+            String json = String.format("{\"id_usuario\": \"%s\", \"nombre\": \"%s\", \"precio\": \"%s\", \"estado\": \"%s\", \"stock\": \"%s\"}",
+                    p.getId_producto(), p.getNombre(), p.getPrecio(), p.getEstado(), p.getStock());
             response.getWriter().write(json);
+            System.out.println(p.getEstado());
         } else {
             // Escribe un mensaje de error en la respuesta si no se encuentra el producto
             response.getWriter().write("{\"error\": \"Usuario No encontrado\"}");

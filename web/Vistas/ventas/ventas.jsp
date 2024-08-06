@@ -89,6 +89,11 @@
                     <input placeholder="Cantidad" type="number" id="cant_produc" class="codigo__cliente cliente__nombre " required>
                 </div>
               </div>
+              <div class="id__cliente">
+                  <h2 class="cliente__title">Pago</h2>
+                  <input placeholder="Pago" type="text" id="pago_cliente" class="codigo__cliente cliente__nombre">
+                  <input placeholder="Vueltos" type="text" id="vueltos_cliente" class="codigo__cliente cliente__nombre margin" readonly >
+              </div>
               <div class="buscar__btn">
                   <button type="button" class="button button__agregar" id="agregar_producto">Agregar Producto</button>
                 <button type="button" id="abrirModal" class="button button__agregar  button__agregar--color">Agragar Cliente</button>

@@ -16,17 +16,27 @@ public class Producto {
     private String precio;
     private String stock;
     private String tela;
+    private String estado;
 
     public Producto() {
     }
 
-    public Producto(String id_producto, String talla, String nombre, String precio, String stock, String tela) {
+    public Producto(String id_producto, String talla, String nombre, String precio, String stock, String tela, String estado) {
         this.id_producto = id_producto;
         this.talla = talla;
         this.nombre = nombre;
         this.precio = precio;
         this.stock = stock;
         this.tela = tela;
+        this.estado = estado;
+    }
+    
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public String getId_producto() {
