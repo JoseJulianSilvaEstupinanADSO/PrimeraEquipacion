@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-08-2024 a las 08:23:19
+-- Tiempo de generación: 08-08-2024 a las 09:19:29
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -51,7 +51,15 @@ INSERT INTO `factura` (`id_factura`, `fecha_facturacion`, `id_venta`, `doc_clien
 (18, '2024-08-05', 18, '7481293647', 30000),
 (19, '2024-08-05', 19, '7481293647', 15000),
 (20, '2024-08-07', 20, '7290514386', 330820),
-(21, '2024-08-07', 21, '1948673520', 95200);
+(21, '2024-08-07', 21, '1948673520', 95200),
+(22, '2024-08-08', 22, '1054612341', 15470),
+(23, '2024-08-08', 23, '1054612341', 126140),
+(24, '2024-08-08', 24, '1054612341', 1707650),
+(25, '2024-08-08', 25, '1012345678', 321300),
+(26, '2024-08-08', 26, '1012345678', 142800),
+(27, '2024-08-08', 30, '1012345678', 261800),
+(28, '2024-08-08', 31, '1012345678', 130900),
+(29, '2024-08-08', 32, '1012345678', 428400);
 
 -- --------------------------------------------------------
 
@@ -88,7 +96,21 @@ INSERT INTO `factura_producto` (`id_factura_producto`, `id_factura`, `id_product
 (30, 20, 21, 1, 77350),
 (31, 20, 26, 2, 107100),
 (32, 20, 30, 1, 130900),
-(33, 21, 23, 1, 95200);
+(33, 21, 23, 1, 95200),
+(34, 22, 31, 1, 15470),
+(35, 23, 39, 2, 30940),
+(36, 23, 40, 1, 95200),
+(37, 24, 32, 1, 178500),
+(38, 24, 35, 1, 1166200),
+(39, 24, 20, 2, 142800),
+(40, 24, 24, 1, 53550),
+(41, 24, 41, 1, 71400),
+(42, 24, 40, 2, 95200),
+(43, 25, 32, 2, 178500),
+(44, 25, 20, 2, 142800),
+(45, 26, 20, 1, 142800),
+(46, 27, 30, 2, 261800),
+(47, 29, 20, 3, 428400);
 
 -- --------------------------------------------------------
 
@@ -148,24 +170,24 @@ CREATE TABLE `producto_desc` (
 --
 
 INSERT INTO `producto_desc` (`id_producto`, `talla`, `stock`, `tela`) VALUES
-(20, 'M', 40, 'Microfibra'),
+(20, 'M', 33, 'Microfibra'),
 (21, 'X', 19, 'Poliester'),
 (22, 'S', 10, 'Malla '),
 (23, 'X', 15, 'Nylon'),
-(24, 'M', 7, 'Nylon'),
+(24, 'M', 6, 'Nylon'),
 (25, 'L', 5, 'Nylon'),
 (26, 'M', 10, 'Nylon'),
 (27, 'S', 12, 'Spandex '),
 (28, 'X', 12, 'Malla '),
 (29, 'XL', 6, 'Microfibra'),
-(30, 'L', 15, 'Nylon'),
-(31, 'M', 14, 'Malla '),
-(32, 'S', 30, 'Nylon'),
-(35, 'X', 14, 'Nylon'),
+(30, 'L', 13, 'Nylon'),
+(31, 'M', 13, 'Malla '),
+(32, 'S', 29, 'Nylon'),
+(35, 'X', 13, 'Nylon'),
 (36, 'L', 11, 'Spandex '),
 (37, 'XL', 10, 'Microfibra'),
 (39, 'L', 12, 'algondo'),
-(40, 'M', 23, 'Lino'),
+(40, 'M', 22, 'Lino'),
 (41, 'L', 20, 'Lino');
 
 -- --------------------------------------------------------
@@ -277,7 +299,18 @@ INSERT INTO `venta` (`id_venta`, `id_usuario`) VALUES
 (18, 1),
 (19, 1),
 (20, 1),
-(21, 1);
+(21, 1),
+(22, 1),
+(23, 1),
+(24, 1),
+(25, 1),
+(26, 1),
+(27, 1),
+(28, 1),
+(29, 1),
+(30, 1),
+(31, 1),
+(32, 1);
 
 --
 -- Índices para tablas volcadas
@@ -346,13 +379,13 @@ ALTER TABLE `venta`
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `factura_producto`
 --
 ALTER TABLE `factura_producto`
-  MODIFY `id_factura_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_factura_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -376,7 +409,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- Restricciones para tablas volcadas

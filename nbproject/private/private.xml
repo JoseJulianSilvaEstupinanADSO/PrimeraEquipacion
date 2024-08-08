@@ -5,11 +5,11 @@
         <group>
             <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/Vistas/facturas/facturas.jsp</file>
             <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/factura.js</file>
-            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/clientes.js</file>
+            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/ventas.js</file>
             <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/src/java/com/modelo/FacturaDAO.java</file>
             <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/inicio.js</file>
+            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/clientes.js</file>
             <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/src/java/com/controlador/Facturas.java</file>
-            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/datos.js</file>
         </group>
     </open-files>
 </project-private>
