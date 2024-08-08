@@ -140,7 +140,6 @@ document.addEventListener("DOMContentLoaded", function() {
             if(ope.status === 200){
                 let respuesta = JSON.parse(ope.responseText);
                 
-                console.log(respuesta);
                 
                 const $dom = document;
                 
@@ -157,7 +156,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 $nombre_user.value = respuesta.nombre;
                 $doc_user.value = respuesta.documento;
                 
-                console.log(respuesta.rol);
 
                 if(respuesta.rol === "null"){ 
                     $rol_user.value = "sleccionar";

@@ -63,7 +63,10 @@
       </div>
     </section>
     <section class="facturas">
-      <h1 class="tabla__title">Gestion de Facturas</h1>
+      <div class="header__productos">
+            <h1 class="producto__title">Gestion de Usuarios</h1>
+            <button type="button" class="agregar__producto  Listar">Listar</button>
+      </div>
       <div class="container__tabla">
         <table class="tabla--factura">
           <thead class="tabla__header">
@@ -115,6 +118,7 @@
           </div>
           <div class="personas">
               <h2 class="total total--facturas"></h2>
+              <button class="button btn__descargar">Descargar Factura</button>
           </div>
       </div>
   </div>

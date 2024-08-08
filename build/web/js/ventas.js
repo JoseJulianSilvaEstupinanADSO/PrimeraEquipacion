@@ -240,6 +240,7 @@ ListarTallas();
 const $buscarp = $dom.querySelector("button#buscar_producto");
 let stock = 0;
 let estado = 0;
+let iva = 19;
 function BuscarProducto() {
     $label = $dom.querySelector("input#cdProducto");
     $selec = $dom.querySelector("select#tallas");
@@ -389,12 +390,24 @@ function AgragarProdutoTabla(items) {
             $td3.classList.add("talla__producto");
             $td3.classList.add("tabla__td");
             $td3.innerText = talla;
+            
+            const $tdiva = $dom.createElement("td");
+            $tdiva.classList.add("iva__producto");
+            $tdiva.classList.add("tabla__td");
+            $tdiva.innerText = iva + "%";
+            
+            
+            const $subTotal = $dom.createElement("td");
+            $subTotal.classList.add("subTotal__producto");
+            $subTotal.classList.add("tabla__td");
+            $subTotal.innerText = Number($precio);
 
-
+            let iva_p = Number($precio) * Number(iva/100);
+            
             const $td4 = $dom.createElement("td");
             $td4.classList.add("precio__producto");
             $td4.classList.add("tabla__td");
-            $td4.innerText = Number($precio) * Number($cant);
+            $td4.innerText = (Number($precio) + Number(iva_p))*Number($cant);
 
             const $td5 = $dom.createElement("td");
             $td5.classList.add("cantidad__producto");
@@ -415,6 +428,8 @@ function AgragarProdutoTabla(items) {
             $tr.appendChild($td1);
             $tr.appendChild($td2);
             $tr.appendChild($td3);
+            $tr.appendChild($tdiva);
+            $tr.appendChild($subTotal);
             $tr.appendChild($td4);
             $tr.appendChild($td5);
             $tr.appendChild($td6);
@@ -463,7 +478,6 @@ function total() {
 //Generrar Una Nueva Venta, Agregando los datos a las tablas venta,factura,factura_producto//
 
 const $venta = $dom.querySelector(".btn__ventas");
-
 function NuevaVenta() {
     
     let id_usuario = localStorage.getItem("idUsuario");
@@ -492,7 +506,7 @@ function NuevaVenta() {
             ope.onload = function(){
                 if (ope.status === 200) {
                     let respuesta = JSON.parse(ope.responseText);
-
+                    id = respuesta.resultado;
                     if (respuesta.resultado) {
                         $filas.forEach((fila) => {
                             let id_factura = respuesta.resultado;
@@ -510,6 +524,7 @@ function NuevaVenta() {
                             ope2.onload = function(){
                                 if (ope.status === 200){
                                     let respuesta2 = JSON.parse(ope2.responseText);
+                                    
                                 }
                             };
                             ope2.send("id_factura=" + id_factura + "&id_producto=" + id_producto + "&cantidad=" + cantidad + "&precion="+ precio);
@@ -518,18 +533,19 @@ function NuevaVenta() {
 
                         });
 
-                    }
-
+                    } 
                     let cliente = $dom.querySelector(".cliente__nombre");
                     cliente.value = "";
                     $doc_cliente.value = "";
+                    setTimeout(() => {
+                        Descargar(respuesta.resultado);
+                    },2000);
 
 
 
                 }
             };
             ope.send("id_usuario=" + id_usuario + "&fecha=" + fecha_factura + "&doc_cliente=" + doc_cliente + "&total=" + total);
-
         }
         else{
             $titleError.innerText = "Pago Insuficiente";
@@ -552,3 +568,30 @@ function NuevaVenta() {
     
 }
 $venta.addEventListener("click", NuevaVenta);
+
+function Descargar() {
+    let ope = new XMLHttpRequest();
+    ope.open("GET", "../../Facturas?action=PdfProductosFactura&id_factura=" + encodeURIComponent(id), true);
+    ope.responseType = 'blob'; // Configura el tipo de respuesta como blob para manejar archivos binarios
+
+    ope.onload = function () {
+        if (ope.status === 200) {
+            // Crea un enlace para descargar el PDF
+            let url = window.URL.createObjectURL(new Blob([ope.response], { type: 'application/pdf' }));
+            let a = document.createElement('a');
+            a.href = url;
+            a.download = 'factura.pdf'; // Nombre del archivo PDF
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        } else {
+            console.error('Error al generar el PDF:', ope.statusText);
+        }
+    };
+
+    ope.onerror = function () {
+        console.error('Error de red.');
+    };
+
+    ope.send();
+}

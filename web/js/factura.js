@@ -8,7 +8,8 @@ const $dom = document;
 const error = $dom.querySelector(".container__modal--error");
 const $titleError = $dom.querySelector(".title_error");
 const $paragrahp = $dom.querySelector(".paragrahp__error");
-
+const $descargar = $dom.querySelector(".btn__descargar");
+let $id_factura = 0;
 function CloseSession(){
         let $session = localStorage.getItem("session");
         if ($session === "false" || $session === null) {
@@ -56,7 +57,7 @@ table.addEventListener('click', function(event) {
         const $id = row.querySelector('td.IdFactura');
         const $fecha = row.querySelector("td.Fecha");
         const $total = row.querySelector("td.Total");
-
+        id_factura = $id.innerText;
         let total = Number($total.innerText);
         let id = Number($id.innerText);
         let fecha = $fecha.innerText;
@@ -165,7 +166,7 @@ function  ListarFacturas() {
     });
     
     let ope = new XMLHttpRequest();
-    ope.open("GET","../../Facturas?action=ListarFacturas", true );
+    ope.open("GET", "../../Facturas?action=ListarFacturas", true );
     ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     ope.onload = function() {
         if (ope.status === 200) {
@@ -271,3 +272,44 @@ function Buscar(){
 
 const $BtnBuscar = $dom.querySelector(".button__buscar");
 $BtnBuscar.addEventListener("click", Buscar);
+
+const $Listar = $dom.querySelector(".Listar");
+$Listar.addEventListener("click",() => {
+    const $filas = document.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
+    $filas.forEach((fila) => {
+           fila.remove();
+    });
+    ListarFacturas();
+});
+
+
+
+function Descargar() {
+
+    let ope = new XMLHttpRequest();
+    ope.open("GET", "../../Facturas?action=PdfProductosFactura&id_factura=" + encodeURIComponent(id_factura), true);
+    ope.responseType = 'blob'; // Configura el tipo de respuesta como blob para manejar archivos binarios
+
+    ope.onload = function () {
+        if (ope.status === 200) {
+            // Crea un enlace para descargar el PDF
+            let url = window.URL.createObjectURL(new Blob([ope.response], { type: 'application/pdf' }));
+            let a = document.createElement('a');
+            a.href = url;
+            a.download = 'factura.pdf'; // Nombre del archivo PDF
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        } else {
+            console.error('Error al generar el PDF:', ope.statusText);
+        }
+    };
+
+    ope.onerror = function () {
+        console.error('Error de red.');
+    };
+
+    ope.send();
+}
+
+$descargar.addEventListener("click", Descargar);

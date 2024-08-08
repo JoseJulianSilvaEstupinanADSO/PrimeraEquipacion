@@ -72,6 +72,7 @@ $agregar.addEventListener("click", function () {
     const $precio_producto = $dom.querySelector(".form_Precio");
     const $stock_producto = $dom.querySelector(".form_Stock");
     const $tela_producto = $dom.querySelector(".form_Tela");
+    const $estado = $dom.querySelector("#estado");
     
     $tela_producto.removeAttribute("readonly", "");
     
@@ -80,6 +81,8 @@ $agregar.addEventListener("click", function () {
     $precio_producto.value = "";
     $stock_producto.value = "";
     $tela_producto.value = "";
+    $estado.value = "Seleccionar";
+    
 });
 
 
@@ -110,6 +113,7 @@ table.addEventListener('click', function(event) {
     const $talla = row.querySelector("td.TallaProducto");
     const $stock = row.querySelector("td.StockProducto");
     const $tela = row.querySelector("td.TelaProducto");
+    const $estado = row.querySelector("td.pro_estado");
 
     
 
@@ -119,6 +123,7 @@ table.addEventListener('click', function(event) {
     let talla = $talla.innerText;
     let stock = Number($stock.innerText);
     let tela = $tela.innerText;
+    let estado = $estado.innerText;
 
     const $id_producto = $dom.querySelector('.form_Id');
     const $nombre_producto = $dom.querySelector(".form_Nombre");
@@ -126,6 +131,7 @@ table.addEventListener('click', function(event) {
     const $talla_producto = $dom.querySelector(".form_talla");
     const $stock_producto = $dom.querySelector(".form_Stock");
     const $tela_producto = $dom.querySelector(".form_Tela");
+    const $estado_producto = $dom.querySelector("#estado");
 
     $talla_producto.remove();
 
@@ -145,6 +151,7 @@ table.addEventListener('click', function(event) {
     $input.value = talla;
     $stock_producto.value = stock;
     $tela_producto.value = tela;
+    $estado_producto.value = estado;
 
     $id_producto.setAttribute("readonly","");
     $input.setAttribute("readonly","");
@@ -224,6 +231,7 @@ function AgregarModificarProducto() {
     const $talla_producto = $dom.querySelector(".form_talla").value;
     const $stock_producto = $dom.querySelector(".form_Stock").value;
     const $tela_producto = $dom.querySelector(".form_Tela").value;
+    const $estado = $dom.querySelector("#estado").value;
     
     if($bnt_modal.classList.contains('agregar__producto')){
         const $inputs = $dom.querySelectorAll("div.form__content > div > input.llenar");
@@ -233,7 +241,7 @@ function AgregarModificarProducto() {
                 num = num +1;
             }
         });
-        if(num === $inputs.length-1){
+        if(num === $inputs.length-1 && $estado != "Seleccionar"){
 
             let ope = new XMLHttpRequest();
             ope.open("POST", "../../Productos?action=RegistrarProducto", true);
@@ -263,7 +271,7 @@ function AgregarModificarProducto() {
                 }
 
             };
-            ope.send("nombre=" + $nombre_producto + "&precio=" + $precio_producto + "&talla=" + $talla_producto + "&stock=" + $stock_producto + "&tela=" + $tela_producto);
+            ope.send("nombre=" + $nombre_producto + "&precio=" + $precio_producto + "&talla=" + $talla_producto + "&stock=" + $stock_producto + "&tela=" + $tela_producto + "&estado=" + $estado);
 
 
 
@@ -279,18 +287,17 @@ function AgregarModificarProducto() {
 
     }
     if($bnt_modal.classList.contains('modificar__producto')){
-        console.log("Modificar");
         const $id_producto = $dom.querySelector('.form_Id').value;
         const $nombre_producto = $dom.querySelector(".form_Nombre").value;
         const $precio_producto = $dom.querySelector(".form_Precio").value;
         const $stock_producto = $dom.querySelector(".form_Stock").value;
         const $talla_producto = $dom.querySelector(".form_talla").value;
+        const $estado = $dom.querySelector("#estado").value;
 
         let ope = new XMLHttpRequest();
             ope.open("POST", "../../Productos?action=ModificarProducto", true);
             ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             ope.onload = function () {
-                console.log(ope.status);
                 if (ope.status === 200){
                     let respuesta = JSON.parse(ope.responseText);
                     if(respuesta.resultado){
@@ -314,7 +321,7 @@ function AgregarModificarProducto() {
                 }
 
             };
-            ope.send("id_producto=" + $id_producto + "&nombre=" + $nombre_producto + "&precio=" + $precio_producto + "&stock=" + $stock_producto + "&talla=" + $talla_producto);
+            ope.send("id_producto=" + $id_producto + "&nombre=" + $nombre_producto + "&precio=" + $precio_producto + "&stock=" + $stock_producto + "&talla=" + $talla_producto + "&estado=" + $estado);
     }    
 }
 
@@ -382,8 +389,15 @@ function ListarProductos() {
                 
                 $colTela.innerText = x.tela;
                 
+                const $colEs = $dom.createElement("td");
+                $colEs.classList.add("td__tabla");
+                $colEs.classList.add("pro_estado");
+                
+                $colEs.innerText = x.estado;
+                
                 const $colBtn = $dom.createElement("td");
                 $colBtn.classList.add("td__tabla");
+                
                 
                 const $BtnEdit = $dom.createElement("button");
                 $BtnEdit.classList.add("button__tabla");
@@ -397,6 +411,7 @@ function ListarProductos() {
                 $fila.appendChild($colTalla);
                 $fila.appendChild($colStock);
                 $fila.appendChild($colTela);
+                $fila.appendChild($colEs);
                 $fila.appendChild($colBtn);
                 
                 $frag.appendChild($fila);

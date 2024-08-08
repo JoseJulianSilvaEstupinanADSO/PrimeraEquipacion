@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Statement;
+
 /**
  *
  * @author Julian
@@ -224,5 +225,44 @@ public class FacturaDAO extends Conexion {
         }
         
         return compras;
+    }
+    public List<Factura> PdfProductoFactura(String id_factura) {
+        List<Factura> productos = new ArrayList<>();
+        
+        try {
+            // Conecta a la base de datos
+            this.conectar();
+            
+            // Consulta SQL para seleccionar productos asociados a una factura específica
+            String sql = "SELECT f.fecha_facturacion, f.doc_cliente, f.total, fp.id_producto, fp.precio, fp.cantidad, p.nombre, pd.talla FROM factura f JOIN factura_producto fp  ON f.id_factura = fp.id_factura JOIN producto p ON fp.id_producto = p.id_producto JOIN producto_desc pd ON p.id_producto = pd.id_producto WHERE fp.id_factura = ?";
+            PreparedStatement pre = this.getCon().prepareStatement(sql);
+            pre.setInt(1, Integer.parseInt(id_factura));
+            ResultSet rs = pre.executeQuery();
+            
+            // Procesa los resultados y agrega los productos a la lista
+            while (rs.next()) {                
+                Factura f = new Factura();
+                
+                f.setFecha(rs.getString("fecha_facturacion"));
+                f.setDoc_cliente(rs.getString("doc_cliente"));
+                f.setTotal(rs.getString("total"));
+                f.setId_producto(rs.getString("id_producto"));
+                f.setPrecio(rs.getString("precio"));
+                f.setCantidad(rs.getString("cantidad"));
+                f.setNombre_p(rs.getString("nombre"));
+                f.setTalla(rs.getString("talla"));
+                
+                productos.add(f);
+            }
+            
+        } catch (SQLException e) {
+            // Maneja cualquier excepción SQL
+            e.printStackTrace();
+        } finally {
+            // Desconecta de la base de datos
+            this.desconectar();
+        }
+        
+        return productos;
     }
 }

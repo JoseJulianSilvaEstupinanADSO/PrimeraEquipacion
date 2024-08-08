@@ -100,9 +100,10 @@ public class Productos extends HttpServlet {
         String talla = request.getParameter("talla");
         String stock = request.getParameter("stock");
         String tela = request.getParameter("tela");
+        String estado = request.getParameter("estado");
 
         // Crea un objeto Producto con los datos obtenidos
-        Producto p = new Producto(null, talla, nombre, precio, stock, tela, null);
+        Producto p = new Producto(null, talla, nombre, precio, stock, tela, estado);
 
         // Llama al modelo para agregar el producto y obtiene el resultado
         boolean resultado = modelo.AgregarProducto(p);
@@ -126,8 +127,8 @@ public class Productos extends HttpServlet {
         StringBuilder json = new StringBuilder("[");
         for (int i = 0; i < productos.size(); i++) {
             Producto p = productos.get(i);
-            json.append(String.format("{\"id_producto\": \"%s\", \"nombre\": \"%s\", \"precio\": \"%s\", \"talla\": \"%s\", \"stock\": \"%s\", \"tela\": \"%s\"}",
-                    p.getId_producto(), p.getNombre(), p.getPrecio(), p.getTalla(), p.getStock(), p.getTela()));
+            json.append(String.format("{\"id_producto\": \"%s\", \"nombre\": \"%s\", \"precio\": \"%s\", \"talla\": \"%s\", \"stock\": \"%s\", \"tela\": \"%s\", \"estado\": \"%s\"}",
+                    p.getId_producto(), p.getNombre(), p.getPrecio(), p.getTalla(), p.getStock(), p.getTela(), p.getEstado()));
             if (i < productos.size() - 1) {
                 json.append(",");
             }
@@ -146,9 +147,10 @@ public class Productos extends HttpServlet {
         String stock = request.getParameter("stock");
         String precio = request.getParameter("precio");
         String talla = request.getParameter("talla");
+        String estado = request.getParameter("estado");
 
         // Crea un objeto Producto con los datos obtenidos
-        Producto p = new Producto(id_producto, talla, nombre, precio, stock, null, null);
+        Producto p = new Producto(id_producto, talla, nombre, precio, stock, null, estado);
 
         // Llama al modelo para modificar el producto y obtiene el resultado
         boolean resultado = modelo.ModificarProducto(p);

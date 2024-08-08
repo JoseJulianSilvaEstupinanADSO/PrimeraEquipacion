@@ -76,6 +76,7 @@
             <th class="th__item">Talla</th>
             <th class="th__item">Stock</th>
             <th class="th__item">Tela</th>
+            <th class="th__item">Estado</th>
             <th class="th__item">Acciones</th>
           </thead>
           <tbody class="body__tabla">
@@ -131,6 +132,16 @@
                             <div>
                                 <label class="label__modal" for="tela">Tela:</label>
                                 <input class="input__modal llenar form_Tela" type="text">
+                            </div>
+                        </div>     
+                        <div class="form__content">
+                            <div>
+                                <label class="label__modal" for="">Estado:</label>
+                                <select id="estado" class="input__modal">
+                                    <option value="Seleccionar">Seleccionar</option>
+                                    <option value="1">Habilitado</option>
+                                    <option value="0">Desabilitado</option>
+                                </select>
                             </div>
                         </div>     
                         <div class="form__content--buttons">

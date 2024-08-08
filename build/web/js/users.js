@@ -316,7 +316,6 @@ function Buscar() {
     let num = 0;
     $filas.forEach((fila) => {
        let otra = fila.querySelector(".DocumentoUsuario").innerText;
-       console.log(otra);
        let documento = fila.querySelector(".IdUsuario").innerText;
        
         if (documento === $Label || otra === $Label){

@@ -15,6 +15,12 @@ import com.modelo.FacturaDAO;
 import com.modelo.Factura;
 import java.util.ArrayList;
 import java.util.List;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.OutputStream;
 /**
  *
  * @author Julian
@@ -58,6 +64,10 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
         case "ClientesCompras":
             // Llama al método ClientesCompras
             ClientesCompras(request, response);
+            break;
+        case "PdfProductosFactura":
+            // Llama al método ClientesCompras
+            PdfProductosFactura(request, response);
             break;
             
         default:
@@ -195,8 +205,60 @@ private void ClientesCompras(HttpServletRequest request, HttpServletResponse res
     // Escribe el JSON en la respuesta
     response.getWriter().write(json.toString());
 }
-    
 
+
+private void PdfProductosFactura(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Obtiene el ID de la factura desde los parámetros de la solicitud
+        String id_factura = request.getParameter("id_factura");
+        
+        // Llama al modelo para listar los productos de la factura y obtiene la lista de productos
+        List<Factura> productos = modelo.PdfProductoFactura(id_factura);
+        
+        System.out.println(productos);
+        
+        // Configura la respuesta como PDF y establece la codificación
+        response.setContentType("application/pdf");
+        try {
+            OutputStream out = response.getOutputStream();
+
+            Document documento = new Document();
+            PdfWriter.getInstance(documento, out);
+
+            documento.open();
+            Paragraph paragraph = new Paragraph("DETALLES DE FACTURA");
+            paragraph.setAlignment(Element.ALIGN_CENTER);
+            documento.add(paragraph);
+            documento.add(new Paragraph(" ")); 
+            documento.add(new Paragraph(String.format("PRODUCTOS")));  
+            documento.add(new Paragraph(" "));  
+            // Añade los productos al documento PDF
+            double total = 0;
+            String fecha = "";
+            String doc = "";
+            for (Factura f : productos) {
+                fecha = f.getFecha();
+                doc = f.getDoc_cliente();
+                total += Double.parseDouble(f.getPrecio());
+                documento.add(new Paragraph(String.format("ID Producto: %s", f.getId_producto())));
+                documento.add(new Paragraph(String.format("Nombre: %s", f.getNombre_p())));
+                documento.add(new Paragraph(String.format("Talla: %s", f.getTalla())));
+                documento.add(new Paragraph(String.format("Cantidad: %s", f.getCantidad())));
+                documento.add(new Paragraph(String.format("Precio: %s", f.getPrecio())));
+                documento.add(new Paragraph(" "));  // Añade un espacio en blanco entre productos
+            }
+            documento.add(new Paragraph(String.format("FECHA FACTURACION: %s", fecha)));  
+            documento.add(new Paragraph(" "));  
+            documento.add(new Paragraph(String.format("DOCUMENTO DE CLIENTE: %s", doc)));  
+            documento.add(new Paragraph(" "));  
+            documento.add(new Paragraph(String.format("TOTAL: %s", total)));
+            documento.close();
+        
+        } catch (Exception e) {
+           e.getMessage();
+
+
+        }
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

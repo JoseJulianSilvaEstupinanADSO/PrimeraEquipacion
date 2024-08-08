@@ -266,3 +266,11 @@ function Buscar(){
 const $BtnBuscar = $dom.querySelector(".Btn__buscar");
 $BtnBuscar.addEventListener("click", Buscar);
 
+const $Listar = $dom.querySelector(".Listar");
+$Listar.addEventListener("click",() => {
+    const $filas = document.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
+    $filas.forEach((fila) => {
+           fila.remove();
+    });
+    ListarClientes();
+});

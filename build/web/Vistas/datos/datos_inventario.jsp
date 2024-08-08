@@ -72,7 +72,7 @@
                         <div class="form__content">
                             <div>
                                 <label class="label__modal" for="">Documento:</label>
-                                <input class="input__modal form_Doc" type="text" readonly>
+                                <input class="input__modal form_Doc" type="number" readonly>
                             </div>
                             <div id="selec">
                                 <label class="label__modal" for="">Rol:</label>
@@ -91,7 +91,7 @@
                             </div>
                             <div>
                                 <label class="label__modal" for="">Telefono:</label>
-                                <input class="input__modal form_Tel" type="text">
+                                <input class="input__modal form_Tel" type="number">
                             </div>
                         </div>
                         <div class="form__content">
@@ -101,7 +101,7 @@
                           </div>
                           <div>
                               <label class="label__modal" for="">Correo:</label>
-                              <input class="input__modal form_Email" type="text">
+                              <input class="input__modal form_Email" type="email">
                           </div>
                       </div>
                         <div class="form__content--buttons">

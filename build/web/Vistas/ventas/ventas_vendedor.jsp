@@ -53,7 +53,7 @@
           <a href="../../index.jsp" class="menu__link menu__link--salir Sign-out" ><span class="icono__span"><i class="fa-solid fa-right-from-bracket"></i></span>Sign out</a>
         </div>
       </section>
-        <section class="container__factura">
+       <section class="container__factura">
         <div class="fatura__buscar">
           <h1 class="title">REALIZAR VENTA</h1>
           <form action="" class="form__datos" novalidate>
@@ -80,6 +80,11 @@
                     <input placeholder="Cantidad" type="number" id="cant_produc" class="codigo__cliente cliente__nombre " required>
                 </div>
               </div>
+              <div class="id__cliente">
+                  <h2 class="cliente__title">Pago</h2>
+                  <input placeholder="Pago" type="text" id="pago_cliente" class="codigo__cliente cliente__nombre">
+                  <input placeholder="Vueltos" type="text" id="vueltos_cliente" class="codigo__cliente cliente__nombre margin" readonly >
+              </div>
               <div class="buscar__btn">
                   <button type="button" class="button button__agregar" id="agregar_producto">Agregar Producto</button>
                 <button type="button" id="abrirModal" class="button button__agregar  button__agregar--color">Agragar Cliente</button>
@@ -92,7 +97,9 @@
                         <th>Id Producto</th>
                         <th>Nombre</th>
                         <th>Talla</th>
-                        <th>Precio</th>
+                        <th>IVA</th>
+                        <th>SubTotal</th>
+                        <th>Total</th>
                         <th>Cantidad</th>
                         <th>Acciones</th>
                     </thead>

@@ -154,12 +154,13 @@ Botones --------------------------------------------------------------------
 
 .button{
     text-align: center;
-    /* padding: var(--padding); */
+    padding: var(--padding); 
     height: 42px;
     border-radius: 5px;
     background: var(--primario);
     transition: var(--transition);
     cursor: pointer;
+    color: var(--whithe);
 }
 .button--alert{
   text-align: center;
@@ -220,6 +221,9 @@ Botones --------------------------------------------------------------------
 .button__buscar:hover{
   background: var(--whithe);
   color: var(--primario);
+}
+.btn__descargar:hover{
+    color: var(--primario);
 }
 /*-------------------------------------------------------------------------
 

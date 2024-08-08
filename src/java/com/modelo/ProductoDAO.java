@@ -59,10 +59,11 @@ public class ProductoDAO extends Conexion {
             this.conectar();
             
             // Consulta SQL para insertar un nuevo producto
-            String sql = "INSERT INTO producto(nombre, precio,estado) VALUES (?,?,1)";
+            String sql = "INSERT INTO producto(nombre, precio,estado) VALUES (?,?,?)";
             PreparedStatement pre = this.getCon().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pre.setString(1, p.getNombre());
             pre.setInt(2, Integer.parseInt(p.getPrecio()));
+            pre.setInt(3, Integer.parseInt(p.getEstado()));
             
             // Ejecuta la consulta de inserción y obtiene el ID generado
             int exito = pre.executeUpdate();
@@ -111,7 +112,7 @@ public class ProductoDAO extends Conexion {
             this.conectar();
             
             // Consulta SQL para seleccionar todos los productos y sus detalles
-            String sql = "SELECT producto.id_producto, nombre, precio, estado, talla, stock, tela FROM producto JOIN producto_desc ON producto.id_producto = producto_desc.id_producto WHERE producto.estado=1 ";
+            String sql = "SELECT producto.id_producto, nombre, precio, estado, talla, stock, tela FROM producto JOIN producto_desc ON producto.id_producto = producto_desc.id_producto";
             PreparedStatement pre = this.getCon().prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
             
@@ -124,6 +125,7 @@ public class ProductoDAO extends Conexion {
                 p.setTalla(rs.getString("talla"));
                 p.setStock(rs.getString("stock"));
                 p.setTela(rs.getString("tela"));
+                p.setEstado(rs.getString("estado"));
                 
                 productos.add(p);
             }
@@ -146,7 +148,7 @@ public class ProductoDAO extends Conexion {
             this.conectar();
             
             // Consulta SQL para actualizar los detalles del producto
-            String sql = "UPDATE producto p JOIN producto_desc pd ON p.id_producto = pd.id_producto JOIN talla t ON pd.talla = t.talla SET nombre = ?, precio = ?, stock = ? WHERE p.id_producto = ? AND t.talla=?";
+            String sql = "UPDATE producto p JOIN producto_desc pd ON p.id_producto = pd.id_producto JOIN talla t ON pd.talla = t.talla SET nombre = ?, precio = ?, stock = ?, estado = ? WHERE p.id_producto = ? AND t.talla=?";
             PreparedStatement pre = this.getCon().prepareStatement(sql);
             
             System.out.println(p.getId_producto()); // Imprime el ID del producto
@@ -155,8 +157,10 @@ public class ProductoDAO extends Conexion {
             pre.setString(1, p.getNombre());
             pre.setInt(2, Integer.parseInt(p.getPrecio()));
             pre.setInt(3, Integer.parseInt(p.getStock()));
-            pre.setInt(4, Integer.parseInt(p.getId_producto()));
-            pre.setString(5, p.getTalla());
+            pre.setInt(4, Integer.parseInt(p.getEstado()));
+            pre.setInt(5, Integer.parseInt(p.getId_producto()));
+            pre.setString(6, p.getTalla());
+
             
             // Ejecuta la actualización y retorna true si la operación fue exitosa
             return pre.executeUpdate() > 0;

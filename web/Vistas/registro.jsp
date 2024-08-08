@@ -29,12 +29,12 @@
                 </div>
                 <div class="mb-3">
                     <label for="formGroupExampleInput" class="form-label login__label" >Documento:</label>
-                    <input type="text" class="form-control login__input" id="Rdoc" placeholder="Documento">
+                    <input type="number" class="form-control login__input" id="Rdoc" placeholder="Documento">
                     <p class="vacio">Campo Vacio</p>
                 </div>
                 <div class="mb-3">
                     <label for="formGroupExampleInput" class="form-label login__label " >Telefono:</label>
-                    <input type="text" class="form-control login__input" id="Rtel" placeholder="Telefono">
+                    <input type="number" class="form-control login__input" id="Rtel" placeholder="Telefono">
                     <p class="vacio">Campo Vacio</p>
                 </div>
                 <div class="mb-3">
@@ -49,7 +49,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="formGroupExampleInput" class="form-label login__label ">Edad:</label>
-                    <input type="text" class="form-control login__input" id="Redad" placeholder="Edad">
+                    <input type="number" class="form-control login__input" id="Redad" placeholder="Edad">
                     <p class="vacio">Campo Vacio</p>
                 </div>
                 <div class="mb-3">

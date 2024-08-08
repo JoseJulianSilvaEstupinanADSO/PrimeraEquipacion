@@ -91,7 +91,7 @@
               </div>
               <div class="id__cliente">
                   <h2 class="cliente__title">Pago</h2>
-                  <input placeholder="Pago" type="text" id="pago_cliente" class="codigo__cliente cliente__nombre">
+                  <input placeholder="Pago" type="number" id="pago_cliente" class="codigo__cliente cliente__nombre">
                   <input placeholder="Vueltos" type="text" id="vueltos_cliente" class="codigo__cliente cliente__nombre margin" readonly >
               </div>
               <div class="buscar__btn">
@@ -106,7 +106,9 @@
                         <th>Id Producto</th>
                         <th>Nombre</th>
                         <th>Talla</th>
-                        <th>Precio</th>
+                        <th>IVA</th>
+                        <th>SubTotal</th>
+                        <th>Total</th>
                         <th>Cantidad</th>
                         <th>Acciones</th>
                     </thead>

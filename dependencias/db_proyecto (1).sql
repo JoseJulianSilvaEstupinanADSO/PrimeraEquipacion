@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Aug 02, 2024 at 12:30 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 08-08-2024 a las 08:23:19
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_proyecto`
+-- Base de datos: `db_proyecto`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `factura`
+-- Estructura de tabla para la tabla `factura`
 --
 
 CREATE TABLE `factura` (
@@ -36,7 +36,7 @@ CREATE TABLE `factura` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `factura`
+-- Volcado de datos para la tabla `factura`
 --
 
 INSERT INTO `factura` (`id_factura`, `fecha_facturacion`, `id_venta`, `doc_cliente`, `total`) VALUES
@@ -45,12 +45,18 @@ INSERT INTO `factura` (`id_factura`, `fecha_facturacion`, `id_venta`, `doc_clien
 (12, '2024-07-31', 12, '4109382765', 160000),
 (13, '2024-08-01', 13, '1005231647', 600000),
 (14, '2024-08-01', 14, '1005231647', 840000),
-(15, '2024-08-01', 15, '4819273650', 500000);
+(15, '2024-08-01', 15, '4819273650', 500000),
+(16, '2024-08-05', 16, '7481293647', 30000),
+(17, '2024-08-05', 17, '4819273650', 30000),
+(18, '2024-08-05', 18, '7481293647', 30000),
+(19, '2024-08-05', 19, '7481293647', 15000),
+(20, '2024-08-07', 20, '7290514386', 330820),
+(21, '2024-08-07', 21, '1948673520', 95200);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `factura_producto`
+-- Estructura de tabla para la tabla `factura_producto`
 --
 
 CREATE TABLE `factura_producto` (
@@ -62,7 +68,7 @@ CREATE TABLE `factura_producto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `factura_producto`
+-- Volcado de datos para la tabla `factura_producto`
 --
 
 INSERT INTO `factura_producto` (`id_factura_producto`, `id_factura`, `id_producto`, `cantidad`, `precio`) VALUES
@@ -74,12 +80,20 @@ INSERT INTO `factura_producto` (`id_factura_producto`, `id_factura`, `id_product
 (22, 14, 20, 7, 840000),
 (23, 15, 23, 4, 320000),
 (24, 15, 25, 2, 30000),
-(25, 15, 32, 1, 150000);
+(25, 15, 32, 1, 150000),
+(26, 16, 25, 2, 30000),
+(27, 17, 25, 2, 30000),
+(28, 18, 28, 3, 30000),
+(29, 19, 25, 1, 15000),
+(30, 20, 21, 1, 77350),
+(31, 20, 26, 2, 107100),
+(32, 20, 30, 1, 130900),
+(33, 21, 23, 1, 95200);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `producto`
+-- Estructura de tabla para la tabla `producto`
 --
 
 CREATE TABLE `producto` (
@@ -90,17 +104,17 @@ CREATE TABLE `producto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `producto`
+-- Volcado de datos para la tabla `producto`
 --
 
 INSERT INTO `producto` (`id_producto`, `nombre`, `precio`, `estado`) VALUES
 (20, 'Pantaloneta PE Tottenham Hotspur 2011', 120000, 1),
-(21, 'Pantaloneta SE Manchester United 2019', 65000, 1),
+(21, 'Pantaloneta SE Manchester United 2019', 65000, 0),
 (22, 'Medias TE Juventus 2012', 26000, 1),
 (23, 'Camisa PE Bayern Munich 2018', 80000, 1),
 (24, 'Pantaloneta SE Chelsea 2020', 45000, 1),
 (25, 'Medias TE Paris Saint-Germain 2015', 15000, 1),
-(26, 'Camisa SE Liverpool 2021', 90000, 1),
+(26, 'Camisa SE Liverpool 2021', 90000, 0),
 (27, 'Pantaloneta TE AC Milan 2014', 45000, 1),
 (28, 'Medias PE Arsenal 2017', 10000, 1),
 (29, 'Camisa SE Inter Milan 2013', 100000, 1),
@@ -112,12 +126,14 @@ INSERT INTO `producto` (`id_producto`, `nombre`, `precio`, `estado`) VALUES
 (35, 'Camisa PE Borussia Dortmund 2023', 980000, 1),
 (36, 'Pantaloneta SE Ajax 2010', 46000, 1),
 (37, 'Pantaloneta PE Tottenham Hotspur 2011', 80000, 1),
-(39, 'Medias PE Real Madrid 2016', 26000, 1);
+(39, 'Medias PE Real Madrid 2016', 26000, 1),
+(40, 'Camisa PE Atletico Bucaramanga 2019', 80000, 1),
+(41, 'Pantaloneta PE Atletico Bucaramanga 2023', 60000, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `producto_desc`
+-- Estructura de tabla para la tabla `producto_desc`
 --
 
 CREATE TABLE `producto_desc` (
@@ -128,19 +144,19 @@ CREATE TABLE `producto_desc` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `producto_desc`
+-- Volcado de datos para la tabla `producto_desc`
 --
 
 INSERT INTO `producto_desc` (`id_producto`, `talla`, `stock`, `tela`) VALUES
 (20, 'M', 40, 'Microfibra'),
-(21, 'X', 20, 'Poliester'),
+(21, 'X', 19, 'Poliester'),
 (22, 'S', 10, 'Malla '),
-(23, 'X', 16, 'Nylon'),
+(23, 'X', 15, 'Nylon'),
 (24, 'M', 7, 'Nylon'),
-(25, 'L', 10, 'Nylon'),
+(25, 'L', 5, 'Nylon'),
 (26, 'M', 10, 'Nylon'),
 (27, 'S', 12, 'Spandex '),
-(28, 'X', 15, 'Malla '),
+(28, 'X', 12, 'Malla '),
 (29, 'XL', 6, 'Microfibra'),
 (30, 'L', 15, 'Nylon'),
 (31, 'M', 14, 'Malla '),
@@ -148,12 +164,14 @@ INSERT INTO `producto_desc` (`id_producto`, `talla`, `stock`, `tela`) VALUES
 (35, 'X', 14, 'Nylon'),
 (36, 'L', 11, 'Spandex '),
 (37, 'XL', 10, 'Microfibra'),
-(39, 'L', 12, 'algondo');
+(39, 'L', 12, 'algondo'),
+(40, 'M', 23, 'Lino'),
+(41, 'L', 20, 'Lino');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rol`
+-- Estructura de tabla para la tabla `rol`
 --
 
 CREATE TABLE `rol` (
@@ -162,7 +180,7 @@ CREATE TABLE `rol` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `rol`
+-- Volcado de datos para la tabla `rol`
 --
 
 INSERT INTO `rol` (`id_rol`, `nombre`) VALUES
@@ -174,7 +192,7 @@ INSERT INTO `rol` (`id_rol`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `talla`
+-- Estructura de tabla para la tabla `talla`
 --
 
 CREATE TABLE `talla` (
@@ -182,7 +200,7 @@ CREATE TABLE `talla` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `talla`
+-- Volcado de datos para la tabla `talla`
 --
 
 INSERT INTO `talla` (`talla`) VALUES
@@ -195,7 +213,7 @@ INSERT INTO `talla` (`talla`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuario`
+-- Estructura de tabla para la tabla `usuario`
 --
 
 CREATE TABLE `usuario` (
@@ -212,11 +230,11 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `usuario`
+-- Volcado de datos para la tabla `usuario`
 --
 
 INSERT INTO `usuario` (`id_usuario`, `usuario`, `contrasena`, `id_rol`, `documento`, `nombre`, `telefono`, `direccion`, `email`, `edad`) VALUES
-(1, 'admin', '$2a$10$6tCGFkrSOtGzqRX64bGWvuJ24ByB14F9eA8/fm2ZzmKmCMJb0Atai', 1, '1005231647', 'Jose Julian', '3164579824', 'hola1234', 'hola@123.com', 22),
+(1, 'admin', '$2a$10$6tCGFkrSOtGzqRX64bGWvuJ24ByB14F9eA8/fm2ZzmKmCMJb0Atai', 1, '1005231647', 'Jose Julian Silva', '3164579824', 'hola1234', 'hola@123.com', 22),
 (5, NULL, NULL, 4, '3216549874', 'Pedro  Picapiedra', '3126459785', NULL, NULL, NULL),
 (15, NULL, NULL, 4, '4567891234', 'Felipe Silva', '3164587921', NULL, NULL, NULL),
 (21, NULL, NULL, 4, '7481293647', 'Ainhoa Cruz', '3211465487', NULL, NULL, NULL),
@@ -235,7 +253,7 @@ INSERT INTO `usuario` (`id_usuario`, `usuario`, `contrasena`, `id_rol`, `documen
 -- --------------------------------------------------------
 
 --
--- Table structure for table `venta`
+-- Estructura de tabla para la tabla `venta`
 --
 
 CREATE TABLE `venta` (
@@ -244,7 +262,7 @@ CREATE TABLE `venta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `venta`
+-- Volcado de datos para la tabla `venta`
 --
 
 INSERT INTO `venta` (`id_venta`, `id_usuario`) VALUES
@@ -253,21 +271,27 @@ INSERT INTO `venta` (`id_venta`, `id_usuario`) VALUES
 (12, 1),
 (13, 1),
 (14, 1),
-(15, 1);
+(15, 1),
+(16, 1),
+(17, 1),
+(18, 1),
+(19, 1),
+(20, 1),
+(21, 1);
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `factura`
+-- Indices de la tabla `factura`
 --
 ALTER TABLE `factura`
   ADD PRIMARY KEY (`id_factura`),
   ADD KEY `id_venta` (`id_venta`);
 
 --
--- Indexes for table `factura_producto`
+-- Indices de la tabla `factura_producto`
 --
 ALTER TABLE `factura_producto`
   ADD PRIMARY KEY (`id_factura_producto`),
@@ -275,32 +299,32 @@ ALTER TABLE `factura_producto`
   ADD KEY `id_producto` (`id_producto`);
 
 --
--- Indexes for table `producto`
+-- Indices de la tabla `producto`
 --
 ALTER TABLE `producto`
   ADD PRIMARY KEY (`id_producto`);
 
 --
--- Indexes for table `producto_desc`
+-- Indices de la tabla `producto_desc`
 --
 ALTER TABLE `producto_desc`
   ADD PRIMARY KEY (`id_producto`,`talla`),
   ADD KEY `talla` (`talla`);
 
 --
--- Indexes for table `rol`
+-- Indices de la tabla `rol`
 --
 ALTER TABLE `rol`
   ADD PRIMARY KEY (`id_rol`);
 
 --
--- Indexes for table `talla`
+-- Indices de la tabla `talla`
 --
 ALTER TABLE `talla`
   ADD PRIMARY KEY (`talla`);
 
 --
--- Indexes for table `usuario`
+-- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id_usuario`),
@@ -308,84 +332,84 @@ ALTER TABLE `usuario`
   ADD KEY `id_rol` (`id_rol`);
 
 --
--- Indexes for table `venta`
+-- Indices de la tabla `venta`
 --
 ALTER TABLE `venta`
   ADD PRIMARY KEY (`id_venta`),
   ADD KEY `id_usuario` (`id_usuario`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `factura`
+-- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT for table `factura_producto`
+-- AUTO_INCREMENT de la tabla `factura_producto`
 --
 ALTER TABLE `factura_producto`
-  MODIFY `id_factura_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_factura_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
--- AUTO_INCREMENT for table `producto`
+-- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
--- AUTO_INCREMENT for table `rol`
+-- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
   MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `usuario`
+-- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
--- AUTO_INCREMENT for table `venta`
+-- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `factura`
+-- Filtros para la tabla `factura`
 --
 ALTER TABLE `factura`
   ADD CONSTRAINT `factura_ibfk_2` FOREIGN KEY (`id_venta`) REFERENCES `venta` (`id_venta`);
 
 --
--- Constraints for table `factura_producto`
+-- Filtros para la tabla `factura_producto`
 --
 ALTER TABLE `factura_producto`
   ADD CONSTRAINT `factura_producto_ibfk_1` FOREIGN KEY (`id_factura`) REFERENCES `factura` (`id_factura`),
   ADD CONSTRAINT `factura_producto_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`);
 
 --
--- Constraints for table `producto_desc`
+-- Filtros para la tabla `producto_desc`
 --
 ALTER TABLE `producto_desc`
   ADD CONSTRAINT `producto_desc_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`),
   ADD CONSTRAINT `producto_desc_ibfk_2` FOREIGN KEY (`talla`) REFERENCES `talla` (`talla`);
 
 --
--- Constraints for table `usuario`
+-- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
   ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`id_rol`) REFERENCES `rol` (`id_rol`);
 
 --
--- Constraints for table `venta`
+-- Filtros para la tabla `venta`
 --
 ALTER TABLE `venta`
   ADD CONSTRAINT `venta_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`);
