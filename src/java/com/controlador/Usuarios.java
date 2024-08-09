@@ -47,7 +47,7 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
     
     // Obtiene la acción desde los parámetros de la solicitud
     String action = request.getParameter("action");
-    
+
     // Verifica si la acción no es nula y selecciona la acción a realizar según el valor de 'action'
     if(action != null){
         switch (action) {
@@ -81,7 +81,6 @@ private void validarUsuario(HttpServletRequest request, HttpServletResponse resp
     // Obtiene los parámetros de la solicitud
     String usuario = request.getParameter("usuario");
     String contrasena = request.getParameter("contrasena");
-    
     // Llama al modelo para validar el usuario y obtiene el resultado
     Usuario usuarioValido = modelo.validarUsuario(usuario, contrasena);
     response.setContentType("application/json");
