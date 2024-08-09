@@ -1,0 +1,107 @@
+09-Aug-2024 13:22:11.296 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Nombre de la versión del servidor: Apache Tomcat/9.0.89
+09-Aug-2024 13:22:11.299 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:                      May 3 2024 20:22:11 UTC
+09-Aug-2024 13:22:11.301 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Número de versión de servidor:     9.0.89.0
+09-Aug-2024 13:22:11.301 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:                           Windows 11
+09-Aug-2024 13:22:11.301 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Versión de Systema Operativo:      10.0
+09-Aug-2024 13:22:11.301 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Arquitectura:                      amd64
+09-Aug-2024 13:22:11.301 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:                         C:\Program Files\Java\jdk-22
+09-Aug-2024 13:22:11.301 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:                       22.0.1+8-16
+09-Aug-2024 13:22:11.301 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Vededor JVM:                       Oracle Corporation
+09-Aug-2024 13:22:11.301 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:                     C:\Users\Propietario\Documents\NetBeansProjects\PrimeraEquipacion\dependencias\apache-tomcat-9.0.89
+09-Aug-2024 13:22:11.301 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:                     C:\Users\Propietario\Documents\NetBeansProjects\PrimeraEquipacion\dependencias\apache-tomcat-9.0.89
+09-Aug-2024 13:22:11.307 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument:             --add-opens=java.base/java.lang=ALL-UNNAMED
+09-Aug-2024 13:22:11.308 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument:             --add-opens=java.base/java.io=ALL-UNNAMED
+09-Aug-2024 13:22:11.308 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument:             --add-opens=java.base/java.util=ALL-UNNAMED
+09-Aug-2024 13:22:11.308 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument:             --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+09-Aug-2024 13:22:11.308 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument:             --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+09-Aug-2024 13:22:11.308 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument:             -Djava.util.logging.config.file=C:\Users\Propietario\Documents\NetBeansProjects\PrimeraEquipacion\dependencias\apache-tomcat-9.0.89\conf\logging.properties
+09-Aug-2024 13:22:11.308 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument:             -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+09-Aug-2024 13:22:11.308 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument:             -Djdk.tls.ephemeralDHKeySize=2048
+09-Aug-2024 13:22:11.308 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument:             -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+09-Aug-2024 13:22:11.308 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument:             -Dignore.endorsed.dirs=
+09-Aug-2024 13:22:11.308 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument:             -Dcatalina.base=C:\Users\Propietario\Documents\NetBeansProjects\PrimeraEquipacion\dependencias\apache-tomcat-9.0.89
+09-Aug-2024 13:22:11.308 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument:             -Dcatalina.home=C:\Users\Propietario\Documents\NetBeansProjects\PrimeraEquipacion\dependencias\apache-tomcat-9.0.89
+09-Aug-2024 13:22:11.308 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument:             -Djava.io.tmpdir=C:\Users\Propietario\Documents\NetBeansProjects\PrimeraEquipacion\dependencias\apache-tomcat-9.0.89\temp
+09-Aug-2024 13:22:11.336 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Cargada la biblioteca nativa APR de Apache Tomcat [1.3.0] con la versión APR [1.7.4].
+09-Aug-2024 13:22:11.336 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Capacidades APR: IPv6 [true], enviar fichero [true], aceptar filtros [false], aleatorio [true], UDS [true].
+09-Aug-2024 13:22:11.337 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+09-Aug-2024 13:22:11.349 INFO [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL inicializado correctamente [OpenSSL 3.0.13 30 Jan 2024]
+09-Aug-2024 13:22:11.640 INFO [main] org.apache.coyote.AbstractProtocol.init Inicializando el manejador de protocolo ["http-nio-8080"]
+
+09-Aug-2024 13:22:11.660 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [538] milliseconds
+09-Aug-2024 13:22:11.711 INFO [main] org.apache.catalina.core.StandardService.startInternal Arrancando servicio [Catalina]
+09-Aug-2024 13:22:11.712 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/9.0.89]
+09-Aug-2024 13:22:11.720 INFO [main] org.apache.catalina.startup.HostConfig.deployDescriptor Desplieque del descriptor de configuración [C:\Users\Propietario\Documents\NetBeansProjects\PrimeraEquipacion\dependencias\apache-tomcat-9.0.89\conf\Catalina\localhost\PrimeraEquipacion.xml]
+09-Aug-2024 13:22:11.734 WARNING [main] org.apache.catalina.startup.HostConfig.deployDescriptor The path attribute with value [/PrimeraEquipacion] in deployment descriptor [C:\Users\Propietario\Documents\NetBeansProjects\PrimeraEquipacion\dependencias\apache-tomcat-9.0.89\conf\Catalina\localhost\PrimeraEquipacion.xml] has been ignored
+09-Aug-2024 13:22:12.368 INFO [main] org.apache.jasper.servlet.TldScanner.scanJars Al menos un JAR, que se ha explorado buscando TLDs, aún no contenía TLDs. Activar historial de depuración para este historiador para una completa lista de los JARs que fueron explorados y de los que nos se halló TLDs. Saltarse JARs no necesarios durante la exploración puede dar lugar a una mejora de tiempo significativa en el arranque y compilación de JSP .
+09-Aug-2024 13:22:12.416 INFO [main] org.apache.catalina.startup.HostConfig.deployDescriptor Deployment of deployment descriptor [C:\Users\Propietario\Documents\NetBeansProjects\PrimeraEquipacion\dependencias\apache-tomcat-9.0.89\conf\Catalina\localhost\PrimeraEquipacion.xml] has finished in [694] ms
+09-Aug-2024 13:22:12.416 INFO [main] org.apache.catalina.startup.HostConfig.deployDescriptor Desplieque del descriptor de configuración [C:\Users\Propietario\Documents\NetBeansProjects\PrimeraEquipacion\dependencias\apache-tomcat-9.0.89\conf\Catalina\localhost\ROOT.xml]
+09-Aug-2024 13:22:12.417 WARNING [main] org.apache.catalina.startup.HostConfig.deployDescriptor The path attribute with value [] in deployment descriptor [C:\Users\Propietario\Documents\NetBeansProjects\PrimeraEquipacion\dependencias\apache-tomcat-9.0.89\conf\Catalina\localhost\ROOT.xml] has been ignored
+09-Aug-2024 13:22:12.422 SEVERE [main] org.apache.catalina.startup.HostConfig.deployDescriptor Error durante el despliegue del descriptor de configuración [C:\Users\Propietario\Documents\NetBeansProjects\PrimeraEquipacion\dependencias\apache-tomcat-9.0.89\conf\Catalina\localhost\ROOT.xml]
+	java.lang.IllegalStateException: Error starting child
+		at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:602)
+		at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:571)
+		at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:603)
+		at org.apache.catalina.startup.HostConfig.deployDescriptor(HostConfig.java:680)
+		at org.apache.catalina.startup.HostConfig$DeployDescriptor.run(HostConfig.java:1844)
+		at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+		at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+		at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+		at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:123)
+		at org.apache.catalina.startup.HostConfig.deployDescriptors(HostConfig.java:575)
+		at org.apache.catalina.startup.HostConfig.deployApps(HostConfig.java:466)
+		at org.apache.catalina.startup.HostConfig.start(HostConfig.java:1584)
+		at org.apache.catalina.startup.HostConfig.lifecycleEvent(HostConfig.java:312)
+		at org.apache.catalina.util.LifecycleBase.fireLifecycleEvent(LifecycleBase.java:114)
+		at org.apache.catalina.util.LifecycleBase.setStateInternal(LifecycleBase.java:402)
+		at org.apache.catalina.util.LifecycleBase.setState(LifecycleBase.java:345)
+		at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:776)
+		at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:721)
+		at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+		at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
+		at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
+		at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+		at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+		at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
+		at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
+		at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:211)
+		at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+		at org.apache.catalina.core.StandardService.startInternal(StandardService.java:415)
+		at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+		at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:878)
+		at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+		at org.apache.catalina.startup.Catalina.start(Catalina.java:735)
+		at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+		at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+		at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:345)
+		at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:473)
+	Caused by: org.apache.catalina.LifecycleException: Failed to start component [org.apache.catalina.webresources.StandardRoot@540dbda9]
+		at org.apache.catalina.util.LifecycleBase.handleSubClassException(LifecycleBase.java:419)
+		at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:186)
+		at org.apache.catalina.core.StandardContext.resourcesStart(StandardContext.java:4120)
+		at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4242)
+		at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+		at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:599)
+		... 35 more
+	Caused by: java.lang.IllegalArgumentException: The main resource set specified [C:\Users\Propietario\Documents\NetBeansProjects\mdaSenaAnt\build\web] is not a directory or war file, or is not readable (it does not exist or permissions to access it are missing)
+		at org.apache.catalina.webresources.StandardRoot.createMainResourceSet(StandardRoot.java:749)
+		at org.apache.catalina.webresources.StandardRoot.startInternal(StandardRoot.java:707)
+		at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+		... 39 more
+09-Aug-2024 13:22:12.424 INFO [main] org.apache.catalina.startup.HostConfig.deployDescriptor Deployment of deployment descriptor [C:\Users\Propietario\Documents\NetBeansProjects\PrimeraEquipacion\dependencias\apache-tomcat-9.0.89\conf\Catalina\localhost\ROOT.xml] has finished in [8] ms
+09-Aug-2024 13:22:12.425 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Desplegando el directorio [C:\Users\Propietario\Documents\NetBeansProjects\PrimeraEquipacion\dependencias\apache-tomcat-9.0.89\webapps\docs] de la aplicación web
+09-Aug-2024 13:22:12.459 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\Propietario\Documents\NetBeansProjects\PrimeraEquipacion\dependencias\apache-tomcat-9.0.89\webapps\docs] has finished in [34] ms
+09-Aug-2024 13:22:12.460 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Desplegando el directorio [C:\Users\Propietario\Documents\NetBeansProjects\PrimeraEquipacion\dependencias\apache-tomcat-9.0.89\webapps\examples] de la aplicación web
+09-Aug-2024 13:22:12.835 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\Propietario\Documents\NetBeansProjects\PrimeraEquipacion\dependencias\apache-tomcat-9.0.89\webapps\examples] has finished in [376] ms
+09-Aug-2024 13:22:12.836 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Desplegando el directorio [C:\Users\Propietario\Documents\NetBeansProjects\PrimeraEquipacion\dependencias\apache-tomcat-9.0.89\webapps\host-manager] de la aplicación web
+09-Aug-2024 13:22:12.869 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\Propietario\Documents\NetBeansProjects\PrimeraEquipacion\dependencias\apache-tomcat-9.0.89\webapps\host-manager] has finished in [32] ms
+09-Aug-2024 13:22:12.869 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Desplegando el directorio [C:\Users\Propietario\Documents\NetBeansProjects\PrimeraEquipacion\dependencias\apache-tomcat-9.0.89\webapps\manager] de la aplicación web
+09-Aug-2024 13:22:12.898 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\Propietario\Documents\NetBeansProjects\PrimeraEquipacion\dependencias\apache-tomcat-9.0.89\webapps\manager] has finished in [29] ms
+09-Aug-2024 13:22:12.903 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+09-Aug-2024 13:22:12.921 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [1260] milliseconds
+09-Aug-2024 13:22:19.863 INFO [http-nio-8080-exec-8] org.apache.catalina.startup.HostConfig.undeploy Repliegue (undeploy) de la aplicación web que tiene como trayectoria de contexto [/PrimeraEquipacion]
+09-Aug-2024 13:22:19.919 INFO [http-nio-8080-exec-7] org.apache.catalina.startup.HostConfig.deployDescriptor Desplieque del descriptor de configuración [C:\Users\Propietario\Documents\NetBeansProjects\PrimeraEquipacion\dependencias\apache-tomcat-9.0.89\conf\Catalina\localhost\PrimeraEquipacion.xml]
+09-Aug-2024 13:22:19.920 WARNING [http-nio-8080-exec-7] org.apache.catalina.startup.HostConfig.deployDescriptor The path attribute with value [/PrimeraEquipacion] in deployment descriptor [C:\Users\Propietario\Documents\NetBeansProjects\PrimeraEquipacion\dependencias\apache-tomcat-9.0.89\conf\Catalina\localhost\PrimeraEquipacion.xml] has been ignored
+09-Aug-2024 13:22:20.297 INFO [http-nio-8080-exec-7] org.apache.jasper.servlet.TldScanner.scanJars Al menos un JAR, que se ha explorado buscando TLDs, aún no contenía TLDs. Activar historial de depuración para este historiador para una completa lista de los JARs que fueron explorados y de los que nos se halló TLDs. Saltarse JARs no necesarios durante la exploración puede dar lugar a una mejora de tiempo significativa en el arranque y compilación de JSP .
+09-Aug-2024 13:22:20.300 INFO [http-nio-8080-exec-7] org.apache.catalina.startup.HostConfig.deployDescriptor Deployment of deployment descriptor [C:\Users\Propietario\Documents\NetBeansProjects\PrimeraEquipacion\dependencias\apache-tomcat-9.0.89\conf\Catalina\localhost\PrimeraEquipacion.xml] has finished in [381] ms
+09-Aug-2024 13:22:20.303 INFO [http-nio-8080-exec-2] org.apache.catalina.util.LifecycleBase.start The start() method was called on component [StandardEngine[Catalina].StandardHost[localhost].StandardContext[/PrimeraEquipacion]] after start() had already been called. The second call will be ignored.
