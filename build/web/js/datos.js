@@ -4,9 +4,18 @@
  */
 
 const $dom = document;
+
 const error = $dom.querySelector(".container__modal--error");
 const $titleError = $dom.querySelector(".title_error");
 const $paragrahp = $dom.querySelector(".paragrahp__error");
+
+const $modal = document.getElementById("ventanaModal");
+const $boton = document.querySelector(".cambiar__contraseña");
+const $cerrar = document.getElementById("Cerrar__Modal");
+
+const $actual = $dom.querySelector(".password_actual");
+const $nueva = $dom.querySelector(".password_nueva");
+const $confirm = $dom.querySelector(".password_confrm");
 
 function CloseSession(){
         let $session = localStorage.getItem("session");
@@ -25,13 +34,6 @@ setInterval(() => {
 
 //MODAL-----------------------------------------------------------------------
 
-const $modal = document.getElementById("ventanaModal");
-
-
-const $boton = document.querySelector(".cambiar__contraseña");
-
-
-const $cerrar = document.getElementById("Cerrar__Modal");
 
 
 $boton.addEventListener("click",function() {
@@ -80,9 +82,6 @@ $cambiar.addEventListener("click", async function () {
     });
     
     if (num === $input.length) {
-        const $actual = $dom.querySelector(".password_actual");
-        const $nueva = $dom.querySelector(".password_nueva");
-        const $confirm = $dom.querySelector(".password_confrm");
         
         let actual = $actual.value;
         let confirm = $confirm.value;
