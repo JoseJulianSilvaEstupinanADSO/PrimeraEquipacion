@@ -7,7 +7,6 @@
 export default Mensaje
 
 function Mensaje($titleError,$paragrahp,error, title_msj,paragrahp_msj) {
-    console.log("gola");
     $titleError.innerText = title_msj;
     $paragrahp.innerText = paragrahp_msj;
     error.style.display = "block";

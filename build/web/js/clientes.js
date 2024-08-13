@@ -3,12 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/javascript.js to edit this template
  */
 
+import Ajax from "./Modulos/ajax.js";
+import Mensaje from "./Modulos/msjerror.js";
 
 const $dom = document;
+const servlet = "../../Facturas";
+
 const error = $dom.querySelector(".container__modal--error");
 const $titleError = $dom.querySelector(".title_error");
 const $paragrahp = $dom.querySelector(".paragrahp__error");
 
+const $modal = $dom.getElementById("ventanaModal");
+
+const $id_form = $dom.querySelector('p.Id_cliente > b');
+const $tbody = $dom.querySelector("tbody.body__tabla--modal");
+    
 function CloseSession(){
         let $session = localStorage.getItem("session");
         if ($session === "false" || $session === null) {
@@ -28,7 +37,7 @@ setInterval(() => {
 //Cambiar colores de las filas impares De las tablas //
 
 function filas(){
-    $filas = $dom.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
+    let $filas = $dom.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
         $filas.forEach((fila,index) =>{
             if (index % 2 !== 0) {
                 fila.style.background = "#DBDADA";
@@ -37,12 +46,12 @@ function filas(){
 }
 
 function filasModal(){
-    $filas = $dom.querySelectorAll("tbody.body__tabla > tr.fila__tabla--modal");
+    let $filas = $dom.querySelectorAll("tbody.body__tabla--modal > tr");
         $filas.forEach((fila,index) =>{
             if (index % 2 !== 0) {
                 fila.style.background = "#DBDADA";
             }
-        });  
+    });  
 }
 
 
@@ -51,88 +60,79 @@ function filasModal(){
 
 const table = $dom.querySelector('.tabla--factura');
 
-table.addEventListener('click', function(event) {
+table.addEventListener('click',async function(event) {
    if (event.target.classList.contains('button__tabla')) {
        
-    const $modal = $dom.getElementById("ventanaModal");
-    $modal.style.display = "block";
-    
-    const  $filas = $dom.querySelectorAll("tbody.body__tabla > tr.fila__tabla--modal");
-        $filas.forEach((x) =>{
-            x.remove();
-        });
+        $modal.style.display = "block";
 
-    const row = event.target.closest('tr');
-    const $id = row.querySelector('td.IdCliente');
+        let  $filas = $dom.querySelectorAll("tbody.body__tabla > tr.fila__tabla--modal");
+            $filas.forEach((x) =>{
+                x.remove();
+            });
 
-    let id = Number($id.innerText);
+        const row = event.target.closest('tr');
+        const $id = row.querySelector('td.IdCliente');
 
-    const $id_form = $dom.querySelector('p.Id_cliente > b');
-    
-    $id_form.innerText = "Numero: " + id;
-    
-    let $doc = row.querySelector(".documento__cliente");
-    let doc = $doc.innerText;
-    
-    let ope = new XMLHttpRequest();
-        ope.open("POST","../../Facturas?action=ClientesCompras", true );
-        ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        ope.onload = function() {
-            if (ope.status === 200) {
-                let respuesta = JSON.parse(ope.responseText);
-                const $tbody = $dom.querySelector("tbody.body__tabla--modal");
-                respuesta.forEach((x) => {
-                    const $fila = $dom.createElement("tr");
-                    $fila.classList.add("fila__tabla--modal"); 
-
-                    const $colId_venta = $dom.createElement("td");
-                    $colId_venta.classList.add("td__tabla");
-                    $colId_venta.classList.add("idventa");
-
-                    $colId_venta.innerText = x.id_venta;
-
-                    const $colidfac = $dom.createElement("td");
-                    $colidfac.classList.add("td__tabla");
-                    $colidfac.classList.add("idfactura");
-
-                    $colidfac.innerText = x.id_factura;
-
-                    const $coldate = $dom.createElement("td");
-                    $coldate.classList.add("td__tabla");
-                    $coldate.classList.add("date");
-
-                    $coldate.innerText = x.fecha_facturacion;
-
-                    const $colidven = $dom.createElement("td");
-                    $colidven.classList.add("td__tabla");
-                    $colidven.classList.add("idvendedor");
-
-                    $colidven.innerText = x.id_usuario;
+        let id = Number($id.innerText);
 
 
-                    $fila.appendChild($colId_venta);
-                    $fila.appendChild($colidfac);
-                    $fila.appendChild($coldate);
-                    $fila.appendChild($colidven);
+        $id_form.innerText = "Numero: " + id;
 
-                    $tbody.appendChild($fila);
-
-                });
-                filas();
-                
-            }
+        let $doc = row.querySelector(".documento__cliente");
+        let datos = {
+            "doc_cliente": $doc.innerText
         };
-        ope.send("doc_cliente=" + doc);
-     
-    filasModal();
+        let respuesta = await Ajax(servlet,datos,"POST","ClientesCompras");
 
-   }
+        respuesta.forEach((x) => {
+            const $fila = $dom.createElement("tr");
+            $fila.classList.add("fila__tabla--modal"); 
+
+            const $colId_venta = $dom.createElement("td");
+            $colId_venta.classList.add("td__tabla");
+            $colId_venta.classList.add("idventa");
+
+            $colId_venta.innerText = x.id_venta;
+
+            const $colidfac = $dom.createElement("td");
+            $colidfac.classList.add("td__tabla");
+            $colidfac.classList.add("idfactura");
+
+            $colidfac.innerText = x.id_factura;
+
+            const $coldate = $dom.createElement("td");
+            $coldate.classList.add("td__tabla");
+            $coldate.classList.add("date");
+
+            $coldate.innerText = x.fecha_facturacion;
+
+            const $colidven = $dom.createElement("td");
+            $colidven.classList.add("td__tabla");
+            $colidven.classList.add("idvendedor");
+
+            $colidven.innerText = x.id_usuario;
+
+
+            $fila.appendChild($colId_venta);
+            $fila.appendChild($colidfac);
+            $fila.appendChild($coldate);
+            $fila.appendChild($colidven);
+
+            $tbody.appendChild($fila);
+
+        });
+        
+    filasModal();
+    
+    }
+
+
+
+
  });
 
 
  //CERRAR MODAL
-
- const $modal = $dom.getElementById("ventanaModal");
 
  const $cerrar = $dom.querySelector(".cerrar__x");
  

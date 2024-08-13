@@ -4,3 +4,17 @@
  */
 
 
+export default validarCorreo
+
+function validarCorreo(event, value) {
+
+    const regex = /^[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}/;
+    if (regex.test(value.value)) {
+        value.classList.remove("alert");
+        return true;
+    }
+    else{
+        value.classList.add("alert");
+        return false;
+    }
+}

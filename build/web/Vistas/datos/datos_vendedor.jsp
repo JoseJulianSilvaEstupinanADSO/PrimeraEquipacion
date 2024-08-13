@@ -59,22 +59,22 @@
                 <h2 class="modal__title">Detalles del Usuario</h2>
             </div>
             <div class="modal__body modal__body--users">
-                <form action="" class="form__modal--inventario">
+                <form action="" class="form__modal--inventario form__user" novalidate="">
                     <div class="form__items">
                         <div class="form__content">
                             <div>
                                 <label class="label__modal" for="">Id Usuario:</label>
-                                <input class="input__modal form_Id" type="number" readonly>
+                                <input class="input__modal form_Id" type="number" readonly required>
                             </div>
                             <div>
                                 <label class="label__modal" for="">Nombre:</label>
-                                <input class="input__modal form_Nombre" type="text">
+                                <input class="input__modal form_Nombre" type="text" required>
                             </div>
                         </div>
                         <div class="form__content">
                             <div>
                                 <label class="label__modal" for="">Documento:</label>
-                                <input class="input__modal form_Doc" type="number" readonly>
+                                <input class="input__modal form_Doc" type="number" readonly required>
                             </div>
                             <div id="selec">
                                 <label class="label__modal" for="">Rol:</label>
@@ -89,21 +89,21 @@
                         <div class="form__content">
                             <div>
                                 <label class="label__modal" for="">Usuario:</label>
-                                <input class="input__modal form_User" type="text">
+                                <input class="input__modal form_User" type="text" required>
                             </div>
                             <div>
                                 <label class="label__modal" for="">Telefono:</label>
-                                <input class="input__modal form_Tel" type="number">
+                                <input class="input__modal form_Tel" type="number" required>
                             </div>
                         </div>
                         <div class="form__content">
                           <div>
                               <label class="label__modal" for="">Direccion:</label>
-                              <input class="input__modal form_Direc" type="text">
+                              <input class="input__modal form_Direc" type="text" required>
                           </div>
                           <div>
                               <label class="label__modal" for="">Correo:</label>
-                              <input class="input__modal form_Email" type="email">
+                              <input class="input__modal form_Email" type="email" required>
                           </div>
                       </div>
                         <div class="form__content--buttons">
@@ -118,21 +118,21 @@
       <div id="ventanaModal" class="container__modal container__modal--datos">
         <div class="contenido__modal">
           <h2 class="modal__title--ventas">Cambiar Contraseña</h2>
-          <form action="" class="form__modal">
+          <form action="" class="form__modal form__password" novalidate>
               <div class="div__form">
                   <label for="" class="">Contraseña Actual: </label>
-                  <input type="password" class="modal__input password_actual">
+                  <input type="password" class="modal__input password_actual" required>
               </div>
               <div class="div__form">
                   <label for="" class="">Nueva Contraseña: </label>
-                  <input type="password" class="modal__input password_nueva">
+                  <input type="password" class="modal__input password_nueva" required>
               </div>
               <div class="div__form">
                   <label for="" class="">Confirme Contraseña: </label>
-                  <input type="password" class="modal__input password_confrm">
+                  <input type="password" class="modal__input password_confrm" required>
               </div>
               <div class="div__buttons">
-                  <button type="button" class="button button__modal Cambiar">Cambiar</button>
+                  <button type="submit" class="button button__modal Cambiar">Cambiar</button>
                   <button type="button" id="Cerrar__Modal" class="button--alert button__modal button__modal--alert">Cancelar</button>
               </div>
           </form>

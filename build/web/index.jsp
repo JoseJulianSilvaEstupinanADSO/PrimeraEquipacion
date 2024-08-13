@@ -33,7 +33,7 @@
                     <p class="vacio">Campo Vacio</p>
                 </div>
                 <div class="btns__form">
-                    <button class="button Ingresar " type="button"><a class="btn__link">Ingresar</a></button>
+                    <button class="button Ingresar " type="submit"><a class="btn__link">Ingresar</a></button>
                     <button class="button button--color" type="button"><a class="btn__link btn__link--color" href="Vistas/registro.jsp">Registrarse</a></button>
                 </div>
             </form>

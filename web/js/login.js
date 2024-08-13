@@ -4,6 +4,7 @@
  */
 import Ajax from "./Modulos/ajax.js";
 import Mensaje from "./Modulos/msjerror.js";
+import validations from "./Modulos/Validaciones/vacio.js";
 
 const $dom = document;
 const servlet = "Usuarios";
@@ -13,7 +14,7 @@ const $titleError = $dom.querySelector(".title_error");
 const $paragrahp = $dom.querySelector(".paragrahp__error");
 
 const $cambiar = document.querySelector(".Ingresar");
-const $input = document.querySelectorAll("div > input.login__input");
+const $input = document.querySelectorAll(".login__form [required]");
 
 const $usuario = document.getElementById("usuario");
 const $contraseña = document.getElementById("contraseña");
@@ -21,18 +22,7 @@ const $contraseña = document.getElementById("contraseña");
 document.addEventListener('DOMContentLoaded', function() {
     
     $cambiar.addEventListener("click", async function() {
-        let num = 0;
-        $input.forEach(x => {
-            let p = x.nextElementSibling;
-            if (x.value.length === 0) {
-                x.classList.add("alert"); 
-                p.classList.add("vacio--ver")  ;      
-            } else {
-                x.classList.remove("alert");
-                p.classList.remove("vacio--ver") ;  
-                num += 1;
-            }
-        });
+        let num = validations(event, $input)
 
         if (num === $input.length) {
 
@@ -43,8 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             let respuesta = await Ajax(servlet ,datos,"POST", "ValidarLogin");
             if (respuesta.error){
-                    Mensaje($titleError, $paragrahp, error, "Error en credenciales","Usuaro o contraseña incorrectos"
-                );
+                    Mensaje($titleError, $paragrahp, error, "Error en credenciales","Usuaro o contraseña incorrectos");
             }
             else{
                 localStorage.setItem("idUsuario", respuesta.idUsuario);

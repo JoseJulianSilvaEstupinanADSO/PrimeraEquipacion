@@ -128,7 +128,7 @@
         </div>
     </div>
   </main>
-  <script src="../../js/clientes.js"></script>
+    <script src="../../js/clientes.js" type="module"></script>
   <script src="../../js/menu.js"></script>
 </body>
 </html>
