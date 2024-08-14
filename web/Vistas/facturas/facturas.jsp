@@ -129,7 +129,7 @@
                 </div>
             </div>
         </main>
-        <script src="../../js/factura.js"></script>
+        <script src="../../js/factura.js" type="module"></script>
         <script src="../../js/menu.js"></script>
     </body>
 </html>

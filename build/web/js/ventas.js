@@ -467,3 +467,9 @@ telefono.addEventListener("keypress", (event) => {
 nombre.addEventListener("keypress", (event) => {
     validarString(event);
 });
+documento.addEventListener("blur", (event) => {
+    validarLength(event, documento);
+});
+telefono.addEventListener("blur", (event) => {
+    validarLength(event, telefono);
+});
