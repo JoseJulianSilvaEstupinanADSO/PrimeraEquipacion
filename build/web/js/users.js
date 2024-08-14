@@ -3,9 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/javascript.js to edit this template
  */
 
-
+import Ajax from "./Modulos/ajax.js";
+import Mensaje from "./Modulos/msjerror.js";
 
 const $dom = document;
+const sevlet = "../../Usuarios";
 const error = $dom.querySelector(".container__modal--error");
 const $titleError = $dom.querySelector(".title_error");
 const $paragrahp = $dom.querySelector(".paragrahp__error");
@@ -88,108 +90,98 @@ function filas(){
 
 
 // Listar Toddos los usuarios Registrados en la base de datos//
-function CargarDatos() {
+async function CargarDatos() {
     const $BtnBusacar = $dom.querySelector("#BuscarUser");
     const  $filas = $dom.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
     $filas.forEach((x) =>{
         x.remove();
     });
     //Operacion AJAX//
-    let ope = new XMLHttpRequest();
-        ope.open("GET", "../../Usuarios?action=ListaUsuarios", true);
-        ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        ope.onload = function(){
-            if (ope.status === 200){
-                let respuesta = JSON.parse(ope.responseText);
-                const $tbody = $dom.querySelector(".body__tabla");
-                const $frag = $dom.createDocumentFragment();
-                respuesta.forEach((x) => {
-                    
-                    //tomando el resultado de la operacion AJAX y recorriendolo
-                    //Se crea la fila donde se almacenaran los datos del respectivo usuario
-                    const $fila = $dom.createElement("tr");
-                    $fila.classList.add("fila__tabla");
+    let respuesta = await Ajax(servlet,"","GET","ListaUsuarios"); 
+    const $tbody = $dom.querySelector(".body__tabla");
+    const $frag = $dom.createDocumentFragment();
+    respuesta.forEach((x) => {
 
-                    const $colId = $dom.createElement("td");
-                    $colId.classList.add("td__tabla");
-                    $colId.classList.add("IdUsuario");
-                    
-                    $colId.innerText = x.idUsuario;
+        //tomando el resultado de la operacion AJAX y recorriendolo
+        //Se crea la fila donde se almacenaran los datos del respectivo usuario
+        const $fila = $dom.createElement("tr");
+        $fila.classList.add("fila__tabla");
 
-                    const $colNom = $dom.createElement("td");
-                    $colNom.classList.add("td__tabla");
-                    $colNom.classList.add("NombreUsuario");
-                    
-                    $colNom.innerText = x.nombre;
+        const $colId = $dom.createElement("td");
+        $colId.classList.add("td__tabla");
+        $colId.classList.add("IdUsuario");
 
-                    const $colDoc = $dom.createElement("td");
-                    $colDoc.classList.add("td__tabla");
-                    $colDoc.classList.add("DocumentoUsuario");
-                    
-                    $colDoc.innerText = x.documento;
+        $colId.innerText = x.idUsuario;
 
-                    const $colRol = $dom.createElement("td");
-                    $colRol.classList.add("td__tabla");
-                    $colRol.classList.add("Rol");
-                    
-                    $colRol.innerText = x.rol;
+        const $colNom = $dom.createElement("td");
+        $colNom.classList.add("td__tabla");
+        $colNom.classList.add("NombreUsuario");
 
-                    const $colUser = $dom.createElement("td");
-                    $colUser.classList.add("td__tabla");
-                    $colUser.classList.add("UsuarioUser");
-                    
-                    $colUser.innerText = x.usuario;
+        $colNom.innerText = x.nombre;
 
-                    const $colTel = $dom.createElement("td");
-                    $colTel.classList.add("td__tabla");
-                    $colTel.classList.add("TelUser");
-                    
-                    $colTel.innerText = x.telefono;
+        const $colDoc = $dom.createElement("td");
+        $colDoc.classList.add("td__tabla");
+        $colDoc.classList.add("DocumentoUsuario");
 
-                    const $colDirec = $dom.createElement("td");
-                    $colDirec.classList.add("td__tabla");
-                    $colDirec.classList.add("DireccionUser");
-                    
-                    $colDirec.innerText = x.direccion;
+        $colDoc.innerText = x.documento;
 
-                    const $colEmail = $dom.createElement("td");
-                    $colEmail.classList.add("td__tabla");
-                    $colEmail.classList.add("EmailUser");
-                    
-                    $colEmail.innerText = x.email;
-                    
-                    const $colBtn = $dom.createElement("td");
-                    $colBtn.classList.add("td__tabla");
-                    
-                    
-                    const $BtnEdit = $dom.createElement("button");
-                    $BtnEdit.classList.add("button__tabla");
-                    $BtnEdit.innerText = "Editar";
-                    
-                    
-                    $colBtn.appendChild($BtnEdit);
-                    $fila.appendChild($colId);
-                    $fila.appendChild($colNom);
-                    $fila.appendChild($colDoc);
-                    $fila.appendChild($colRol);
-                    $fila.appendChild($colUser);
-                    $fila.appendChild($colTel);
-                    $fila.appendChild($colDirec);
-                    $fila.appendChild($colEmail);
-                    $fila.appendChild($colBtn);
-                    
-                    $frag.appendChild($fila);
-                     
-                });
-                
-                $tbody.appendChild($frag);
-                filas();
-            
-            }
-        };
-        ope.send();
-        
-    
+        const $colRol = $dom.createElement("td");
+        $colRol.classList.add("td__tabla");
+        $colRol.classList.add("Rol");
+
+        $colRol.innerText = x.rol;
+
+        const $colUser = $dom.createElement("td");
+        $colUser.classList.add("td__tabla");
+        $colUser.classList.add("UsuarioUser");
+
+        $colUser.innerText = x.usuario;
+
+        const $colTel = $dom.createElement("td");
+        $colTel.classList.add("td__tabla");
+        $colTel.classList.add("TelUser");
+
+        $colTel.innerText = x.telefono;
+
+        const $colDirec = $dom.createElement("td");
+        $colDirec.classList.add("td__tabla");
+        $colDirec.classList.add("DireccionUser");
+
+        $colDirec.innerText = x.direccion;
+
+        const $colEmail = $dom.createElement("td");
+        $colEmail.classList.add("td__tabla");
+        $colEmail.classList.add("EmailUser");
+
+        $colEmail.innerText = x.email;
+
+        const $colBtn = $dom.createElement("td");
+        $colBtn.classList.add("td__tabla");
+
+
+        const $BtnEdit = $dom.createElement("button");
+        $BtnEdit.classList.add("button__tabla");
+        $BtnEdit.innerText = "Editar";
+
+
+        $colBtn.appendChild($BtnEdit);
+        $fila.appendChild($colId);
+        $fila.appendChild($colNom);
+        $fila.appendChild($colDoc);
+        $fila.appendChild($colRol);
+        $fila.appendChild($colUser);
+        $fila.appendChild($colTel);
+        $fila.appendChild($colDirec);
+        $fila.appendChild($colEmail);
+        $fila.appendChild($colBtn);
+
+        $frag.appendChild($fila);
+
+    });
+
+    $tbody.appendChild($frag);
+    filas();
+   
 }
 
 CargarDatos();
@@ -267,7 +259,7 @@ table.addEventListener('click', function(event) {
    }
  });
 
-function Modificar() {
+async function Modificar() {
     
     const $id = $dom.querySelector(".form_Id").value;
     const $nombre = $dom.querySelector(".form_Nombre").value;
@@ -277,32 +269,25 @@ function Modificar() {
     const $telefono = $dom.querySelector(".form_Tel").value;
     const $direccion = $dom.querySelector(".form_Direc").value;
     const $correo = $dom.querySelector(".form_Email").value;
-    
+    let datos = {
+        "id": $id,
+        "id_rol": $rol,
+        "nombre": $nombre,
+        "documento": $documento,
+        "usuario": $usuario,
+        "telefono": $telefono,
+        "direccion": $direccion,
+        "correo": correo,
+        "contrasena": null
+    };
+    let respuesta = await Ajax(servlet,datos,"POST","ModificarUsuario");   
+    if(respuesta.resultado){
+        Mensaje($titleError, $paragrahp, error, "Exito","Usuario Modificado");
+         CloseModal();
+         CargarDatos();
 
-   let ope = new XMLHttpRequest();
-   ope.open("POST", "../../Usuarios?action=ModificarUsuario", true);
-   ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-   ope.onload = function () {
-     if(ope.status === 200){
-         let respuesta = JSON.parse(ope.responseText);
-            
-         
-         if(respuesta.resultado){
-             $titleError.innerText = "Exito";
-            $paragrahp.innerText = "Usuario Modificado";
-            error.style.display = "block";
-            setTimeout(() => {
-                error.style.display = "none";
-            }, 2000);
-             
-             CloseModal();
-             CargarDatos();
-             
-             
-         }
-     }  
-   };
-   ope.send("id=" + $id + "&id_rol=" + $rol + "&nombre=" + $nombre + "&documento=" + $documento + "&usuario=" + $usuario + "&telefono=" + $telefono + "&direccion=" + $direccion + "&correo=" + $correo + "&contrasena=" + null);
+
+    }
 };
 
 const $BtnModificar = $dom.querySelector(".ModificarUser");
@@ -328,12 +313,7 @@ function Buscar() {
     });
     
     if(num === $filas.length){
-        $titleError.innerText = "Usuario no encontrado";
-        $paragrahp.innerText = "Verifique el id del Usuario";
-        error.style.display = "block";
-        setTimeout(() => {
-            error.style.display = "none";
-        }, 2000);
+        Mensaje($titleError, $paragrahp, error, "suario no encontrado","Verifique el id del Usuario");
         CargarDatos();
     }
 }
