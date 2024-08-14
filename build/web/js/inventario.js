@@ -178,7 +178,12 @@ table.addEventListener('click', function(event) {
 
     $input.classList.add("input__modal");
     $input.classList.add("form_talla");
-
+    if (estado === "Habilitado") {
+        estado = 1;
+    }
+    else{
+        estado = 0;
+    }
 
     $cambio.appendChild($input);
 
@@ -333,8 +338,15 @@ async function ListarProductos() {
         const $colEs = $dom.createElement("td");
         $colEs.classList.add("td__tabla");
         $colEs.classList.add("pro_estado");
+        let valor = "";
+        if (x.estado === "1") {
+            valor = "Habilitado";
+        }
+        else{
+            valor = "Desabilitado";
+        }
 
-        $colEs.innerText = x.estado;
+        $colEs.innerText = valor;
 
         const $colBtn = $dom.createElement("td");
         $colBtn.classList.add("td__tabla");

@@ -122,7 +122,7 @@ public class FacturaDAO extends Conexion {
             this.conectar();
             
             // Consulta SQL para seleccionar todas las facturas junto con el ID de la venta asociada
-            String sql = "SELECT f.id_factura, f.fecha_facturacion, f.id_venta, f.doc_cliente, f.total, v.id_usuario FROM factura f JOIN venta v ON f.id_venta = v.id_venta";
+            String sql = "SELECT f.id_factura, f.fecha_facturacion, f.id_venta, f.doc_cliente, f.total, v.id_usuario, u.nombre FROM factura f JOIN venta v ON f.id_venta = v.id_venta JOIN usuario u ON u.id_usuario = v.id_usuario";
             PreparedStatement pre = this.getCon().prepareStatement(sql);
             
             // Ejecuta la consulta y procesa los resultados
@@ -132,7 +132,7 @@ public class FacturaDAO extends Conexion {
                 Factura f = new Factura();
                 
                 f.setId_venta(rs.getString("id_venta"));
-                f.setId_usuario(rs.getString("id_usuario"));
+                f.setId_usuario(rs.getString("nombre"));
                 f.setId_factura(rs.getString("id_factura"));
                 f.setFecha(rs.getString("fecha_facturacion"));
                 f.setDoc_cliente(rs.getString("doc_cliente"));
@@ -199,7 +199,7 @@ public class FacturaDAO extends Conexion {
             this.conectar();
             
             // Consulta SQL para seleccionar todas las compras de un cliente basado en su documento
-            String sql = "SELECT f.id_venta, f.id_factura, f.fecha_facturacion, v.id_usuario FROM factura f JOIN venta v ON f.id_venta = v.id_venta WHERE f.doc_cliente = ?";
+            String sql = "SELECT f.id_venta, f.id_factura, f.fecha_facturacion, v.id_usuario, u.nombre FROM factura f JOIN venta v ON f.id_venta = v.id_venta JOIN usuario u ON v.id_usuario = u.id_usuario WHERE f.doc_cliente = ?";
             PreparedStatement pre = this.getCon().prepareStatement(sql);
             pre.setString(1, doc_cliente);
             
@@ -211,7 +211,7 @@ public class FacturaDAO extends Conexion {
                 c.setId_venta(rs.getString("id_venta"));
                 c.setId_factura(rs.getString("id_factura"));
                 c.setFecha(rs.getString("fecha_facturacion"));
-                c.setId_usuario(rs.getString("id_usuario"));
+                c.setId_usuario(rs.getString("nombre"));
                 
                 compras.add(c);
             }

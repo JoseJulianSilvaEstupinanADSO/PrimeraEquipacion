@@ -74,7 +74,7 @@
                         <th class="th__item">Fecha Facturacion</th>
                         <th class="th__item">Documento Cliente</th>
                         <th class="th__item">Id Venta</th>
-                        <th class="th__item">Id Usuario</th>
+                        <th class="th__item">Nombre Vendedor</th>
                         <th class="th__item">Total</th>
                         <th class="th__item">Acciones</th>
                         </thead>
