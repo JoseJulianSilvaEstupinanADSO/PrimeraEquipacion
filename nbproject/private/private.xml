@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/js/datos.js</file>
             <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/js/Modulos/Validaciones/length.js</file>
             <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/js/Modulos/Validaciones/correo.js</file>
@@ -12,6 +13,15 @@
             <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/js/clientes.js</file>
             <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/js/Modulos/Validaciones/letras.js</file>
             <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/Vistas/admin/clientes.jsp</file>
+=======
+            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/menu.js</file>
+            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/registro.js</file>
+            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/factura.js</file>
+            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/users.js</file>
+            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/inicio.js</file>
+            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/login.js</file>
+            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/inventario.js</file>
+>>>>>>> 514a18b49809ae6c84d24a73a46451f68f06d207
         </group>
     </open-files>
 </project-private>

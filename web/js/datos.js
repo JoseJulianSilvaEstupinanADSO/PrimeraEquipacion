@@ -211,13 +211,13 @@ $nombre_user.addEventListener("keypress", (event) => {
     validarString(event );
 });
 
-$tel_user.addEventListener("blur", ((event) => {
+$tel_user.addEventListener("keypress", (event) => {
     validarNumber(event);
-}));
-$tel_user.addEventListener("blur", ((event) => {
+});
+$tel_user.addEventListener("blur", (event) => {
     validarLength(event, $tel_user);
-}));
+});
 
-$email_user.addEventListener("blur", ((event) => {
+$email_user.addEventListener("blur", (event) => {
     validarCorreo(event, $email_user);
-}));
+});

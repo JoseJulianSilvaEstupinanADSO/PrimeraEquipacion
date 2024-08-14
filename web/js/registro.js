@@ -3,62 +3,81 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/javascript.js to edit this template
  */
 
+import Ajax from "./Modulos/ajax.js";
+import Mensaje from "./Modulos/msjerror.js";
+import validations from "./Modulos/Validaciones/vacio.js";
+import validarCorreo from "./Modulos/Validaciones/correo.js";
+import validarString from "./Modulos/Validaciones/letras.js";
+import validarNumber from "./Modulos/Validaciones/numeros.js"
+import validarLength from "./Modulos/Validaciones/length.js";
+
+
 const $dom = document;
-const $cambiar = document.querySelector(".Registrar");
+const servlet = "../Usuarios";
+const $input = $dom.querySelectorAll(".login__form [required]");
+const $cambiar = document.querySelector(".login__form");
 const error = $dom.querySelector(".container__modal--error");
 const $titleError = $dom.querySelector(".title_error");
 const $paragrahp = $dom.querySelector(".paragrahp__error");
 
-$cambiar.addEventListener("click", function () {
+const $usuario = document.querySelector("#Ruser");
+const $contrasena = document.querySelector("#Rcontra");
+const $documento = document.querySelector("#Rdoc");
+const $nombre = document.querySelector("#Rnom");
+const $telefono = document.querySelector("#Rtel");
+const $direccion = document.querySelector("#Rdirec");
+const $email = document.querySelector("#Remail");
+const $edad = document.querySelector("#Redad");
+        
+$cambiar.addEventListener("submit", async function () {
     const $input = document.querySelectorAll("div > input.login__input");
-    let num = 0;
-    $input.forEach(x => {
-        let p = x.nextElementSibling;
-        if (x.value.length === 0) {
-            x.classList.add("alert"); 
-            p.classList.add("vacio--ver");        
-        } else {
-            x.classList.remove("alert");
-            p.classList.remove("vacio--ver");   
-            num += 1;
-        }
-    });
+    let num = validations(event, $input);
     if (num === $input.length) {
-        
-        const $usuario = document.querySelector("#Ruser").value;
-        const $contrasena = document.querySelector("#Rcontra").value;
-        const $documento = document.querySelector("#Rdoc").value;
-        const $nombre = document.querySelector("#Rnom").value;
-        const $telefono = document.querySelector("#Rtel").value;
-        const $direccion = document.querySelector("#Rdirec").value;
-        const $email = document.querySelector("#Remail").value;
-        const $edad = document.querySelector("#Redad").value;
-        
-        let ope = new XMLHttpRequest();
-        ope.open("POST","../Usuarios?action=RegistrarUsuario",true);
-        ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        ope.onload = function(){
-            if (ope.status === 200){
-                let respuesta = JSON.parse(ope.responseText);
-                if (respuesta.resultado){
-                    alert(respuesta.resultado);
-                    alert("Usuario Creado");
-                    window.location.href = '../index.jsp';
-                }
-                else{
-                    alert("El usuario no pudo ser Registrado UserName ya registrado");
-                }
-            }
+        let datos = {
+                "usuario": $usuario.value,
+                "contrasena": $contrasena.value,
+                "documento": $documento.value,
+                "nombre": $nombre.value,
+                "telefono": $telefono.value,
+                "direccion": $direccion.value,
+                "email": $email.value,
+                "edad": $edad.value
         };
-        ope.send("usuario=" + $usuario + "&contrasena=" + $contrasena + "&documento=" + $documento + "&nombre=" + $nombre + "&telefono=" + $telefono + "&direccion=" + $direccion + "&email=" + $email + "&edad=" + $edad);
-
+        let respuesta = await Ajax(servlet,datos,"POST","RegistrarUsuario");   
+        if (respuesta.resultado){
+            Mensaje($titleError, $paragrahp, error, "Exito","Usuario creado exitosamente");
+            setInterval(() => {
+                window.location.href = '../index.jsp';         
+            },2000);
+        }
+        else{
+            Mensaje($titleError, $paragrahp, error, "Error","El usuario no pudo ser Registrado UserName ya registrado");
+        }
     }
     else{
-        $titleError.innerText = "Error campos vacios";
-        $paragrahp.innerText = "Por favor llene todos los campos";
-        error.style.display = "block";
-        setTimeout(() => {
-            error.style.display = "none";
-        }, 2000);
+        Mensaje($titleError, $paragrahp, error, "Error campos vacios","Por favor llene todos los campos");
     }
+});
+
+
+$nombre.addEventListener("keypress", (event) => {
+    validarString(event);
+});
+$documento.addEventListener("keypress",(event) => {
+    validarNumber(event);
+});
+$telefono.addEventListener("keypress",(event) => {
+    validarNumber(event);
+});
+$edad.addEventListener("keypress", (event) => {
+    validarNumber(event);
+});
+$telefono.addEventListener("blur", (event) => {
+    validarLength(event, $telefono);
+});
+$documento.addEventListener("blur", (event) => {
+    validarLength(event, $documento);
+});
+$email.addEventListener("blur", (event) => {
+    validarCorreo(event, $email);
 });

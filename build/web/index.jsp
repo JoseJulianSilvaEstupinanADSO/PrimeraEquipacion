@@ -23,12 +23,12 @@
                     Login
                 </h1>
                 <div class="mb-3">
-                    <label for="formGroupExampleInput" class="form-label login__label">Usuario</label>
+                    <label for="usuario" class="form-label login__label">Usuario</label>
                     <input type="text" class="form-control login__input" id="usuario" placeholder="Usuario" required>
                     <p class="vacio">Campo Vacio</p>
                 </div>
                 <div class="mb-3">
-                    <label for="formGroupExampleInput2" class="form-label login__label">Contraseña</label>
+                    <label for="contraseña" class="form-label login__label">Contraseña</label>
                     <input type="password" class="form-control login__input" id="contraseña" placeholder="Contraseña" required>
                     <p class="vacio">Campo Vacio</p>
                 </div>

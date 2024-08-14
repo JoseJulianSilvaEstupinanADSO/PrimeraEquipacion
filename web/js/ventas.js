@@ -3,16 +3,57 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/javascript.js to edit this template
  */
 
+import Ajax from "./Modulos/ajax.js";
+import Mensaje from "./Modulos/msjerror.js";
+import validations from "./Modulos/Validaciones/vacio.js";
+import validarCorreo from "./Modulos/Validaciones/correo.js";
+import validarString from "./Modulos/Validaciones/letras.js";
+import validarNumber from "./Modulos/Validaciones/numeros.js"
+import validarLength from "./Modulos/Validaciones/length.js";
+
 const $dom = document;
 
-const $pago_c = $dom.querySelector("#pago_cliente");
-const $vuelta_c = $dom.querySelector("#vueltos_cliente");
-
-
+const servlet_c = "../../Clientes";
+const servlet_p = "../../Productos";
+const servlet_f = "../../Facturas";
 
 const error = $dom.querySelector(".container__modal--error");
 const $titleError = $dom.querySelector(".title_error");
 const $paragrahp = $dom.querySelector(".paragrahp__error");
+
+const $pago_c = $dom.querySelector("#pago_cliente");
+const $vuelta_c = $dom.querySelector("#vueltos_cliente");
+
+const $modal = $dom.getElementById("ventanaModal");
+const $boton = $dom.getElementById("abrirModal");
+const $cerrar = $dom.getElementById("Cerrar__Modal");
+
+const documento = $dom.querySelector(".documento_cliente");
+const nombre = $dom.querySelector(".nombre_cliente");
+const telefono = $dom.querySelector(".tefelono_cliente");
+
+const $label = $dom.querySelector("input#cdProducto");
+const $selec = $dom.querySelector("select#tallas");
+const $tbody = $dom.querySelector("tbody.tabla__tb");
+
+
+const $BtnRegistrar = $dom.querySelector(".registar__clientes");
+const Btn_buscar_cliente = $dom.querySelector(".Btn_busacar_cliente");
+const $buscarp = $dom.querySelector("button#buscar_producto");
+
+const $documento = $dom.querySelector(".documento");
+const $nom_clie = $dom.querySelector(".insertDocumento");
+const $nombre = $dom.querySelector("#nombre_produc");
+const $precio = $dom.querySelector("#precio_produc");
+const $pro_items = $dom.querySelectorAll("input[required]");
+const $btn_agregar_pro = $dom.querySelector("#agregar_producto");
+const $cant = $dom.querySelector("#cant_produc");
+
+const $venta = $dom.querySelector(".btn__ventas");
+
+let stock = 0;
+let estado = 0;
+let iva = 19;
 
 function CloseSession(){
         let $session = localStorage.getItem("session");
@@ -31,13 +72,6 @@ setInterval(() => {
 
 //MODAL-----------------------------------------------------------------------
 
-const $modal = document.getElementById("ventanaModal");
-
-
-const $boton = document.getElementById("abrirModal");
-
-
-const $cerrar = document.getElementById("Cerrar__Modal");
 
 
 function CloseModal() {   
@@ -49,15 +83,6 @@ function CloseModal() {
 }
 
 
-$boton.addEventListener("click",function() {
-  $modal.style.display = "block";
-    let documento = document.querySelector(".documento_cliente");
-    let nombre = document.querySelector(".nombre_cliente");
-    let telefono = document.querySelector(".tefelono_cliente");
-    documento.value = "";
-    nombre.value = "";
-    telefono.value = "";
-});
 
 $cerrar.addEventListener("click", function () {
     $modal.classList.add("cerrando");
@@ -77,19 +102,22 @@ window.addEventListener("click",function(event) {
   }
 });
 
+$boton.addEventListener("click",function() {
+  $modal.style.display = "block";
+    documento.value = "";
+    nombre.value = "";
+    telefono.value = "";
+});
 //----------------------------------------------------------------------------
 
-function eliminar(){
-    
-    return  botonesEliminar = document.querySelectorAll('.BtnEliminar');    
-}
+//function eliminar(){
+//    return  botonesEliminar = document.querySelectorAll('.BtnEliminar');    
+//}
 
 
- document.addEventListener('DOMContentLoaded', function() {
-     
-     
-  setInterval(() => {
-    const botonesEliminar = eliminar();    
+ document.addEventListener('DOMContentLoaded', function() {   
+ setInterval(() => {
+    const botonesEliminar = $dom.querySelectorAll('.BtnEliminar');    
     botonesEliminar.forEach(boton => {
         boton.addEventListener('click', function() {
             const fila = this.closest('tr'); // Selecciona la fila más cercana al botón clicado
@@ -103,293 +131,153 @@ function eliminar(){
 
 // Registrar cliente //
 
-function RegistarCliente() {
+async function RegistarCliente() {
     
     event.preventDefault();
     
-    let documento = document.querySelector(".documento_cliente");
-    let nombre = document.querySelector(".nombre_cliente");
-    let telefono = document.querySelector(".tefelono_cliente");
-   
-   $documento = documento.value;
-   $nombre = nombre.value;
-   $telefono = telefono.value;
-    
+
     let num = 0;
     
-    if ($documento.length === 10 && $nombre.length > 0 && $telefono.length === 10) {
+    if ((documento.value).length === 10 && (nombre.value).length > 0 && (telefono.value).length === 10) {
         num = 1;
     }    
     if (num === 1) {
         
-        let ope = new XMLHttpRequest();
-        ope.open("POST", "../../Clientes?action=RegistrarUsuario", true);
-        ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        ope.onload = function(){
-            if (ope.status === 200) {
-                let respuesta = JSON.parse(ope.responseText);
-                console.log(respuesta);
-                if (respuesta.resultado) {
-                    const $modal = document.getElementById("ventanaModal");
-                    $titleError.innerText = "Exito";
-                    $paragrahp.innerText = "Cliente registrado con exito";
-                    error.style.display = "block";
-                    setTimeout(() => {
-                        error.style.display = "none";
-                    }, 2000);
-                    
-                    
-                    CloseModal();
-                    
-                }
-            }  
+        let datos = {
+                "nombre": nombre.value,
+                "documento": documento.value,
+                "telefono": telefono.value
         };
-        ope.send("nombre=" + $nombre + "&documento=" + $documento + "&telefono=" + $telefono);
+        
+        let respuesta = await Ajax(servlet_c,datos,"POST","RegistrarUsuario");
+        
+        if (respuesta.resultado) {
+            Mensaje($titleError, $paragrahp, error, "Exito","Cliente registrado con exito");
+            CloseModal();
+
+        }
     }
     else{
-        $titleError.innerText = "Error al registrar";
-        $paragrahp.innerText = "Verifique que no hayan campos vacios o que el telefono y documento tengan 10 caracteres";
-        error.style.display = "block";
-        setTimeout(() => {
-            error.style.display = "none";
-        }, 2000);
+        Mensaje($titleError, $paragrahp, error, "Error al registrar","Verifique que no hayan campos vacios o que el telefono y documento tengan 10 caracteres");
     }
     
     
 
 }
-
-
-const $BtnRegistrar = document.querySelector(".registar__clientes");
-
-$BtnRegistrar.addEventListener("submit", RegistarCliente);
-
-
 
 // Bucar Cliente   //
 
-function BuscarCliente() {
-    const $documento = $dom.querySelector(".documento");
+async function BuscarCliente() {
     let valor = $documento.value;
-    if(valor !== ""){
+    $nom_clie.value = "";
+    if(valor !== ""){ 
         $documento.classList.remove("alert");
-        let ope = new XMLHttpRequest();
-        ope.open("POST", "../../Clientes?action=BuscarCliente", true);
-        ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        ope.onload = function() {
-            if (ope.status === 200){
-                let respuesta = JSON.parse(ope.responseText);
-                if (respuesta.error){
-                    $documento.classList.add("alert");
-                    $titleError.innerText = "Cliente no encontrado";
-                    $paragrahp.innerText = "Verifique el documento del cliente";
-                    error.style.display = "block";
-                    setTimeout(() => {
-                        error.style.display = "none";
-                    }, 2000);
-                }
-                else{
-                    const $label = $dom.querySelector(".insertDocumento");
-                    $label.value = respuesta.nombre;
-                }
-            }  
-        };
-        
-    ope.send("documento=" + valor);
-    }
+        let datos = {
+                "documento": valor
+        };   
+        let respuesta = await Ajax(servlet_c,datos,"POST","BuscarCliente");
+
+        if (respuesta.error){
+            Mensaje($titleError, $paragrahp, error, "Cliente no encontrado","Verifique el documento del cliente");
+            $documento.classList.add("alert");
+        }
+        else{
+            $nom_clie.value = respuesta.nombre;
+        }
+    }  
     else{
         $documento.classList.add("alert");
-        $titleError.innerText = "Error campo vacio";
-        $paragrahp.innerText = "Por favor llene todos los campos";
-        error.style.display = "block";
-        setTimeout(() => {
-            error.style.display = "none";
-        }, 2000);
+        Mensaje($titleError, $paragrahp, error, "Error campo vacio","Por favor llene todos los campos");
     }
 }
 
-const Btn_buscar_cliente = document.querySelector(".Btn_busacar_cliente");
-
-Btn_buscar_cliente.addEventListener("click", BuscarCliente);
-
-
 //Listar las tallas en la vista ventas//
 
-function ListarTallas() {
-    const $tallas = $dom.querySelector("select.tallas");    
-    let ope = new XMLHttpRequest();
-    ope.open("GET", "../../Productos?action=ListarTallas", true);
-    ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    ope.onload = function () {
-        if (ope.status === 200){
-            let respuesta = JSON.parse(ope.responseText);        
-            respuesta.forEach((x) => {
-               let option = $dom.createElement("option") ;
-               option.innerText = x.talla;
-               $tallas.appendChild(option);
-            });
-            
-        }
-    };
-    ope.send();
+async function ListarTallas() {    
+    let respuesta = await Ajax(servlet_p,"","GET","ListarTallas");     
+    respuesta.forEach((x) => {
+       let option = $dom.createElement("option") ;
+       option.innerText = x.talla;
+       $selec.appendChild(option);
+    });
 }
 ListarTallas();
 
 //Buscar Producto para agregarlo a la factura//
 
-const $buscarp = $dom.querySelector("button#buscar_producto");
-let stock = 0;
-let estado = 0;
-let iva = 19;
-function BuscarProducto() {
-    $label = $dom.querySelector("input#cdProducto");
-    $selec = $dom.querySelector("select#tallas");
-    
-    let codigo = $label.value;
-    let talla = $selec.value;
-    
+async function BuscarProducto() {
     let num = 0;
     
-    if (codigo !== ""){
+    if ($label.value !== ""){
         $label.classList.remove("alert");
         num+=1;
     }
     else{
         $label.classList.add("alert");
-        $titleError.innerText = "Error campos vacios";
-        $paragrahp.innerText = "Por favor llene todos los campos";
-        error.style.display = "block";
-        setTimeout(() => {
-            error.style.display = "none";
-        }, 2000);
+        Mensaje($titleError, $paragrahp, error, "Error campos vacios","Por favor llene todos los campos");
     }
-    if (talla !== "Seleccionar Talla"){
+    if ($selec.value !== "Seleccionar Talla"){
         $selec.classList.remove("alert"); 
         num+=1;
     }
     else{
-        $selec.classList.add("alert");
-        $titleError.innerText = "Error talla no seleccionada";
-        $paragrahp.innerText = "Seleccione una talla";
-        error.style.display = "block";
-        setTimeout(() => {
-            error.style.display = "none";
-        }, 2000);
+        Mensaje($titleError, $paragrahp, error, "Error talla no seleccionada","Seleccione una talla");
     }
     
     let $filas = $dom.querySelectorAll("tbody.tabla__tb > tr.tabla__fila");  
-        $filas.forEach((fila) => {
-            let id = fila.querySelector(".id__producto").innerText;
-            if (id === $label.value) {
-                num-=1;
-                $titleError.innerText = "Error producto ya registrado";
-                $paragrahp.innerText = "El producto ya se encuantra listado";
-                error.style.display = "block";
-                setTimeout(() => {
-                    error.style.display = "none";
-                }, 2000);
-            }
-        });
+    $filas.forEach((fila) => {
+        let id = fila.querySelector(".id__producto").innerText;
+        if (id === $label.value) {
+            num-=1;
+            Mensaje($titleError, $paragrahp, error, "Error producto ya registrado","El producto ya se encuantra listado");
+        }
+    });
     
     if (num === 2){
-        
-        let ope = new XMLHttpRequest();
-        ope.open("POST", "../../Productos?action=BuscarProducto", true);
-        ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        ope.onload = function() {
-            if (ope.status === 200){
-                let respuesta = JSON.parse(ope.responseText);
-                if(respuesta.error){
-                    $titleError.innerText = "Error Producto no encontrado";
-                    $paragrahp.innerText = "Producto en estado inhabilitado o Error en datos ingresados";
-                    error.style.display = "block";
-                    setTimeout(() => {
-                        error.style.display = "none";
-                    }, 2000);
-                }
-                else{
-                    let $nombre = $dom.querySelector("#nombre_produc");
-                    let $precio = $dom.querySelector("#precio_produc");
-                    $nombre.value = respuesta.nombre;
-                    $precio.value = respuesta.precio;
-                    stock = Number(respuesta.stock);
-                    estado = Number(respuesta.estado);   
-                }
-                if (respuesta.stock <= 10) {
-                    console.log("si")
-                    $titleError.innerText = "Estock del producto bajo";
-                    $paragrahp.innerText = "El estock actual del producto es: " + respuesta.stock;
-                    error.style.display = "block";
-                    setTimeout(() => {
-                        error.style.display = "none";
-                    }, 2000);
-                }
-                else{
-                    console.log("no")
-                }
-                
-            }
+         let datos = {
+                "id_producto": $label.value,
+                "talla": $selec.value
         };
-        ope.send("id_producto=" + codigo + "&talla=" + talla );
-    }
-}
-
-$buscarp.addEventListener("click", BuscarProducto);
-
-
-//Agregar Productos a la tabla Factura//
-
-const $pro_items = $dom.querySelectorAll("input[required]");
-const $btn_agregar_pro = $dom.querySelector("#agregar_producto");
-
-function AgragarProdutoTabla(items) {
-    let num = 0;
-    items.forEach((x) => {
-        if (x.value !== "") {
-            num+=1;
-            x.classList.remove("alert");
+        
+        let respuesta = await Ajax(servlet_p,datos,"POST","BuscarProducto");
+        if(respuesta.error){
+            Mensaje($titleError, $paragrahp, error, "Error Producto no encontrado","Producto en estado inhabilitado o Error en datos ingresados");
         }
         else{
-            x.classList.add("alert");
-            $titleError.innerText = "Error campos vacios";
-            $paragrahp.innerText = "Por favor llene todos los campos";
-            error.style.display = "block";
-            setTimeout(() => {
-                error.style.display = "none";
-            }, 2000);
+            $nombre.value = respuesta.nombre;
+            $precio.value = respuesta.precio;
+            stock = Number(respuesta.stock);
+            estado = Number(respuesta.estado);   
         }
-    });   
-    const $cant = $dom.querySelector("#cant_produc").value;
-    let cant = Number($cant);
-    if (num === items.length){
-        if (stock >= cant) {
+        if (respuesta.stock <= 10) {
+            Mensaje($titleError, $paragrahp, error, "Estock del producto bajo","El estock actual del producto es: " + respuesta.stock);
+        }             
+    }
+}
+//Agregar Productos a la tabla Factura//
+
+function AgragarProdutoTabla() {
+    let num = validations(event, $pro_items);
+    if (num === $pro_items.length){
+        if (stock >= Number($cant.value)) {
             
-            const $tbody = $dom.querySelector("tbody.tabla__tb");
-
-            const $id = $dom.querySelector("#cdProducto").value;
-            const $nombre = $dom.querySelector("#nombre_produc").value;
-            const $talla = $dom.querySelector("#tallas");
-            const $precio = $dom.querySelector("#precio_produc").value;
-
-            talla = $talla.value;
-
             const $tr = $dom.createElement("tr");
             $tr.classList.add("tabla__fila");
 
             const $td1 = $dom.createElement("td");
             $td1.classList.add("id__producto");
             $td1.classList.add("tabla__td");
-            $td1.innerText = $id;
+            $td1.innerText = $label.value;
 
             const $td2 = $dom.createElement("td");
             $td2.classList.add("nombre__producto");
             $td2.classList.add("tabla__td");
-            $td2.innerText = $nombre;
+            $td2.innerText = $nombre.value;
 
             const $td3 = $dom.createElement("td");
             $td3.classList.add("talla__producto");
             $td3.classList.add("tabla__td");
-            $td3.innerText = talla;
+            $td3.innerText = $selec.value;
             
             const $tdiva = $dom.createElement("td");
             $tdiva.classList.add("iva__producto");
@@ -400,19 +288,19 @@ function AgragarProdutoTabla(items) {
             const $subTotal = $dom.createElement("td");
             $subTotal.classList.add("subTotal__producto");
             $subTotal.classList.add("tabla__td");
-            $subTotal.innerText = Number($precio);
+            $subTotal.innerText = Number($precio.value) * Number($cant.value);
 
-            let iva_p = Number($precio) * Number(iva/100);
+            let iva_p = Number($precio.value) * Number(iva/100);
             
             const $td4 = $dom.createElement("td");
             $td4.classList.add("precio__producto");
             $td4.classList.add("tabla__td");
-            $td4.innerText = (Number($precio) + Number(iva_p))*Number($cant);
+            $td4.innerText = (Number($precio.value) + Number(iva_p))*Number($cant.value);
 
             const $td5 = $dom.createElement("td");
             $td5.classList.add("cantidad__producto");
             $td5.classList.add("tabla__td");
-            $td5.innerText = $cant;
+            $td5.innerText = $cant.value;
 
             const $td6 = $dom.createElement("td");
             $td6.classList.add("tabla__td");
@@ -436,29 +324,20 @@ function AgragarProdutoTabla(items) {
 
             $tbody.appendChild($tr);
 
-            items.forEach((x) => {
+            $pro_items.forEach((x) => {
                 x.value = "";
             });
-            $talla.value = "Seleccionar Talla";
-        
+            $selec.value = "Seleccionar Talla";
         }
-        
         else{
-            $titleError.innerText = "Stock insuficiente";
-            $paragrahp.innerText = "El stock del produdco no es suficiente para realizar la venta";
-            error.style.display = "block";
-            setTimeout(() => {
-                error.style.display = "none";
-            }, 2000);
+            Mensaje($titleError, $paragrahp, error, "Stock insuficiente","El stock del produdco no es suficiente para realizar la venta");
         }
+    }
+    else{
+        Mensaje($titleError, $paragrahp, error, "Campos Vacios","Favor llene todos los campos");
     }
     total();
 }
-
-
-$btn_agregar_pro.addEventListener("click", (() => {
-    AgragarProdutoTabla($pro_items);
-}));
 
 //Calcular el tottal de la factura //
 function total() {
@@ -474,102 +353,61 @@ function total() {
     $total.innerText = total;
 }
 
-
 //Generrar Una Nueva Venta, Agregando los datos a las tablas venta,factura,factura_producto//
 
-const $venta = $dom.querySelector(".btn__ventas");
-function NuevaVenta() {
-    
+async function NuevaVenta() {
     let id_usuario = localStorage.getItem("idUsuario");
-    
     let fecha = new Date;
     let fecha_factura = fecha.getFullYear()+"-"+(fecha.getMonth() + 1)+"-"+fecha.getDate();
-    
-    let $doc_cliente = $dom.querySelector("#cdCliente");
-    
-    let doc_cliente = $doc_cliente.value;
-    
     let $filas = $dom.querySelectorAll("tbody.tabla__tb > tr.tabla__fila");  
-    
-    let $total = $dom.querySelector(".total__factura");
-    
-    let total = $total.innerText;
-    
+    let $total = $dom.querySelector(".total__factura").innerText; 
     let pago = $pago_c.value;
-    
     if ($filas.length > 0) {
-        if (Number(total) <= Number(pago)){
-            $vuelta_c.value = Number(pago) - Number(total);
-            let ope = new XMLHttpRequest();
-            ope.open("POST", "../../Facturas?action=NuevaVenta", true);
-            ope.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            ope.onload = function(){
-                if (ope.status === 200) {
-                    let respuesta = JSON.parse(ope.responseText);
-                    id = respuesta.resultado;
-                    if (respuesta.resultado) {
-                        $filas.forEach((fila) => {
-                            let id_factura = respuesta.resultado;
-                            let $id_producto = fila.querySelector(".id__producto");
-                            let $cantidad = fila.querySelector(".cantidad__producto ");
-                            let $precio = fila.querySelector(".precio__producto ");
-
-                            let id_producto = $id_producto.innerText;
-                            let cantidad = $cantidad.innerText;
-                            let precio = $precio.innerText;
-
-                            let ope2 = new XMLHttpRequest();
-                            ope2.open("POST", "../../Facturas?action=AgregarProdcutosFactura", true);
-                            ope2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                            ope2.onload = function(){
-                                if (ope.status === 200){
-                                    let respuesta2 = JSON.parse(ope2.responseText);
-                                    
-                                }
-                            };
-                            ope2.send("id_factura=" + id_factura + "&id_producto=" + id_producto + "&cantidad=" + cantidad + "&precion="+ precio);
-
-                            fila.remove();
-
-                        });
-
-                    } 
-                    let cliente = $dom.querySelector(".cliente__nombre");
-                    cliente.value = "";
-                    $doc_cliente.value = "";
-                    setTimeout(() => {
-                        Descargar(respuesta.resultado);
-                    },2000);
-
-
-
-                }
+        if (Number($total) <= Number(pago)){
+            $vuelta_c.value = Number(pago) - Number($total);
+            let datos_1 = {
+                "id_usuario": id_usuario,
+                "fecha": fecha_factura,
+                "doc_cliente": $documento.value,
+                "total": $total
             };
-            ope.send("id_usuario=" + id_usuario + "&fecha=" + fecha_factura + "&doc_cliente=" + doc_cliente + "&total=" + total);
+            let respuesta = await Ajax(servlet_f,datos_1,"POST","NuevaVenta");
+            let id_factura = respuesta.resultado;
+            if (respuesta.resultado) {
+                $filas.forEach(async (fila) => {
+                    let $id_producto = fila.querySelector(".id__producto");
+                    let $cantidad = fila.querySelector(".cantidad__producto ");
+                    let $precio = fila.querySelector(".precio__producto ");
+                    
+                    let datos_2 = {
+                        "id_factura": id_factura,
+                        "id_producto": $id_producto.innerText,
+                        "cantidad": $cantidad.innerText,
+                        "precion": $precio.innerText
+                    };
+                    let respuesta = await Ajax(servlet_f,datos_2,"POST","AgregarProdcutosFactura");
+                    fila.remove();
+
+                });
+            } 
+            $nom_clie.value = "";
+            $documento.value = "";
+            setTimeout(() => {
+                Descargar(id_factura);
+            },2000);
         }
         else{
-            $titleError.innerText = "Pago Insuficiente";
-            $paragrahp.innerText = "El monto total de la compra es mayor al pago del cliente";
-            error.style.display = "block";
-            setTimeout(() => {
-                error.style.display = "none";
-            }, 2000);
+            Mensaje($titleError, $paragrahp, error, "Pago Insuficiente","El monto total de la compra es mayor al pago del cliente");
         }
     }
     
     else{
-        $titleError.innerText = "No hay datos para añadir";
-        $paragrahp.innerText = "Agrege productos a la factura";
-        error.style.display = "block";
-        setTimeout(() => {
-            error.style.display = "none";
-        }, 2000);
+        Mensaje($titleError, $paragrahp, error, "No hay datos para añadir","Agrege productos a la factura");
     }
     
 }
-$venta.addEventListener("click", NuevaVenta);
 
-function Descargar() {
+function Descargar(id) {
     let ope = new XMLHttpRequest();
     ope.open("GET", "../../Facturas?action=PdfProductosFactura&id_factura=" + encodeURIComponent(id), true);
     ope.responseType = 'blob'; // Configura el tipo de respuesta como blob para manejar archivos binarios
@@ -595,3 +433,43 @@ function Descargar() {
 
     ope.send();
 }
+
+$BtnRegistrar.addEventListener("submit", RegistarCliente);
+
+Btn_buscar_cliente.addEventListener("click", BuscarCliente);
+
+$buscarp.addEventListener("click", BuscarProducto);
+
+$btn_agregar_pro.addEventListener("click", () => {
+    AgragarProdutoTabla();
+});
+
+$venta.addEventListener("click", NuevaVenta);
+
+$documento.addEventListener("keypress", (event) => {
+    validarNumber(event);
+});
+$label.addEventListener("keypress", (event) => {
+    validarNumber(event);
+});
+$cant.addEventListener("keypress", (event) => {
+    validarNumber(event);
+});
+$pago_c.addEventListener("keypress", (event) => {
+    validarNumber(event);
+});
+documento.addEventListener("keypress", (event) => {
+    validarNumber(event);
+});
+telefono.addEventListener("keypress", (event) => {
+    validarNumber(event);
+});
+nombre.addEventListener("keypress", (event) => {
+    validarString(event);
+});
+documento.addEventListener("blur", (event) => {
+    validarLength(event, documento);
+});
+telefono.addEventListener("blur", (event) => {
+    validarLength(event, telefono);
+});

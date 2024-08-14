@@ -38,6 +38,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     margin-top: 50px;
     display: flex;
     gap: 70px;
+    margin-bottom: 10px;
 }
 .buscar{
     align-content: center;

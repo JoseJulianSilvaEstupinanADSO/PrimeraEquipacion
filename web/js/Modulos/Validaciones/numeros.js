@@ -7,11 +7,9 @@
 
 export default validarNumber
 
-function validarNumber(event, tipo, value) {
+function validarNumber(event) {
 
-    if (tipo === "number") {
-        if (!(event.charCode >= 48 && event.charCode <= 57)) {
-            event.preventDefault();
-        }
+    if (!(event.charCode >= 48 && event.charCode <= 57)) {
+        event.preventDefault();
     }
 }
