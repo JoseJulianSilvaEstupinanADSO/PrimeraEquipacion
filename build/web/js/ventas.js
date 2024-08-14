@@ -51,6 +51,10 @@ const $cant = $dom.querySelector("#cant_produc");
 
 const $venta = $dom.querySelector(".btn__ventas");
 
+const $canelar = $dom.querySelector(".btn__cancelar");
+
+console.log($canelar)
+
 let stock = 0;
 let estado = 0;
 let iva = 19;
@@ -407,6 +411,13 @@ async function NuevaVenta() {
     
 }
 
+function cancelar() {
+    let $filas = $dom.querySelectorAll("tbody.tabla__tb > tr.tabla__fila"); 
+    $filas.forEach((x) => {
+        x.remove();
+    });
+}
+
 function Descargar(id) {
     let ope = new XMLHttpRequest();
     ope.open("GET", "../../Facturas?action=PdfProductosFactura&id_factura=" + encodeURIComponent(id), true);
@@ -439,6 +450,8 @@ $BtnRegistrar.addEventListener("submit", RegistarCliente);
 Btn_buscar_cliente.addEventListener("click", BuscarCliente);
 
 $buscarp.addEventListener("click", BuscarProducto);
+
+$canelar.addEventListener("click", cancelar);
 
 $btn_agregar_pro.addEventListener("click", () => {
     AgragarProdutoTabla();

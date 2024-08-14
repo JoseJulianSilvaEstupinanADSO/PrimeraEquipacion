@@ -120,7 +120,7 @@
                             <div class="generar__factura">
                                 <div class="buttons__facturas">
                                     <button type="button" class="button button__form btn__ventas">Generar Factura</button>
-                                    <button type="button" class="button__link button__link--size btn__ventas">Cancelar</button>
+                                    <button type="button" class="button__link button__link--size btn__ventas btn__cancelar">Cancelar</button>
                                 </div>
                                 <div class="total__precio">
                                     <h2 class="total">TOTAL</h2>

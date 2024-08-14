@@ -264,7 +264,6 @@ async function AgregarModificarProducto() {
             "tela": $tela_producto.value,
             "estado": $estado
         };
-        console.log(datos);
         let respuesta = await Ajax(servlet,datos,"POST","ModificarProducto");
         if(respuesta.resultado){
             Mensaje($titleError, $paragrahp, error, "Exito","Producto Modificado");
