@@ -18,52 +18,44 @@
             <div class="login__logo">
                 <img class="logo__img" src="../img/logo.png" alt="">
             </div>
-            <form class="login__form">
+            <form class="login__form" novalidate>
                 <h1 class="login__title">
                     Registro
                 </h1>
                 <div class="mb-3">
                     <label for="formGroupExampleInput" class="form-labe login__label">Nombre:</label>
-                    <input type="text" class="form-control login__input" id="Rnom" placeholder="Nombre">
-                    <p class="vacio">Campo Vacio</p>
+                    <input type="text" class="form-control login__input" id="Rnom" placeholder="Nombre" required>
                 </div>
                 <div class="mb-3">
                     <label for="formGroupExampleInput" class="form-label login__label" >Documento:</label>
-                    <input type="number" class="form-control login__input" id="Rdoc" placeholder="Documento">
-                    <p class="vacio">Campo Vacio</p>
+                    <input type="text" class="form-control login__input form_Doc" id="Rdoc" placeholder="Documento" required>
                 </div>
                 <div class="mb-3">
-                    <label for="formGroupExampleInput" class="form-label login__label " >Telefono:</label>
-                    <input type="number" class="form-control login__input" id="Rtel" placeholder="Telefono">
-                    <p class="vacio">Campo Vacio</p>
+                    <label for="formGroupExampleInput" class="form-label login__label" >Telefono:</label>
+                    <input type="text" class="form-control login__input form_Tel" id="Rtel" placeholder="Telefono" required>
                 </div>
                 <div class="mb-3">
                     <label for="formGroupExampleInput" class="form-label login__label ">Direccion:</label>
-                    <input type="text" class="form-control login__input" id="Rdirec" placeholder="Direccion">
-                    <p class="vacio">Campo Vacio</p>
+                    <input type="text" class="form-control login__input" id="Rdirec" placeholder="Direccion" required>
                 </div>
                 <div class="mb-3">
                     <label for="formGroupExampleInput" class="form-label login__label">E-mail:</label>
-                    <input type="email" class="form-control login__input" id="Remail" placeholder="E-mail">
-                    <p class="vacio">Campo Vacio</p>
+                    <input type="text" class="form-control login__input" id="Remail" placeholder="E-mail" required>
                 </div>
                 <div class="mb-3">
                     <label for="formGroupExampleInput" class="form-label login__label ">Edad:</label>
-                    <input type="number" class="form-control login__input" id="Redad" placeholder="Edad">
-                    <p class="vacio">Campo Vacio</p>
+                    <input type="text" class="form-control login__input" id="Redad" placeholder="Edad" required>
                 </div>
                 <div class="mb-3">
                     <label for="formGroupExampleInput" class="form-label login__label">Usuario:</label>
-                    <input type="text" class="form-control login__input" id="Ruser" placeholder="Usuario">
-                    <p class="vacio">Campo Vacio</p>
+                    <input type="text" class="form-control login__input" id="Ruser" placeholder="Usuario" required>
                 </div>
                 <div class="mb-3">
                     <label for="formGroupExampleInput2" class="form-label login__label">Contraseña:</label>
-                    <input type="password" class="form-control login__input" id="Rcontra" placeholder="Contraseña">
-                    <p class="vacio">Campo Vacio</p>
+                    <input type="password" class="form-control login__input" id="Rcontra" placeholder="Contraseña" required>
                 </div>
                 <div class="btns__form">
-                    <button class="button" type="button"><a class="btn__link Registrar">Registrarse</a></button>
+                    <button class="button" type="submit"><a class="btn__link Registrar">Registrarse</a></button>
                     <button class="button button--color" type="button"><a class="btn__link btn__link--color" href="../index.jsp">Cancelar</a></button>
                 </div>
             </form>
@@ -76,5 +68,5 @@
         </div>
  
     </body>
-    <script src="../js/registro.js"></script>
+    <script src="../js/registro.js" type="module"></script>
 </html>
