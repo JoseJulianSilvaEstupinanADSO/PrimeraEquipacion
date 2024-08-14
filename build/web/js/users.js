@@ -12,11 +12,11 @@ const $paragrahp = $dom.querySelector(".paragrahp__error");
 
 
 function CloseSession(){
-        let $session = localStorage.getItem("session");
-        if ($session === "false" || $session === null) {
-            console.log("cerrado");
-            window.location.href = '../../index.jsp';
-        };
+    let $session = localStorage.getItem("session");
+    if ($session === "false" || $session === null) {
+        console.log("cerrado");
+        window.location.href = '../../index.jsp';
+    };
     
 }
 CloseSession();
