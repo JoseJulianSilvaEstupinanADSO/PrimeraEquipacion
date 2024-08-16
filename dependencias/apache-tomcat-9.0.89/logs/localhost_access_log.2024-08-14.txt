@@ -13813,3 +13813,9 @@
 0:0:0:0:0:0:0:1 - - [14/Aug/2024:17:19:06 -0500] "GET /PrimeraEquipacion/Usuarios?action=ListaUsuarios HTTP/1.1" 200 701
 0:0:0:0:0:0:0:1 - - [14/Aug/2024:17:19:10 -0500] "POST /PrimeraEquipacion/Usuarios?action=ModificarUsuario HTTP/1.1" 200 19
 0:0:0:0:0:0:0:1 - - [14/Aug/2024:17:19:10 -0500] "GET /PrimeraEquipacion/Usuarios?action=ListaUsuarios HTTP/1.1" 200 701
+127.0.0.1 - - [14/Aug/2024:17:32:52 -0500] "HEAD /netbeans-tomcat-status-test HTTP/1.1" 404 -
+127.0.0.1 - root [14/Aug/2024:17:32:52 -0500] "GET /manager/text/ HTTP/1.1" 200 44
+127.0.0.1 - - [14/Aug/2024:17:32:52 -0500] "HEAD /netbeans-tomcat-status-test HTTP/1.1" 404 -
+127.0.0.1 - root [14/Aug/2024:17:32:52 -0500] "GET /manager/text/ HTTP/1.1" 200 44
+127.0.0.1 - - [14/Aug/2024:17:32:52 -0500] "HEAD /netbeans-tomcat-status-test HTTP/1.1" 404 -
+127.0.0.1 - root [14/Aug/2024:17:32:52 -0500] "GET /manager/text/ HTTP/1.1" 200 44

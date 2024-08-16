@@ -104,7 +104,7 @@ public class UsuarioDAO extends Conexion {
             this.conectar();
 
             // Consulta SQL para seleccionar todos los usuarios excluyendo aquellos con rol 4
-            String sql = "SELECT * FROM usuario WHERE id_rol != 4 OR id_rol IS NULL";
+            String sql = "SELECT u.id_usuario, u.usuario, u.contrasena, u.documento, u.nombre, u.telefono, u.direccion, u.email, r.nombre as rol FROM usuario u JOIN rol r ON u.id_rol = r.id_rol WHERE u.id_rol != 4 OR u.id_rol IS NULL";
             PreparedStatement pre = this.getCon().prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
 
@@ -119,7 +119,7 @@ public class UsuarioDAO extends Conexion {
                 u.setTelefono(rs.getString("telefono"));
                 u.setDireccion(rs.getString("direccion"));
                 u.setEmail(rs.getString("email"));
-                u.setRol(rs.getString("id_rol"));
+                u.setRol(rs.getString("rol"));
 
                 usuarios.add(u);
             }

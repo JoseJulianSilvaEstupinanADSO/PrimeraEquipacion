@@ -7,7 +7,7 @@ import Ajax from "./Modulos/ajax.js";
 import Mensaje from "./Modulos/msjerror.js";
 
 const $dom = document;
-const sevlet = "../../Usuarios";
+const servlet = "../../Usuarios";
 const error = $dom.querySelector(".container__modal--error");
 const $titleError = $dom.querySelector(".title_error");
 const $paragrahp = $dom.querySelector(".paragrahp__error");
@@ -78,7 +78,7 @@ window.addEventListener("click",function(event) {
 
 
 function filas(){
-    $filas = $dom.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
+    let $filas = $dom.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
         $filas.forEach((fila,index) =>{
             if (index % 2 !== 0) {
                 fila.style.background = "#DBDADA";
@@ -240,7 +240,22 @@ table.addEventListener('click', function(event) {
         $rol_user.value = "sleccionar";
     }
     else{
-        $rol_user.value = String(rol);
+        switch (rol) {
+            case "admin":
+                $rol_user.value = 1;                  
+                break;                
+            case "ventas":
+                $rol_user.value = 2;               
+                break;
+            case "inventario":
+                $rol_user.value = 3;                    
+                break;
+            case "cliente":
+                $rol_user.value = 4;     
+                break;             
+            default:
+                break;
+        }
     }
 
     $user_user.value = user;
@@ -277,7 +292,7 @@ async function Modificar() {
         "usuario": $usuario,
         "telefono": $telefono,
         "direccion": $direccion,
-        "correo": correo,
+        "correo": $correo,
         "contrasena": null
     };
     let respuesta = await Ajax(servlet,datos,"POST","ModificarUsuario");   
