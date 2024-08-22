@@ -124,9 +124,10 @@
                                         <label class="label__modal" for="">Rol:</label>
                                         <select   class="input__modal form_Rol" name="" id="">
                                             <option value="sleccionar">Seleccionar Rol</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
+                                            <option value="1">admin</option>
+                                            <option value="2">ventas</option>
+                                            <option value="3">inventario</option>
+                                            <option value="4">cliente</option>
                                         </select>
                                     </div>
                                 </div>
@@ -166,7 +167,7 @@
                 </div>
             </div>
         </main>
-        <script src="../../js/users.js"></script>
+        <script src="../../js/users.js" type="module"></script>
         <script src="../../js/menu.js"></script>
     </body>
 </html>

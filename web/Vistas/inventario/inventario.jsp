@@ -102,22 +102,22 @@
                         <h2 class="modal__title">Detalles del Producto</h2>
                     </div>
                     <div class="modal__body">
-                        <form action="" class="form__modal--inventario">
+                        <form action="" class="form__modal--inventario" novalidate>
                             <div class="form__items">
                                 <div class="form__content">
                                     <div>
                                         <label class="label__modal" for="">Id:</label>
-                                        <input disabled="" class="input__modal llenar form_Id" type="number">
+                                        <input disabled="" class="input__modal llenar form_Id" type="number" >
                                     </div>
                                     <div>
                                         <label class="label__modal" for="">Nombre:</label>
-                                        <input class="input__modal llenar form_Nombre" type="text">
+                                        <input class="input__modal llenar form_Nombre" type="text" required>
                                     </div>
                                 </div>
                                 <div class="form__content">
                                     <div>
                                         <label class="label__modal" for="">Precio:</label>
-                                        <input class="input__modal llenar form_Precio" type="number">
+                                        <input class="input__modal llenar form_Precio" type="number" required>
                                     </div>
                                     <div id="selec">
                                         <label class="label__modal" for="">Talla:</label>
@@ -127,11 +127,11 @@
                                 <div class="form__content">
                                     <div>
                                         <label class="label__modal" for="">Stock:</label>
-                                        <input class="input__modal llenar form_Stock" type="number">
+                                        <input class="input__modal llenar form_Stock" type="number" required>
                                     </div>
                                     <div>
                                         <label class="label__modal" for="tela">Tela:</label>
-                                        <input class="input__modal llenar form_Tela" type="text">
+                                        <input class="input__modal llenar form_Tela" type="text" required>
                                     </div>
                                 </div>     
                                 <div class="form__content">
@@ -160,7 +160,7 @@
                 </div>
             </div>
         </main>
-        <script src="../../js/inventario.js"></script>
+        <script src="../../js/inventario.js" type="module"></script>
         <script src="../../js/menu.js"></script>
     </body>
 </html>

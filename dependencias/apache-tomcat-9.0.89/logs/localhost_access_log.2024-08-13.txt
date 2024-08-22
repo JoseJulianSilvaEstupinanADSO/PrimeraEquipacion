@@ -23010,3 +23010,9 @@
 0:0:0:0:0:0:0:1 - - [13/Aug/2024:17:19:25 -0500] "GET /favicon.ico HTTP/1.1" 404 698
 0:0:0:0:0:0:0:1 - - [13/Aug/2024:17:19:26 -0500] "POST /PrimeraEquipacion/Facturas?action=ClientesCompras HTTP/1.1" 200 280
 0:0:0:0:0:0:0:1 - - [13/Aug/2024:17:19:29 -0500] "POST /PrimeraEquipacion/Facturas?action=ClientesCompras HTTP/1.1" 200 187
+127.0.0.1 - - [13/Aug/2024:17:24:53 -0500] "HEAD /netbeans-tomcat-status-test HTTP/1.1" 404 -
+127.0.0.1 - root [13/Aug/2024:17:24:53 -0500] "GET /manager/text/ HTTP/1.1" 200 44
+127.0.0.1 - - [13/Aug/2024:17:24:53 -0500] "HEAD /netbeans-tomcat-status-test HTTP/1.1" 404 -
+127.0.0.1 - root [13/Aug/2024:17:24:53 -0500] "GET /manager/text/ HTTP/1.1" 200 44
+127.0.0.1 - - [13/Aug/2024:17:24:53 -0500] "HEAD /netbeans-tomcat-status-test HTTP/1.1" 404 -
+127.0.0.1 - root [13/Aug/2024:17:24:53 -0500] "GET /manager/text/ HTTP/1.1" 200 44

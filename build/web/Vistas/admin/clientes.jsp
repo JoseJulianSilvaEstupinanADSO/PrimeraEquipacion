@@ -107,7 +107,7 @@
                             <th class="th__item">Id Venta</th>
                             <th class="th__item">Id Factura</th>
                             <th class="th__item">Fecha</th>
-                            <th class="th__item">Id Vendedor</th>
+                            <th class="th__item">Nombre Vendedor</th>
                             </thead>
                             <tbody class="body__tabla body__tabla--modal">
                                 <tr class="fila__tabla--modal" >

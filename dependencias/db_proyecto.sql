@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-08-2024 a las 09:19:29
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Tiempo de generación: 14-08-2024 a las 23:13:02
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -59,7 +59,8 @@ INSERT INTO `factura` (`id_factura`, `fecha_facturacion`, `id_venta`, `doc_clien
 (26, '2024-08-08', 26, '1012345678', 142800),
 (27, '2024-08-08', 30, '1012345678', 261800),
 (28, '2024-08-08', 31, '1012345678', 130900),
-(29, '2024-08-08', 32, '1012345678', 428400);
+(29, '2024-08-08', 32, '1012345678', 428400),
+(30, '2024-08-14', 33, '8674913025', 53550);
 
 -- --------------------------------------------------------
 
@@ -110,7 +111,8 @@ INSERT INTO `factura_producto` (`id_factura_producto`, `id_factura`, `id_product
 (44, 25, 20, 2, 142800),
 (45, 26, 20, 1, 142800),
 (46, 27, 30, 2, 261800),
-(47, 29, 20, 3, 428400);
+(47, 29, 20, 3, 428400),
+(48, 30, 27, 1, 53550);
 
 -- --------------------------------------------------------
 
@@ -131,7 +133,7 @@ CREATE TABLE `producto` (
 
 INSERT INTO `producto` (`id_producto`, `nombre`, `precio`, `estado`) VALUES
 (20, 'Pantaloneta PE Tottenham Hotspur 2011', 120000, 1),
-(21, 'Pantaloneta SE Manchester United 2019', 65000, 0),
+(21, 'Camisa Bayern PE 2020', 65000, 0),
 (22, 'Medias TE Juventus 2012', 26000, 1),
 (23, 'Camisa PE Bayern Munich 2018', 80000, 1),
 (24, 'Pantaloneta SE Chelsea 2020', 45000, 1),
@@ -173,11 +175,11 @@ INSERT INTO `producto_desc` (`id_producto`, `talla`, `stock`, `tela`) VALUES
 (20, 'M', 33, 'Microfibra'),
 (21, 'X', 19, 'Poliester'),
 (22, 'S', 10, 'Malla '),
-(23, 'X', 15, 'Nylon'),
+(23, 'X', 20, 'Nylon'),
 (24, 'M', 6, 'Nylon'),
 (25, 'L', 5, 'Nylon'),
 (26, 'M', 10, 'Nylon'),
-(27, 'S', 12, 'Spandex '),
+(27, 'S', 11, 'Spandex '),
 (28, 'X', 12, 'Malla '),
 (29, 'XL', 6, 'Microfibra'),
 (30, 'L', 13, 'Nylon'),
@@ -256,7 +258,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `usuario`, `contrasena`, `id_rol`, `documento`, `nombre`, `telefono`, `direccion`, `email`, `edad`) VALUES
-(1, 'admin', '$2a$10$6tCGFkrSOtGzqRX64bGWvuJ24ByB14F9eA8/fm2ZzmKmCMJb0Atai', 1, '1005231647', 'Jose Julian Silva', '3164579824', 'hola1234', 'hola@123.com', 22),
+(1, 'admin', '$2a$10$LG.XzO95k4Se2HWWQrU0rOeHlCKakmVUmKn6ahBCppxoIXc7o7Rdi', 1, '1005231647', 'Julian Silva ', '3164579827', 'Cr 11A #15-14', 'julian@hola.com', 22),
 (5, NULL, NULL, 4, '3216549874', 'Pedro  Picapiedra', '3126459785', NULL, NULL, NULL),
 (15, NULL, NULL, 4, '4567891234', 'Felipe Silva', '3164587921', NULL, NULL, NULL),
 (21, NULL, NULL, 4, '7481293647', 'Ainhoa Cruz', '3211465487', NULL, NULL, NULL),
@@ -310,7 +312,8 @@ INSERT INTO `venta` (`id_venta`, `id_usuario`) VALUES
 (29, 1),
 (30, 1),
 (31, 1),
-(32, 1);
+(32, 1),
+(33, 29);
 
 --
 -- Índices para tablas volcadas
@@ -379,19 +382,19 @@ ALTER TABLE `venta`
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `factura_producto`
 --
 ALTER TABLE `factura_producto`
-  MODIFY `id_factura_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id_factura_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -409,7 +412,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- Restricciones para tablas volcadas
