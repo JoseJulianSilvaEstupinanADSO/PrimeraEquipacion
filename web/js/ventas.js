@@ -366,7 +366,7 @@ async function NuevaVenta() {
     let $filas = $dom.querySelectorAll("tbody.tabla__tb > tr.tabla__fila");  
     let $total = $dom.querySelector(".total__factura").innerText; 
     let pago = $pago_c.value;
-    if ($filas.length > 0) {
+    if ($filas.length > 0 && $documento.value !== "") {
         if (Number($total) <= Number(pago)){
             $vuelta_c.value = Number(pago) - Number($total);
             let datos_1 = {
@@ -406,7 +406,7 @@ async function NuevaVenta() {
     }
     
     else{
-        Mensaje($titleError, $paragrahp, error, "No hay datos para añadir","Agrege productos a la factura");
+        Mensaje($titleError, $paragrahp, error, "No hay datos para añadir","Agrege productos a la factura o un cliente");
     }
     
 }
