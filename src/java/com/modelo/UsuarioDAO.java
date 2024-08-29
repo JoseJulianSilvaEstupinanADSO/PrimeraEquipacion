@@ -4,7 +4,6 @@
  */
 package com.modelo;
 
-
 import com.conexion.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,14 +11,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import org.mindrot.jbcrypt.BCrypt;
+
 /**
- *
+ * La clase UsuarioDAO proporciona métodos para realizar operaciones CRUD (Crear, Leer, 
+ * Actualizar y Eliminar) sobre la entidad Usuario en la base de datos. Esta clase extiende 
+ * de la clase Conexion, que maneja la conexión con la base de datos.
+ * 
  * @author Julian
  */
-// Clase UsuarioDAO que extiende de Conexion, manejando operaciones CRUD para la entidad Usuario
 public class UsuarioDAO extends Conexion {
 
-    // Método para validar un usuario mediante nombre de usuario y contraseña
+    /**
+     * Valida un usuario mediante nombre de usuario y contraseña.
+     * 
+     * @param usuario - Nombre de usuario a validar.
+     * @param contrasena - Contraseña del usuario a validar.
+     * @return Usuario - El usuario válido si las credenciales son correctas, de lo contrario, null.
+     */
     public Usuario validarUsuario(String usuario, String contrasena) {
         Usuario usuarioValido = null;
 
@@ -63,7 +71,12 @@ public class UsuarioDAO extends Conexion {
         return usuarioValido;
     }
 
-    // Método para insertar un nuevo usuario en la base de datos
+    /**
+     * Inserta un nuevo usuario en la base de datos.
+     * 
+     * @param u - Objeto Usuario que contiene la información del nuevo usuario.
+     * @return boolean - true si la inserción fue exitosa, de lo contrario, false.
+     */
     public boolean insertarUsuario(Usuario u) {
         try {
             // Conecta a la base de datos
@@ -96,7 +109,11 @@ public class UsuarioDAO extends Conexion {
         }
     }
 
-    // Método para listar todos los usuarios excepto los con rol 4
+    /**
+     * Lista todos los usuarios, excluyendo aquellos con rol 4.
+     * 
+     * @return List<Usuario> - Lista de usuarios.
+     */
     public List<Usuario> ListarUsuarios() {
         List<Usuario> usuarios = new ArrayList<>();
         try {
@@ -135,7 +152,12 @@ public class UsuarioDAO extends Conexion {
         return usuarios;
     }
 
-    // Método para modificar un usuario existente en la base de datos
+    /**
+     * Modifica la información de un usuario existente en la base de datos.
+     * 
+     * @param u - Objeto Usuario que contiene la información actualizada del usuario.
+     * @return boolean - true si la actualización fue exitosa, de lo contrario, false.
+     */
     public boolean ModificarUsuario(Usuario u) {
         try {
             // Conecta a la base de datos
@@ -166,7 +188,12 @@ public class UsuarioDAO extends Conexion {
         }
     }
 
-    // Método para buscar un usuario específico por su ID
+    /**
+     * Busca un usuario específico por su ID.
+     * 
+     * @param id - ID del usuario a buscar.
+     * @return Usuario - El usuario correspondiente al ID, o null si no se encuentra.
+     */
     public Usuario BuscarUsuario(String id) {
         Usuario u = null;
         try {
@@ -205,7 +232,13 @@ public class UsuarioDAO extends Conexion {
         return u;
     }
 
-    // Método para modificar la contraseña de un usuario
+    /**
+     * Modifica la contraseña de un usuario en la base de datos.
+     * 
+     * @param contrasena - Nueva contraseña del usuario.
+     * @param id_usuario - ID del usuario cuya contraseña se debe modificar.
+     * @return boolean - true si la actualización fue exitosa, de lo contrario, false.
+     */
     public boolean ModificarContraseña(String contrasena, String id_usuario) {
         try {
             // Conecta a la base de datos

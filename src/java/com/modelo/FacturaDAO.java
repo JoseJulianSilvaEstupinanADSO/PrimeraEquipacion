@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.modelo;
+
 import com.conexion.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,17 +13,23 @@ import java.util.List;
 import java.sql.Statement;
 
 /**
- *
+ * La clase FacturaDAO extiende de Conexion y maneja las operaciones CRUD para la entidad Factura.
+ * Proporciona métodos para agregar facturas, agregar productos a facturas, listar facturas,
+ * listar productos de una factura, listar compras de clientes y obtener datos para generar PDFs.
+ * 
  * @author Julian
  */
-// Clase FacturaDAO que extiende de Conexion, manejando operaciones CRUD para la entidad Factura
 public class FacturaDAO extends Conexion {
-    
-    // Método para agregar una nueva factura a la base de datos
+
+    /**
+     * Agrega una nueva factura a la base de datos y devuelve el ID de la factura generada.
+     * 
+     * @param f Objeto Factura que contiene la información de la nueva factura.
+     * @param total Total de la factura.
+     * @return ID de la nueva factura si la inserción fue exitosa, 0 en caso contrario.
+     */
     public int AgregarFactura(Factura f, String total) {
-        
         int id_factura = 0;
-            
         try {
             // Conecta a la base de datos
             this.conectar();
@@ -34,15 +41,13 @@ public class FacturaDAO extends Conexion {
             
             // Ejecuta la consulta de inserción y obtiene el ID generado
             int exito = pre.executeUpdate();
-            
             if (exito > 0) {
                 ResultSet rs = pre.getGeneratedKeys();
-                
                 if (rs.next()) {
                     int id_venta = rs.getInt(1);
                     
                     // Consulta SQL para insertar una nueva factura asociada a la venta
-                    String sql2 = "INSERT INTO factura(fecha_facturacion,id_venta,doc_cliente,total) VALUES (?,?,?,?)";
+                    String sql2 = "INSERT INTO factura(fecha_facturacion, id_venta, doc_cliente, total) VALUES (?,?,?,?)";
                     PreparedStatement pre2 = this.getCon().prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
                     pre2.setString(1, f.getFecha());
                     pre2.setInt(2, id_venta);
@@ -51,10 +56,8 @@ public class FacturaDAO extends Conexion {
                     
                     // Ejecuta la consulta de inserción y obtiene el ID de la factura
                     int exito2 = pre2.executeUpdate();
-                    
                     if (exito2 > 0) {
                         ResultSet rs2 = pre2.getGeneratedKeys();
-                        
                         if (rs2.next()) {
                             id_factura = rs2.getInt(1);
                             return id_factura; // Retorna el ID de la nueva factura
@@ -75,9 +78,13 @@ public class FacturaDAO extends Conexion {
         return id_factura;
     }
     
-    // Método para agregar productos a una factura existente
+    /**
+     * Agrega productos a una factura existente.
+     * 
+     * @param f Objeto Factura que contiene la información de los productos a agregar.
+     * @return true si los productos se agregaron correctamente, false en caso contrario.
+     */
     public boolean AgregarProdcutosFactura(Factura f) {
-        
         try {
             // Conecta a la base de datos
             this.conectar();
@@ -113,10 +120,13 @@ public class FacturaDAO extends Conexion {
         }
     }
     
-    // Método para listar todas las facturas en la base de datos
+    /**
+     * Lista todas las facturas en la base de datos.
+     * 
+     * @return Lista de objetos Factura que representa todas las facturas.
+     */
     public List<Factura> ListarFacturas() {
         List<Factura> facturas = new ArrayList<>();
-        
         try {
             // Conecta a la base de datos
             this.conectar();
@@ -127,7 +137,6 @@ public class FacturaDAO extends Conexion {
             
             // Ejecuta la consulta y procesa los resultados
             ResultSet rs = pre.executeQuery();
-            
             while (rs.next()) {                
                 Factura f = new Factura();
                 
@@ -152,10 +161,14 @@ public class FacturaDAO extends Conexion {
         return facturas;
     }
     
-    // Método para listar los productos de una factura específica
+    /**
+     * Lista los productos de una factura específica.
+     * 
+     * @param id_factura ID de la factura de la cual se listarán los productos.
+     * @return Lista de objetos Factura que representa los productos asociados a la factura.
+     */
     public List<Factura> ListarProductoFactura(String id_factura) {
         List<Factura> productos = new ArrayList<>();
-        
         try {
             // Conecta a la base de datos
             this.conectar();
@@ -190,10 +203,14 @@ public class FacturaDAO extends Conexion {
         return productos;
     }
     
-    // Método para listar todas las compras realizadas por un cliente específico
+    /**
+     * Lista todas las compras realizadas por un cliente específico.
+     * 
+     * @param doc_cliente Documento del cliente cuya compra se listará.
+     * @return Lista de objetos Factura que representa las compras del cliente.
+     */
     public List<Factura> ClientesCompras(String doc_cliente) {
         List<Factura> compras = new ArrayList<>();
-        
         try {
             // Conecta a la base de datos
             this.conectar();
@@ -205,7 +222,6 @@ public class FacturaDAO extends Conexion {
             
             // Ejecuta la consulta y procesa los resultados
             ResultSet rs = pre.executeQuery();
-            
             while (rs.next()) {                
                 Factura c = new Factura();
                 c.setId_venta(rs.getString("id_venta"));
@@ -226,9 +242,15 @@ public class FacturaDAO extends Conexion {
         
         return compras;
     }
+
+    /**
+     * Obtiene los datos necesarios para generar un PDF de una factura específica.
+     * 
+     * @param id_factura ID de la factura para la cual se obtendrán los datos.
+     * @return Lista de objetos Factura que contiene los datos para el PDF.
+     */
     public List<Factura> PdfProductoFactura(String id_factura) {
         List<Factura> productos = new ArrayList<>();
-        
         try {
             // Conecta a la base de datos
             this.conectar();

@@ -8,23 +8,44 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 /**
- *
+ * La clase Conexion gestiona la conexión a una base de datos MySQL.
+ * Proporciona métodos para establecer y cerrar la conexión, así como para acceder y modificar el objeto de conexión.
+ * 
+ * @version 1.0
  * @author Julian
  */
 public class Conexion {
-    private Connection con; // Objeto Connection para manejar la conexión a la base de datos
+    
+    /**
+     * Objeto Connection que representa la conexión activa a la base de datos.
+     * Es utilizado por los métodos de la clase para realizar operaciones sobre la base de datos.
+     */
+    private Connection con;
 
-    // Retorna la conexión actual
+    /**
+     * Obtiene la conexión actual a la base de datos.
+     * 
+     * @return Connection que representa la conexión actual a la base de datos.
+     */
     public Connection getCon() {
         return con;
     }
 
-    // Establece la conexión
+    /**
+     * Establece un nuevo objeto Connection para la conexión a la base de datos.
+     * 
+     * @param con Objeto Connection que representa la nueva conexión a la base de datos.
+     */
     public void setCon(Connection con) {
         this.con = con;
     }
     
-    // Método para conectar a la base de datos
+    /**
+     * Establece una conexión a la base de datos MySQL utilizando el DriverManager.
+     * El método intenta cargar el driver JDBC de MySQL y conectarse a la base de datos especificada.
+     * 
+     * En caso de error durante la conexión, se captura la excepción y se imprime un mensaje de error.
+     */
     public void conectar() {
         try {
             // Carga el driver de MySQL
@@ -37,7 +58,12 @@ public class Conexion {
         }
     }
 
-    // Método para cerrar la conexión a la base de datos
+    /**
+     * Cierra la conexión a la base de datos si está activa.
+     * 
+     * El método verifica si la conexión no está cerrada antes de intentar cerrarla.
+     * En caso de error durante el cierre de la conexión, se captura la excepción y se imprime un mensaje de error.
+     */
     public void desconectar() {
         try {
             // Verifica si la conexión no está cerrada antes de intentar cerrarla

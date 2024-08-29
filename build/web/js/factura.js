@@ -8,43 +8,48 @@ import Mensaje from "./Modulos/msjerror.js";
 
 const $dom = document;
 const servlet = "../../Facturas";
+
+// Elementos relacionados con el modal de error y el botón de descarga
 const error = $dom.querySelector(".container__modal--error");
 const $titleError = $dom.querySelector(".title_error");
 const $paragrahp = $dom.querySelector(".paragrahp__error");
 const $descargar = $dom.querySelector(".btn__descargar");
 
+// Elementos del modal
 const $modal = $dom.getElementById("ventanaModal");
 const $cerrar = $dom.querySelector(".cerrar__x");
 
+// Elementos para mostrar detalles de la factura en el modal
 const $id_form = $dom.querySelector('.Numero_factura');
 const $fecha_factura = $dom.querySelector(".fecha__factura");
 const $total_modal = $dom.querySelector(".total--facturas");
 
+// Elementos para la tabla de facturas
 const $tbody = $dom.querySelector("tbody.body__tabla--modal");
 const $tbody_f = $dom.querySelector("tbody.body__tabla");
 const table = $dom.querySelector('.tabla--factura');
 
+// Elementos para búsqueda de facturas
 const $label = $dom.querySelector(".input__buscar");
 const $BtnBuscar = $dom.querySelector(".button__buscar");
 const $Listar = $dom.querySelector(".Listar");
 
 let $id_factura = 0;
 
+// Función para verificar el estado de la sesión y redirigir si la sesión está cerrada
 function CloseSession(){
-        let $session = localStorage.getItem("session");
-        if ($session === "false" || $session === null) {
-            console.log("cerrado");
-            window.location.href = '../../index.jsp';
-        };
-    
+    let $session = localStorage.getItem("session");
+    if ($session === "false" || $session === null) {
+        console.log("cerrado");
+        window.location.href = '../../index.jsp';
+    }
 }
 
 setInterval(() => {
     CloseSession();
 }, 1000);
 
- //CERRAR MODAL
-
+// Cerrar el modal al hacer clic en el botón de cerrar o fuera del modal
 $cerrar.addEventListener("click", function () {
     $modal.classList.add("cerrando");
     setTimeout(function() {
@@ -52,34 +57,33 @@ $cerrar.addEventListener("click", function () {
         $modal.classList.remove("cerrando");
     }, 500);
 });
-window.addEventListener("click",function(event) {
-  if (event.target == $modal) {
-    $modal.classList.add("cerrando");
-    setTimeout(function() {
-        $modal.style.display = "none";
-        $modal.classList.remove("cerrando");
-    }, 500);
-  }
+
+window.addEventListener("click", function(event) {
+    if (event.target == $modal) {
+        $modal.classList.add("cerrando");
+        setTimeout(function() {
+            $modal.style.display = "none";
+            $modal.classList.remove("cerrando");
+        }, 500);
+    }
 });
  
-//Cambiar colores de las filas impares De las tablas //
-
+// Cambiar colores de las filas impares en las tablas
 function filas(){
     let $filas = $dom.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
-        $filas.forEach((fila,index) =>{
-            if (index % 2 !== 0) {
-                fila.style.background = "#DBDADA";
-            }
-        });  
+    $filas.forEach((fila, index) => {
+        if (index % 2 !== 0) {
+            fila.style.background = "#DBDADA";
+        }
+    });  
 }
 
-//Abrir modal y poner el id y fecha de facturachion el en modal//------------
-
+// Abrir el modal y mostrar detalles de la factura al hacer clic en una fila de la tabla de facturas
 table.addEventListener('click', async function(event) {
-   if (event.target.classList.contains('FacturaDetalles')) {
+    if (event.target.classList.contains('FacturaDetalles')) {
         $modal.style.display = "block";
         let $filas = $dom.querySelectorAll("tbody.body__tabla--modal > tr.fila__tabla");
-        $filas.forEach((x) =>{
+        $filas.forEach((x) => {
             x.remove();
         });
         const row = event.target.closest('tr');
@@ -94,9 +98,9 @@ table.addEventListener('click', async function(event) {
         $fecha_factura.innerText = "Fecha: " + fecha;
         $total_modal.innerText = "TOTAL: " + total;   
         let datos = {
-                "id_factura": id
+            "id_factura": id
         };   
-        let respuesta = await Ajax(servlet,datos,"POST","ListarProductosFactura"); 
+        let respuesta = await Ajax(servlet, datos, "POST", "ListarProductosFactura"); 
         respuesta.forEach((x) => {
             const $fila = $dom.createElement("tr");
             $fila.classList.add("fila__tabla"); 
@@ -139,21 +143,18 @@ table.addEventListener('click', async function(event) {
             $fila.appendChild($colCant);
 
             $tbody.appendChild($fila);
-
         });
         filas();   
-   }
- });
- 
-//----------------------------------------------------------------------------
+    }
+});
 
-async function  ListarFacturas() {
-    
+// Listar todas las facturas en la tabla principal
+async function ListarFacturas() {
     let $filas = $dom.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
-    $filas.forEach((x) =>{
+    $filas.forEach((x) => {
         x.remove();
     });
-    let respuesta = await Ajax(servlet,"","GET","ListarFacturas");
+    let respuesta = await Ajax(servlet, "", "GET", "ListarFacturas");
     respuesta.forEach((x) => {
         const $fila = $dom.createElement("tr");
         $fila.classList.add("fila__tabla"); 
@@ -218,6 +219,7 @@ async function  ListarFacturas() {
 }
 ListarFacturas();
 
+// Función para buscar facturas en la tabla principal
 function Buscar(){
     const $filas = document.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
     let num = 0; 
@@ -226,18 +228,18 @@ function Buscar(){
         let id = fila.querySelector(".IdFactura").innerText;
         if (id === $label.value || otra === $label.value){
             fila.style.display = "";
-        }
-        else{
-            num = num+1;
+        } else {
+            num = num + 1;
             fila.style.display = "none";
         }
     });
-    if (num === $filas.length){
+    if (num === $filas.length) {
         ListarFacturas();
-        Mensaje($titleError, $paragrahp, error, "Factura no encontrada","Verifique el id o fecha de la factura");
+        Mensaje($titleError, $paragrahp, error, "Factura no encontrada", "Verifique el ID o fecha de la factura");
     }
 }
 
+// Función para descargar el PDF de la factura
 function Descargar() {
     let ope = new XMLHttpRequest();
     ope.open("GET", "../../Facturas?action=PdfProductosFactura&id_factura=" + encodeURIComponent($id_factura), true);
@@ -261,10 +263,12 @@ function Descargar() {
     };
     ope.send();
 }
-$Listar.addEventListener("click",() => {
+
+// Eventos para listar facturas y descargar el PDF
+$Listar.addEventListener("click", () => {
     const $filas = document.querySelectorAll("tbody.body__tabla > tr.fila__tabla");
     $filas.forEach((fila) => {
-           fila.remove();
+        fila.remove();
     });
     ListarFacturas();
 });

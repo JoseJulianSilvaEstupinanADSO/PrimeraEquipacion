@@ -55,7 +55,7 @@
             </aside>
             <section class="facturas">
                 <div class="header__productos">
-                    <h1 class="producto__title">Gestion de Usuarios</h1>
+                    <h1 class="producto__title">Gestion de Facturas</h1>
                     <button type="button" class="agregar__producto  Listar">Listar</button>
                 </div>
                 <div class="container__tabla">
