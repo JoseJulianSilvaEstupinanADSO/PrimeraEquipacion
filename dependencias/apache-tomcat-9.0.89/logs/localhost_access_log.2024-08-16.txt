@@ -1493,3 +1493,9 @@
 0:0:0:0:0:0:0:1 - - [16/Aug/2024:14:09:14 -0500] "GET /PrimeraEquipacion/Vistas/admin/usuarios.jsp HTTP/1.1" 200 9814
 0:0:0:0:0:0:0:1 - - [16/Aug/2024:14:09:14 -0500] "GET /PrimeraEquipacion/js/users.js HTTP/1.1" 304 -
 0:0:0:0:0:0:0:1 - - [16/Aug/2024:14:09:14 -0500] "GET /PrimeraEquipacion/Usuarios?action=ListaUsuarios& HTTP/1.1" 200 719
+127.0.0.1 - - [16/Aug/2024:14:15:19 -0500] "HEAD /netbeans-tomcat-status-test HTTP/1.1" 404 -
+127.0.0.1 - root [16/Aug/2024:14:15:19 -0500] "GET /manager/text/ HTTP/1.1" 200 44
+127.0.0.1 - - [16/Aug/2024:14:15:19 -0500] "HEAD /netbeans-tomcat-status-test HTTP/1.1" 404 -
+127.0.0.1 - root [16/Aug/2024:14:15:19 -0500] "GET /manager/text/ HTTP/1.1" 200 44
+127.0.0.1 - - [16/Aug/2024:14:15:19 -0500] "HEAD /netbeans-tomcat-status-test HTTP/1.1" 404 -
+127.0.0.1 - root [16/Aug/2024:14:15:19 -0500] "GET /manager/text/ HTTP/1.1" 200 44

@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/Modulos/msjerror.js</file>
             <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/Modulos/Validaciones/letras.js</file>
             <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/Modulos/Validaciones/vacio.js</file>
@@ -10,6 +11,23 @@
             <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/Modulos/Validaciones/length.js</file>
             <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/Modulos/Validaciones/correo.js</file>
             <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/Modulos/ajax.js</file>
+=======
+<<<<<<< HEAD
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/js/users.js</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/Vistas/inventario/inventario_usuario.jsp</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/Vistas/admin/usuarios.jsp</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/src/java/com/modelo/Usuario.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/Vistas/ventas/ventas.jsp</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/src/java/com/modelo/UsuarioDAO.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/Vistas/inventario/inventario.jsp</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/PrimeraEquipacion/web/js/registro.js</file>
+=======
+            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/factura.js</file>
+            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/users.js</file>
+            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/ventas.js</file>
+            <file>file:/C:/Users/Julian/Documents/NetBeansProjects/PrimeraEquipacion/web/js/inventario.js</file>
+>>>>>>> 28ab6cbf59d95d98e88c32317767e33586018ad7
+>>>>>>> affe0c17769b8a854198d29d92059b8168047784
         </group>
     </open-files>
 </project-private>
